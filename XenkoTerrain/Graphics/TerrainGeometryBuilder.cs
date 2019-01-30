@@ -34,18 +34,6 @@ namespace XenkoTerrain.Graphics
 
     public float MaxHeight { get; }
 
-    public ModelComponent BuildTerrainModel()
-    {
-      return BuildModel(BuildTerrain());
-    }
-
-    private ModelComponent BuildModel(GeometricPrimitive primitive)
-    {
-      var mesh = new Mesh(primitive.ToMeshDraw(), new ParameterCollection());      
-      var model = new Model() { Meshes = new List<Mesh>(new[] { mesh }) };
-      return new ModelComponent(model);
-    }
-
     public GeometricPrimitive BuildTerrain()
     {
       var data = GenerateTerrainGeometry(HeightMapImage.Description.Width, HeightMapImage.Description.Height, Size, false);
@@ -149,13 +137,8 @@ namespace XenkoTerrain.Graphics
       {
         return 0;
       }
-
-      // 
+   
       var height = MaxPixelColor +  heightMapPixelBuffer.GetPixel<Color>(x, y).ToRgb();    
-
-      //height += HalfMaxPixelColor;
-      //height /= HalfMaxPixelColor;
-
       return height / MaxPixelColor * MaxHeight;
     }
   }
