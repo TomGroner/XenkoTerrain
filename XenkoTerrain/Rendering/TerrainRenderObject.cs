@@ -44,9 +44,6 @@ namespace XenkoTerrain.Rendering
       SandTexture = component.SandTexture;
       HeightMap = component.HeightMap;
       World = component.Entity.Transform.WorldMatrix;
-
-      
-
       PopulateLighting(component);
       // TODO: Also support an ambient light. These two together should help get pretty damn close
       return this;
