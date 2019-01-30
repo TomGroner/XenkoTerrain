@@ -1,0 +1,7 @@
+!Texture
+Id: b8b24a6e-aebd-474c-819c-4e9cfdf873a1
+SerializedVersion: {Xenko: 2.0.0.0}
+Tags: []
+Source: !file ../../../../.XenkoTerrain/XenkoTerrain/Resources/mars.png
+Type: !ColorTextureType
+    ColorKeyColor: {R: 255, G: 0, B: 255, A: 255}

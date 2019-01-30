@@ -1,0 +1,7 @@
+!Texture
+Id: b918a4fe-aa3f-49d0-a53c-cd4d7ae7157a
+SerializedVersion: {Xenko: 2.0.0.0}
+Tags: []
+Source: !file ../../Resources/blendmap2.png
+Type: !ColorTextureType
+    ColorKeyColor: {R: 255, G: 0, B: 255, A: 255}

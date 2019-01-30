@@ -1,0 +1,7 @@
+!Texture
+Id: 7fd42779-e335-48e9-923b-2071a6659612
+SerializedVersion: {Xenko: 2.0.0.0}
+Tags: []
+Source: !file ../Resources/2k_sun.jpg
+Type: !ColorTextureType
+    ColorKeyColor: {R: 255, G: 0, B: 255, A: 255}

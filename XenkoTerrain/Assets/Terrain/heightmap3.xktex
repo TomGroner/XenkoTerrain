@@ -1,0 +1,7 @@
+!Texture
+Id: 3da9c60f-67f5-4dec-8193-b8c768358646
+SerializedVersion: {Xenko: 2.0.0.0}
+Tags: []
+Source: !file ../../../../.XenkoTerrain/XenkoTerrain/Resources/heightmap3.png
+IsCompressed: false
+Type: !GrayscaleTextureType {}

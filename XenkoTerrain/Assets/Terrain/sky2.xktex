@@ -1,0 +1,7 @@
+!Texture
+Id: 8a9a918e-dfa6-4163-b024-2b2a89455a71
+SerializedVersion: {Xenko: 2.0.0.0}
+Tags: []
+Source: !file ../../../../.XenkoTerrain/XenkoTerrain/Resources/sky2.png
+Type: !ColorTextureType
+    ColorKeyColor: {R: 255, G: 0, B: 255, A: 255}

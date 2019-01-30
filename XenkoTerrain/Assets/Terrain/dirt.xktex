@@ -1,0 +1,7 @@
+!Texture
+Id: a09d1a26-319d-49d7-8228-bc80ad9319cb
+SerializedVersion: {Xenko: 2.0.0.0}
+Tags: []
+Source: !file ../../../../.XenkoTerrain/XenkoTerrain/Resources/dirt.png
+Type: !ColorTextureType
+    ColorKeyColor: {R: 255, G: 0, B: 255, A: 255}

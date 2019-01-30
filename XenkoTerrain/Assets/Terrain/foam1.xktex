@@ -1,0 +1,7 @@
+!Texture
+Id: acf92c72-927a-4858-99d8-6517abd2fa2c
+SerializedVersion: {Xenko: 2.0.0.0}
+Tags: []
+Source: !file ../../../../.XenkoTerrain/XenkoTerrain/Resources/foam1.png
+Type: !ColorTextureType
+    ColorKeyColor: {R: 255, G: 0, B: 255, A: 255}

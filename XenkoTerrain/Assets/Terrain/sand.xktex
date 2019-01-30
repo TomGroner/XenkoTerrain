@@ -1,0 +1,7 @@
+!Texture
+Id: da7714b4-4c4f-4762-8c5e-8afa31034ab6
+SerializedVersion: {Xenko: 2.0.0.0}
+Tags: []
+Source: !file ../../../../.XenkoTerrain/XenkoTerrain/Resources/sand.png
+Type: !ColorTextureType
+    ColorKeyColor: {R: 255, G: 0, B: 255, A: 255}

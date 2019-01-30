@@ -1,0 +1,7 @@
+!Texture
+Id: 562f2767-1979-4134-b538-b6cdd1d4200c
+SerializedVersion: {Xenko: 2.0.0.0}
+Tags: []
+Source: !file ../../../../.XenkoTerrain/XenkoTerrain/Resources/wave0.png
+Type: !ColorTextureType
+    ColorKeyColor: {R: 255, G: 0, B: 255, A: 255}
