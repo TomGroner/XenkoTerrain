@@ -1,7 +1,0 @@
-!Texture
-Id: 5e37d5c1-4d83-43f6-9743-8ab8d784c03e
-SerializedVersion: {Xenko: 2.0.0.0}
-Tags: []
-Source: !file ../../../../.XenkoTerrain/XenkoTerrain/Resources/flowmap-noflow.jpg
-Type: !ColorTextureType
-    ColorKeyColor: {R: 255, G: 0, B: 255, A: 255}

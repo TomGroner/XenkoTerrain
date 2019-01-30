@@ -1,7 +1,0 @@
-!Texture
-Id: 0e155f87-64e9-4ff6-a01c-93a15e863f8a
-SerializedVersion: {Xenko: 2.0.0.0}
-Tags: []
-Source: !file ../../../../.XenkoTerrain/XenkoTerrain/Resources/noise.png
-Type: !ColorTextureType
-    ColorKeyColor: {R: 255, G: 0, B: 255, A: 255}

@@ -1,7 +1,0 @@
-!Texture
-Id: 12b574e8-89bd-4be3-a86a-ef7b89b6d147
-SerializedVersion: {Xenko: 2.0.0.0}
-Tags: []
-Source: !file ../../../../.XenkoTerrain/XenkoTerrain/Resources/water.jpg
-Type: !ColorTextureType
-    ColorKeyColor: {R: 255, G: 0, B: 255, A: 255}

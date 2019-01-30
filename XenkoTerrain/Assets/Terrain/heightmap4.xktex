@@ -2,6 +2,6 @@
 Id: a4f5124e-1ea1-44ab-8141-8be19a502a94
 SerializedVersion: {Xenko: 2.0.0.0}
 Tags: []
-Source: !file ../../../../.XenkoTerrain/XenkoTerrain/Resources/heightmap4.png
+Source: !file ../../Resources/heightmap4.png
 IsCompressed: false
 Type: !GrayscaleTextureType {}
