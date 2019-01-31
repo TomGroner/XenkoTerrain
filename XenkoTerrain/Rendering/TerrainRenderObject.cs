@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Xenko.Core.Mathematics;
 using Xenko.Engine;
 using Xenko.Games;
@@ -18,6 +20,7 @@ namespace XenkoTerrain.Rendering
     }
 
     // Component-linked fields
+    public RgbPixelRepository pixels;
     public Texture BlendMap;
     public Texture HeightMap;
     public Texture SandTexture;
@@ -30,12 +33,18 @@ namespace XenkoTerrain.Rendering
     public float LightIntensity;
 
     // Rendering properties
-    public Matrix World;    
+    public Matrix World;
     public GeometricPrimitive TerrainGeometry;
-    public bool IsInitialized => TerrainGeometry != null;
-
-    public TerrainRenderObject Copy(TerrainEntityComponent component)
+    public bool IsInitialized
     {
+      get => TerrainGeometry != null;// || ShouldDraw;
+    }
+
+    private TerrainEntityComponent component;
+
+    public TerrainRenderObject CreateOrCopy(TerrainEntityComponent component)
+    {
+      this.component = component;
       RenderGroup = component.RenderGroup;
       BlendMap = component.BlendMap;
       DirtTexture = component.DirtTexture;
@@ -44,6 +53,12 @@ namespace XenkoTerrain.Rendering
       SandTexture = component.SandTexture;
       HeightMap = component.HeightMap;
       World = component.Entity.Transform.WorldMatrix;
+
+      if (pixels != null)
+      {
+        //component.ProvideHeightMapData(pixels);
+      }
+
       PopulateLighting(component);
       // TODO: Also support an ambient light. These two together should help get pretty damn close
       return this;
@@ -63,16 +78,49 @@ namespace XenkoTerrain.Rendering
       }
     }
 
+    private List<TerrainEntityComponent> componentsToUpdate = new List<TerrainEntityComponent>();
+
+    public void BuildGeometryForComponent(TerrainEntityComponent terrainEntityComponent)
+    {
+      if (!componentsToUpdate.Contains(terrainEntityComponent))
+      {
+        componentsToUpdate.Add(terrainEntityComponent);
+      }
+    }
+
+    private bool stoppedForGameMode = false;
+
     public void Prepare(RenderDrawContext context)
     {
-      if (!IsInitialized)
+      if (TryGetHeightMapImageData(context))
       {
-        if (TryGetHeightMapImageData(context, out var heightMapImage))
+        var geometryBuilder = new TerrainGeometryBuilder(context.GraphicsDevice, TerrainRenderFeature.GRID_SIZE, pixels, TerrainRenderFeature.HEIGHT_SCALE);
+
+        if (!IsInitialized)
         {
-          var geometryBuilder = new TerrainGeometryBuilder(context.GraphicsDevice, TerrainRenderFeature.GRID_SIZE, heightMapImage, TerrainRenderFeature.HEIGHT_SCALE);
           TerrainGeometry = geometryBuilder.BuildTerrain();
           ApplyPipelineStateValues(TerrainGeometry);
         }
+
+        foreach (var terrainEntityComponent in componentsToUpdate.Where(c => !c.IsGeometryProcessed))
+        {
+          var geometryModel = geometryBuilder.BuildTerrainModel();
+
+          if (terrainEntityComponent.Entity.Get<ModelComponent>() is ModelComponent existingTerrainModel)
+          {
+            terrainEntityComponent.Entity.Remove(existingTerrainModel);
+          }
+
+          var materialBuilder = new TerrainMaterialBuilder(context.GraphicsDevice);
+          var material = materialBuilder.BuildTerrainMaterial(false);
+          geometryModel.Materials.Add(0, material);
+
+          terrainEntityComponent.Entity.Add(geometryModel);
+          terrainEntityComponent.IsGeometryProcessed = true;
+          stoppedForGameMode = true;
+        }
+
+        componentsToUpdate.Clear();
       }
     }
 
@@ -91,39 +139,73 @@ namespace XenkoTerrain.Rendering
 
     public void Draw(RenderDrawContext context, EffectInstance terrainEffect)
     {
-      // Diffuse Lighting
-      terrainEffect.Parameters.Set(TerrainShaderKeys.LightPosition, LightPosition);
-      terrainEffect.Parameters.Set(TerrainShaderKeys.LightColor, LightColor.ToVector3());
-      terrainEffect.Parameters.Set(TerrainShaderKeys.LightIntensity, LightIntensity);
+      if (stoppedForGameMode)
+      {
+        DrawComponent(context);
+      }
+      else
+      {
+        DrawSelf(context, terrainEffect);
+      }      
+    }
 
-      terrainEffect.Parameters.Set(TerrainShaderKeys.SpecularReflectivity, 1);
-      terrainEffect.Parameters.Set(TerrainShaderKeys.SpecularDamping, 10);
-
-      // Terrain Textures
-      terrainEffect.Parameters.Set(TerrainShaderKeys.BlendMap, BlendMap);
-      terrainEffect.Parameters.Set(TerrainShaderKeys.SandTexture, SandTexture);
-      terrainEffect.Parameters.Set(TerrainShaderKeys.DirtTexture, DirtTexture);
-      terrainEffect.Parameters.Set(TerrainShaderKeys.GrassTexture, GrassTexture);
-      terrainEffect.Parameters.Set(TerrainShaderKeys.RockTexture, RockTexture);
-
-      terrainEffect.Parameters.Set(TerrainShaderKeys.TextureScale, TerrainRenderFeature.GRID_SIZE); // put on component
-      terrainEffect.Parameters.Set(TerrainShaderKeys.HeightScale, TerrainRenderFeature.HEIGHT_SCALE);
-
+    private void DrawSelf(RenderDrawContext context, EffectInstance terrainEffect)
+    {
+      DoTheDraw(context, terrainEffect.Parameters);
       TerrainGeometry.Draw(context.GraphicsContext, terrainEffect);
     }
 
-    protected bool TryGetHeightMapImageData(RenderDrawContext context, out Image heightMapImage)
+    private void DrawComponent(RenderDrawContext context)
     {
-      try
+      DoTheDraw(context, component.Entity.Get<ModelComponent>().Materials[0].Passes[0].Parameters);
+    }
+
+
+    private void DoTheDraw(RenderDrawContext context, ParameterCollection parameters)
+    {
+      // Diffuse Lighting
+      parameters.Set(TerrainShaderKeys.LightPosition, LightPosition);
+      parameters.Set(TerrainShaderKeys.LightColor, LightColor.ToVector3());
+      parameters.Set(TerrainShaderKeys.LightIntensity, LightIntensity);
+
+      //parametersSet(TerrainShaderKeys.SpecularReflectivity, 1);
+      //parametersSet(TerrainShaderKeys.SpecularDamping, 10);
+
+      // Terrain Textures
+      parameters.Set(TerrainShaderKeys.BlendMap, BlendMap);
+      parameters.Set(TerrainShaderKeys.SandTexture, SandTexture);
+      parameters.Set(TerrainShaderKeys.DirtTexture, DirtTexture);
+      parameters.Set(TerrainShaderKeys.GrassTexture, GrassTexture);
+      parameters.Set(TerrainShaderKeys.RockTexture, RockTexture);
+      parameters.Set(TerrainShaderKeys.TextureScale, TerrainRenderFeature.GRID_SIZE); // put on component
+      parameters.Set(TerrainShaderKeys.HeightScale, TerrainRenderFeature.HEIGHT_SCALE);
+    }
+
+    protected bool TryGetHeightMapImageData(RenderDrawContext context)
+    {
+      if (pixels != null)
       {
-        heightMapImage = HeightMap.GetDataAsImage(context.CommandList);
+        return true;
       }
-      catch (Exception)
+      else if (HeightMap.Width == 0)
       {
-        heightMapImage = null;
+        return false;
       }
 
-      return heightMapImage != null;
+      try
+      {
+        var heightMapImage = HeightMap.GetDataAsImage(context.CommandList);
+        pixels = new RgbPixelRepository(heightMapImage.PixelBuffer[0]);
+        return true;
+      }
+      catch (Exception)
+      {        
+      }
+
+
+      return false;
+
+      
     }
   }
 }

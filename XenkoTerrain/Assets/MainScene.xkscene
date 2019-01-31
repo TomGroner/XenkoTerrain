@@ -8,51 +8,35 @@ Hierarchy:
     RootParts:
         - ref!! a7480529-6c59-4db4-9de3-2da91e3176af
         - ref!! df4a8bd0-ab5b-44d1-af8e-1100e895cb88
-        - ref!! fcdcae3b-79f1-4c8d-a881-a850441826c4
-        - ref!! 2833b9a9-60f6-4660-a88a-e2309e391405
-        - ref!! adbd9ae7-026c-416b-aa46-d2886d16faea
-        - ref!! 4cb0f7aa-d474-4a59-aa76-9581a301d9d0
+        - ref!! 18e0596c-bda6-497c-8e6d-61cf7d82f27f
+        - ref!! f4b791e5-a75d-499d-8267-7e3966920968
+        - ref!! 72ddce4e-2998-452c-8ab9-40858c6d16fd
     Parts:
-        -   Folder: null
-            Entity:
-                Id: 2833b9a9-60f6-4660-a88a-e2309e391405
-                Name: Terrain SW
+        -   Entity:
+                Id: 18e0596c-bda6-497c-8e6d-61cf7d82f27f
+                Name: Ambient light
                 Components:
-                    1bf9e7e9030d78323012b39249045fa0: !TransformComponent
-                        Id: 4b69686e-d24f-4b05-b47a-f68ca14253da
-                        Position: {X: -128.0, Y: 0.0, Z: 0.0}
+                    4c68fd14de59f8030cb67648c31d3c4f: !TransformComponent
+                        Id: ec3db2a7-d136-487a-b3a6-a1f240f4c670
+                        Position: {X: 0.0, Y: 0.0, Z: 0.0}
                         Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
                         Scale: {X: 1.0, Y: 1.0, Z: 1.0}
                         Children: {}
-                    ad86a6332e2572d8fcd79bd86deb5f96: !TerrainEntityComponent
-                        Id: 2d3255fc-86f5-4c29-8eef-d38c5d2bbf59
-                        Sun: ref!! cd0f04ad-189f-403a-8dce-4ff68c341c39
-                        BlendMap: b918a4fe-aa3f-49d0-a53c-cd4d7ae7157a:Terrain/blendmap2
-                        HeightMap: 3da9c60f-67f5-4dec-8193-b8c768358646:Terrain/heightmap3
-                        SandTexture: da7714b4-4c4f-4762-8c5e-8afa31034ab6:Terrain/sand
-                        DirtTexture: d19dd46a-6d90-4eaa-912d-dbb51f01e79a:Terrain/Grass
-                        GrassTexture: a09d1a26-319d-49d7-8228-bc80ad9319cb:Terrain/dirt
-                        RockTexture: 1eb0b908-c618-4f08-a5b0-9f59879c43d9:Terrain/dark rock
-        -   Folder: null
-            Entity:
-                Id: 4cb0f7aa-d474-4a59-aa76-9581a301d9d0
-                Name: Terrain NE
+                    b28a6721afdc0898001bfb09cb8ac472: !LightComponent
+                        Id: 7ae2d3b0-c750-4b7a-94fc-6ef189e1986d
+                        Type: !LightAmbient
+                            Color: !ColorRgbProvider
+                                Value: {R: 1.0, G: 1.0, B: 1.0}
+        -   Entity:
+                Id: 72ddce4e-2998-452c-8ab9-40858c6d16fd
+                Name: Entity
                 Components:
-                    1bf9e7e9030d78323012b39249045fa0: !TransformComponent
-                        Id: 004ee10a-9e11-45a1-8072-99a621e58c43
-                        Position: {X: 0.0, Y: 0.0, Z: 128.0}
+                    960a5faab106481d4cc864f18adb3244: !TransformComponent
+                        Id: 4ba86ed4-9c69-4696-af15-852d5a2aff37
+                        Position: {X: 5.12114143, Y: 0.0, Z: -2.689888}
                         Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
                         Scale: {X: 1.0, Y: 1.0, Z: 1.0}
                         Children: {}
-                    ad86a6332e2572d8fcd79bd86deb5f96: !TerrainEntityComponent
-                        Id: 5e26c939-ce0a-4948-9fef-87c691d2c5ce
-                        Sun: ref!! cd0f04ad-189f-403a-8dce-4ff68c341c39
-                        BlendMap: b918a4fe-aa3f-49d0-a53c-cd4d7ae7157a:Terrain/blendmap2
-                        HeightMap: 4ac47f45-3286-429d-b0e1-bf4e297fc4d6:Terrain/heightmap2
-                        SandTexture: da7714b4-4c4f-4762-8c5e-8afa31034ab6:Terrain/sand
-                        DirtTexture: 1eb0b908-c618-4f08-a5b0-9f59879c43d9:Terrain/dark rock
-                        GrassTexture: d19dd46a-6d90-4eaa-912d-dbb51f01e79a:Terrain/Grass
-                        RockTexture: a09d1a26-319d-49d7-8228-bc80ad9319cb:Terrain/dirt
         -   Entity:
                 Id: a7480529-6c59-4db4-9de3-2da91e3176af
                 Name: Camera
@@ -76,56 +60,52 @@ Hierarchy:
                         KeyboardRotationSpeed: {X: 3.0, Y: 3.0}
                         MouseRotationSpeed: {X: 90.0, Y: 60.0}
                         TouchRotationSpeed: {X: 60.0, Y: 40.0}
-        -   Folder: null
-            Entity:
-                Id: adbd9ae7-026c-416b-aa46-d2886d16faea
-                Name: Terrain SE
-                Components:
-                    1bf9e7e9030d78323012b39249045fa0: !TransformComponent
-                        Id: 9bf6dc68-8c81-4cc0-84cf-3a52da04e681
-                        Position: {X: -128.0, Y: 0.0, Z: 128.0}
-                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
-                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
-                        Children: {}
-                    ad86a6332e2572d8fcd79bd86deb5f96: !TerrainEntityComponent
-                        Id: c1f402b7-c978-4c3b-9efc-6f8d38d24468
-                        Sun: ref!! cd0f04ad-189f-403a-8dce-4ff68c341c39
-                        BlendMap: b918a4fe-aa3f-49d0-a53c-cd4d7ae7157a:Terrain/blendmap2
-                        HeightMap: a4f5124e-1ea1-44ab-8141-8be19a502a94:Terrain/heightmap4
-                        SandTexture: da7714b4-4c4f-4762-8c5e-8afa31034ab6:Terrain/sand
-                        DirtTexture: d19dd46a-6d90-4eaa-912d-dbb51f01e79a:Terrain/Grass
-                        GrassTexture: a09d1a26-319d-49d7-8228-bc80ad9319cb:Terrain/dirt
-                        RockTexture: 1eb0b908-c618-4f08-a5b0-9f59879c43d9:Terrain/dark rock
         -   Entity:
                 Id: df4a8bd0-ab5b-44d1-af8e-1100e895cb88
                 Name: Sunlight
                 Components:
                     7dcff3107d2c072676edd153cb8b64e8: !TransformComponent
                         Id: 526e8fb1-a586-44d3-b692-f55ece7d3812
-                        Position: {X: 179.561371, Y: 102.17421, Z: 0.0}
+                        Position: {X: 179.561, Y: 61.0369263, Z: 0.0}
                         Rotation: {X: 0.0, Y: 1.0, Z: 0.0, W: 7.54979E-08}
                         Scale: {X: 1.0, Y: 1.0, Z: 1.0}
                         Children: {}
                     46ffa9c73930a42cbe094d870888f95f: !LightComponent
                         Id: cd0f04ad-189f-403a-8dce-4ff68c341c39
-                        Type: !LightPoint
+                        Type: !LightDirectional
                             Color: !ColorRgbProvider
-                                Value: {R: 1.0, G: 0.533333361, B: 0.266666681}
+                                Value: {R: 1.0, G: 1.0, B: 1.0}
                             Shadow:
-                                Size: Small
+                                Size: Large
+                                DepthRange: {}
+                                PartitionMode: !LightDirectionalShadowMap.PartitionLogarithmic {}
+                                ComputeTransmittance: false
                                 BiasParameters: {}
-                        Intensity: 10.0
+                        Intensity: 50.0
                     1e486a981678a91fdebc1f6d7e0ba7ff: !ModelComponent
                         Id: b1110f63-28e6-400a-bb25-eb65502b4b05
                         Model: 6ad9991c-8471-4c33-9de1-fba46966305b:Sphere
                         Materials: {}
         -   Entity:
+                Id: f4b791e5-a75d-499d-8267-7e3966920968
+                Name: TerrainSystem
+                Components:
+                    307e9ac96c81c3864ce937cd59f57b1d: !TransformComponent
+                        Id: 4f8c074c-8b71-4557-9545-5922c6d9d92c
+                        Position: {X: 0.0, Y: 0.0, Z: 0.0}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children:
+                            a61a07fd2ea7414141bff6e06132894c: ref!! 5ac78db9-b9af-47a3-bbbf-6d12ac903497
+                    7be057ec449d18e2aa6bfadf2b5bb78a: !TerrainSystemEntityComponent
+                        Id: 80778ba6-a712-456c-bbb0-a14522aa57ba
+        -   Entity:
                 Id: fcdcae3b-79f1-4c8d-a881-a850441826c4
-                Name: Terrain NW
+                Name: Terrain Tile
                 Components:
                     1bf9e7e9030d78323012b39249045fa0: !TransformComponent
                         Id: 5ac78db9-b9af-47a3-bbbf-6d12ac903497
-                        Position: {X: 0.0, Y: 0.0, Z: 0.0}
+                        Position: {X: 11.5626707, Y: 0.0, Z: 0.0}
                         Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
                         Scale: {X: 1.0, Y: 1.0, Z: 1.0}
                         Children: {}
@@ -138,3 +118,7 @@ Hierarchy:
                         DirtTexture: d19dd46a-6d90-4eaa-912d-dbb51f01e79a:Terrain/Grass
                         GrassTexture: a09d1a26-319d-49d7-8228-bc80ad9319cb:Terrain/dirt
                         RockTexture: 1eb0b908-c618-4f08-a5b0-9f59879c43d9:Terrain/dark rock
+                    575fbdd7fdee310c7b427d65e27b520e: !ModelComponent
+                        Id: 73143511-0ad8-4bd7-bc47-0e4f60bb4413
+                        Model: 6ad9991c-8471-4c33-9de1-fba46966305b:Sphere
+                        Materials: {}

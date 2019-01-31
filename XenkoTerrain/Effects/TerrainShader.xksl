@@ -1,4 +1,4 @@
-﻿shader TerrainShader : PositionVertexTransform, Texturing, NormalStream
+﻿shader TerrainShader : ComputeColor, PositionVertexTransform, Texturing, NormalStream
 {
   stage stream float3 DirectionToLight;
   stage stream float3 surfaceNormal;
@@ -11,9 +11,8 @@
     stage float LightIntensity;
     stage float TextureScale;
     stage float HeightScale;
-
-    stage float SpecularReflectivity;    
-    stage float SpecularDamping;
+    //stage float SpecularReflectivity;    
+    //stage float SpecularDamping;
   }
 
   rgroup PerMaterial
@@ -25,39 +24,9 @@
     stage Texture2D RockTexture;
   }
 
-  stage override void VSMain()
+  override float4 Compute()
   {
-    base.VSMain();
-    streams.surfaceNormal = mul(World, float4(streams.meshNormal, 0.0f)).xyz;
-    streams.DirectionToLight = LightPosition - streams.PositionWS;
-    streams.ShadingPosition = mul(streams.Position, WorldViewProjection);
-    streams.toCameraVector = mul(ViewInverse, float4(0.0f, 0.0f, 0.0f, 1.0f)).xyz - streams.PositionWS.xyz;
-  }
-
-  stage override void PSMain()
-  {
-    base.PSMain();
-    streams.ColorTarget = ComputeTerrainBaseColor() * ComputeDiffuseLighting();// + ComputeSpecularLighting(); // Cant figure out what I am doing wrong w/Specular :'(
-  }
-
-  float4 ComputeDiffuseLighting()
-  {
-    float3 unitNormal = normalize(streams.surfaceNormal);
-    float3 unitLightvector = normalize(streams.DirectionToLight);           
-    float nDotl = dot(unitNormal, unitLightvector);
-    float brightness = max(nDotl, 0.005f) * LightIntensity; // 0.005f used here is basically fake ambient light for now
-    float3 diffuse = brightness * LightColor;        
-    return float4(diffuse, 1.0f);
-  }
-
-  float4 ComputeSpecularLighting()
-  {
-    float3 unitVectorToCamera = normalize(streams.toCameraVector);
-    float3 lightDirection = -normalize(streams.DirectionToLight);
-    float3 reflectedLightDirection = reflect(normalize(lightDirection), normalize(streams.surfaceNormal));
-    float specularFactor = max(dot(reflectedLightDirection, unitVectorToCamera), 0.0f);
-    float dampedFactor = pow(specularFactor, 10);    
-    return float4(SpecularReflectivity * dampedFactor * LightColor , 0.0f);
+    return ComputeTerrainBaseColor();// * ComputeDiffuseLighting();// + ComputeSpecularLighting(); // Cant figure out what I am doing wrong w/Specular :'(
   }
 
   float4 ComputeTerrainBaseColor()
@@ -70,4 +39,24 @@
     float4 rock = RockTexture.Sample(RepeatSampler, streams.TexCoord * TextureScale) * blend.r;    
     return sand + grass + dirt + rock;    
   }
+
+    //float4 ComputeDiffuseLighting()
+  //{
+  //  float3 unitNormal = normalize(streams.surfaceNormal);
+  //  float3 unitLightvector = normalize(streams.DirectionToLight);           
+  //  float nDotl = dot(unitNormal, unitLightvector);
+  //  float brightness = max(nDotl, 0.005f) * LightIntensity; // 0.005f used here is basically fake ambient light for now
+  //  float3 diffuse = brightness * LightColor;        
+  //  return float4(diffuse, 1.0f);
+  //}
+
+  //float4 ComputeSpecularLighting()
+  //{
+  //  float3 unitVectorToCamera = normalize(streams.toCameraVector);
+  //  float3 lightDirection = -normalize(streams.DirectionToLight);
+  //  float3 reflectedLightDirection = reflect(normalize(lightDirection), normalize(streams.surfaceNormal));
+  //  float specularFactor = max(dot(reflectedLightDirection, unitVectorToCamera), 0.0f);
+  //  float dampedFactor = pow(specularFactor, 10);    
+  //  return float4(SpecularReflectivity * dampedFactor * LightColor , 0.0f);
+  //}
 };

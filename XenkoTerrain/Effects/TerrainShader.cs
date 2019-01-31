@@ -23,8 +23,6 @@ namespace Xenko.Rendering
         public static readonly ValueParameterKey<float> LightIntensity = ParameterKeys.NewValue<float>();
         public static readonly ValueParameterKey<float> TextureScale = ParameterKeys.NewValue<float>();
         public static readonly ValueParameterKey<float> HeightScale = ParameterKeys.NewValue<float>();
-        public static readonly ValueParameterKey<float> SpecularReflectivity = ParameterKeys.NewValue<float>();
-        public static readonly ValueParameterKey<float> SpecularDamping = ParameterKeys.NewValue<float>();
         public static readonly ObjectParameterKey<Texture> BlendMap = ParameterKeys.NewObject<Texture>();
         public static readonly ObjectParameterKey<Texture> SandTexture = ParameterKeys.NewObject<Texture>();
         public static readonly ObjectParameterKey<Texture> DirtTexture = ParameterKeys.NewObject<Texture>();

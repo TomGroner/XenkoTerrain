@@ -1,8 +1,14 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
+using System.IO;
 using Xenko.Core;
+using Xenko.Core.Mathematics;
 using Xenko.Engine;
 using Xenko.Engine.Design;
 using Xenko.Graphics;
+using Xenko.Rendering;
+using XenkoTerrain.Graphics;
+using XenkoTerrain.Rendering;
 
 namespace XenkoTerrain.Components
 {
@@ -12,6 +18,9 @@ namespace XenkoTerrain.Components
   [ComponentOrder(100)]
   public class TerrainEntityComponent : ActivableEntityComponent
   {
+    internal bool IsGeometryProcessed { get; set; }
+
+    // TODO: Later on, force these to be within a parent entity that is the TerrainSystemComponent
     [DataMember(28)]
     public LightComponent Sun { get; set; }
 
@@ -31,7 +40,7 @@ namespace XenkoTerrain.Components
     public Texture GrassTexture { get; set; }
 
     [DataMember(35)]
-    public Texture RockTexture { get; set; }    
+    public Texture RockTexture { get; set; }
 
     [DataMember(100)]
     [DefaultValue(RenderGroup.Group0)]

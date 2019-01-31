@@ -5,7 +5,6 @@ using Xenko.Extensions;
 using Xenko.Graphics;
 using Xenko.Graphics.GeometricPrimitives;
 using Xenko.Rendering;
-using XenkoTerrain.Extensions;
 
 namespace XenkoTerrain.Graphics
 {
@@ -14,15 +13,13 @@ namespace XenkoTerrain.Graphics
   {
     public const float MaxPixelColor = 256 * 256 * 256; // 3 color channels with 256 vals
     public const float HalfMaxPixelColor = MaxPixelColor / 2;
+    private RgbPixelRepository _pixels;
 
-    private PixelBuffer heightMapPixelBuffer;
-
-    public TerrainGeometryBuilder(GraphicsDevice graphicsDevice, float size, Image heightMapImage, float maxHeight)
+    public TerrainGeometryBuilder(GraphicsDevice graphicsDevice, float size, RgbPixelRepository pixels, float maxHeight)
     {
-      heightMapPixelBuffer = heightMapImage.PixelBuffer[0];
+      _pixels = pixels;
       GraphicsDevice = graphicsDevice;
       Size = size;
-      HeightMapImage = heightMapImage;
       MaxHeight = maxHeight;
     }
 
@@ -30,15 +27,32 @@ namespace XenkoTerrain.Graphics
 
     public float Size { get; }
 
-    public Image HeightMapImage { get; }
-
     public float MaxHeight { get; }
+
+    public ModelComponent BuildTerrainModel()
+    {
+      return BuildModel(BuildTerrain());
+    }
+
+    private ModelComponent BuildModel(GeometricPrimitive primitive)
+    {
+      var mesh = new Mesh(primitive.ToMeshDraw(), new ParameterCollection());
+      var model = new Model() { Meshes = new List<Mesh>(new[] { mesh }) };
+      return new ModelComponent(model);
+    }
 
     public GeometricPrimitive BuildTerrain()
     {
-      var data = GenerateTerrainGeometry(HeightMapImage.Description.Width, HeightMapImage.Description.Height, Size, false);
+      var data = GenerateTerrainGeometry(_pixels.Width, _pixels.Height, Size, false);
+
+
+      if (GraphicsDevice == null)
+      {
+        var tom = "likes crystals butt";
+      }
+
       return new GeometricPrimitive(GraphicsDevice, data);
-    }
+    }    
 
     protected virtual GeometricMeshData<VertexPositionNormalTexture> GenerateTerrainGeometry(int tessellationX, int tessellationY, float size, bool generateBackFace)
     {
@@ -133,13 +147,12 @@ namespace XenkoTerrain.Graphics
 
     private float GetHeight(int x, int y)
     {
-      if (x < 0 || x >= HeightMapImage.Description.Height || y < 0 || y >= HeightMapImage.Description.Width)
+      if (!_pixels.HaveData(x,y))
       {
         return 0;
       }
-   
-      var height = MaxPixelColor +  heightMapPixelBuffer.GetPixel<Color>(x, y).ToRgb();    
-      return height / MaxPixelColor * MaxHeight;
+
+      return _pixels.GetPixel(x, y) / MaxPixelColor * MaxHeight + MaxHeight;
     }
   }
 }

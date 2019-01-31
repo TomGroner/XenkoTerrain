@@ -13,6 +13,11 @@
     <PackageReference Include="Xenko.Core.Assets.CompilerApp" Version="3.1.0.1-beta01-0406" PrivateAssets="contentfiles;analyzers" IncludeAssets="build" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Effects\TerrainRenderFeatureEffect.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TerrainRenderFeatureEffect.xksl</DependentUpon>
+    </Compile>
     <Compile Update="Effects\TerrainShader.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -20,6 +25,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Update="Effects\TerrainRenderFeatureEffect.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+      <LastGenOutput>TerrainRenderFeatureEffect.cs</LastGenOutput>
+    </None>
     <None Update="Effects\TerrainShader.xksl">
       <Generator>XenkoShaderKeyGenerator</Generator>
       <LastGenOutput>TerrainShader.cs</LastGenOutput>

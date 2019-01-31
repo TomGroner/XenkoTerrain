@@ -2,6 +2,7 @@
 using Xenko.Core.Mathematics;
 using Xenko.Engine;
 using Xenko.Rendering;
+using Xenko.Streaming;
 
 namespace XenkoTerrain.Rendering
 {
@@ -21,7 +22,7 @@ namespace XenkoTerrain.Rendering
 
     protected override void InitializeCore()
     {      
-      effect = new DynamicEffectInstance("TerrainShader");
+      effect = new DynamicEffectInstance("TerrainRenderFeatureEffect");
       effect.Initialize(Context.Services);
     }
 
