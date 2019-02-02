@@ -1,4 +1,4 @@
-﻿shader TerrainTileShader: ComputeColor, PositionVertexTransform, Texturing, NormalStream
+﻿shader TerrainTileShader: ComputeColor, Texturing
 {
   rgroup PerMaterial
   {    

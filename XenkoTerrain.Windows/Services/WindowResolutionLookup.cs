@@ -7,15 +7,9 @@ namespace XenkoTerrain.Services
   {
     public static int FallbackMaxWidth = 800;
     public static int FallbackMaxHeight = 600;
-    private static WindowResolutionLookup instance;
 
-    private WindowResolutionLookup()
+    public WindowResolutionLookup()
     {
-    }
-
-    static WindowResolutionLookup()
-    {
-      instance = new WindowResolutionLookup();
     }
 
     public bool TryDetermineMaximumResolution(out int maxWidth, out int maxHeight)

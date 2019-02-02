@@ -1,38 +1,27 @@
-﻿using System.IO;
-using System.Threading.Tasks;
+﻿using Xenko.Core;
 using Xenko.Engine;
-using Xenko.Games;
-using Xenko.Graphics;
-using Xenko.Physics;
-using XenkoTerrain.Graphics;
+using XenkoTerrain.Services;
 
 namespace XenkoTerrain
 {
   public class XenkoTerrainGame : Game
   {
-    //public static RgbPixelRepository HeightMapData;
-    //public static bool HeightMapDataReady = false;
-
-    //protected async override Task LoadContent()
-    //{
-    //  await base.LoadContent();
-
-    //  var heightMapTexturePath = @"T:\Storage\Projects\TomGroner\XenkoTerrain\XenkoTerrain\Resources\heightmap.png";
-
-    //  using (var stream = new FileStream(heightMapTexturePath, FileMode.Open, FileAccess.Read, FileShare.Read))
-    //  {
-    //    var texture = Texture.Load(GraphicsDevice, stream);
-    //    var image = texture.GetDataAsImage(GraphicsContext.CommandList);
-    //    HeightMapData = new RgbPixelRepository(image.PixelBuffer[0]);
-    //    HeightMapDataReady = true;
-    //  }
-    //}
-
-    protected override void Draw(GameTime gameTime)
+    protected override void Initialize()
     {
-      var physics = SceneSystem.SceneInstance.GetProcessor<PhysicsProcessor>()?.Simulation;
+      base.Initialize();
 
-      base.Draw(gameTime);
+      if (Services.TryGetService<CustomGraphicsSettings>(out var service))
+      {
+        Services.GetService<CustomGraphicsSettings>().SetMaximizedReziableWindow();
+      }
+    }
+  }
+
+  public static class IServiceRegistryExtensions
+  {
+    public static bool TryGetService<T>(this IServiceRegistry services, out T service) where T : class
+    {
+      return (service = services.GetService<T>()) != null;
     }
   }
 }

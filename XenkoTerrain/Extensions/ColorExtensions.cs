@@ -4,6 +4,9 @@ namespace XenkoTerrain.Extensions
 {
   public static class ColorExtensions
   {
+    /// <summary>
+    /// Packs the color's 4 byte-channel to a float.
+    /// </summary>        
     public static float ToRgb(this Color self)
     {
       return
