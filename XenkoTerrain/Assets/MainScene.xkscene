@@ -27,7 +27,6 @@ Hierarchy:
                         Size: 32.0
                         MaxHeight: 4.0
                         AllowTerrainTransparency: false
-                        Sun: ref!! cd0f04ad-189f-403a-8dce-4ff68c341c39
                         BlendMap: f1722294-9c11-497b-ac2c-2d4bb26d60f1:Terrain/blendmap
                         SandTexture: da7714b4-4c4f-4762-8c5e-8afa31034ab6:Terrain/sand
                         DirtTexture: a09d1a26-319d-49d7-8228-bc80ad9319cb:Terrain/dirt
