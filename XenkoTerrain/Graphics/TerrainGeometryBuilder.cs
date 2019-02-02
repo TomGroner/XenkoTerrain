@@ -1,19 +1,14 @@
-﻿using System.Collections.Generic;
-using Xenko.Core.Mathematics;
-using Xenko.Engine;
-using Xenko.Extensions;
+﻿using Xenko.Core.Mathematics;
 using Xenko.Graphics;
 using Xenko.Graphics.GeometricPrimitives;
-using Xenko.Rendering;
 
 namespace XenkoTerrain.Graphics
 {
   // TODO: Extract interface, separate into water and terrain geometry builders
   public class TerrainGeometryBuilder
   {
-    public const float MaxPixelColor = 256 * 256 * 256; // 3 color channels with 256 vals
-    public const float HalfMaxPixelColor = MaxPixelColor / 2;
     private RgbPixelRepository _pixels;
+    public const float MaxPixelColor = 256 * 256 * 256;   
 
     public TerrainGeometryBuilder(GraphicsDevice graphicsDevice, float size, RgbPixelRepository pixels, float maxHeight)
     {
@@ -28,18 +23,6 @@ namespace XenkoTerrain.Graphics
     public float Size { get; }
 
     public float MaxHeight { get; }
-
-    public ModelComponent BuildTerrainModel()
-    {
-      return BuildModel(BuildTerrain());
-    }
-
-    private ModelComponent BuildModel(GeometricPrimitive primitive)
-    {
-      var mesh = new Mesh(primitive.ToMeshDraw(), new ParameterCollection());
-      var model = new Model() { Meshes = new List<Mesh>(new[] { mesh }) };
-      return new ModelComponent(model);
-    }
 
     public GeometricPrimitive BuildTerrain()
     {
