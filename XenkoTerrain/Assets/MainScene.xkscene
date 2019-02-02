@@ -10,8 +10,29 @@ Hierarchy:
         - ref!! df4a8bd0-ab5b-44d1-af8e-1100e895cb88
         - ref!! 18e0596c-bda6-497c-8e6d-61cf7d82f27f
         - ref!! f4b791e5-a75d-499d-8267-7e3966920968
-        - ref!! 72ddce4e-2998-452c-8ab9-40858c6d16fd
     Parts:
+        -   Entity:
+                Id: 07c8136d-e882-47f6-98c3-2af69db8a56c
+                Name: Terrain Tile
+                Components:
+                    82fee18ae6b00b0a097a7d0bfb0474bd: !TransformComponent
+                        Id: 1940b1c6-4565-4423-bd16-ecc89896d77e
+                        Position: {X: 0.0, Y: 0.0, Z: 0.0}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    03f83e5f61c1f310ead06f99da71f0c7: !TerrainTileEntityComponent
+                        Id: 888f29e8-40a7-4755-b557-aaeac6278175
+                        HeightSource: ref!! d8994546-bce0-4ecd-af23-b5c029c8d2df
+                        Size: 32.0
+                        MaxHeight: 5.0
+                        AllowTerrainTransparency: false
+                        Sun: ref!! cd0f04ad-189f-403a-8dce-4ff68c341c39
+                        BlendMap: f1722294-9c11-497b-ac2c-2d4bb26d60f1:Terrain/blendmap
+                        SandTexture: da7714b4-4c4f-4762-8c5e-8afa31034ab6:Terrain/sand
+                        DirtTexture: a09d1a26-319d-49d7-8228-bc80ad9319cb:Terrain/dirt
+                        GrassTexture: d19dd46a-6d90-4eaa-912d-dbb51f01e79a:Terrain/Grass
+                        RockTexture: 1eb0b908-c618-4f08-a5b0-9f59879c43d9:Terrain/dark rock
         -   Entity:
                 Id: 18e0596c-bda6-497c-8e6d-61cf7d82f27f
                 Name: Ambient light
@@ -24,26 +45,15 @@ Hierarchy:
                         Children: {}
                     b28a6721afdc0898001bfb09cb8ac472: !LightComponent
                         Id: 7ae2d3b0-c750-4b7a-94fc-6ef189e1986d
-                        Type: !LightAmbient
-                            Color: !ColorRgbProvider
-                                Value: {R: 1.0, G: 1.0, B: 1.0}
-        -   Entity:
-                Id: 72ddce4e-2998-452c-8ab9-40858c6d16fd
-                Name: Entity
-                Components:
-                    960a5faab106481d4cc864f18adb3244: !TransformComponent
-                        Id: 4ba86ed4-9c69-4696-af15-852d5a2aff37
-                        Position: {X: 5.12114143, Y: 0.0, Z: -2.689888}
-                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
-                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
-                        Children: {}
+                        Type: !LightSkybox
+                            Skybox: ddf4fbe0-aad4-4987-928b-e568682652c9:Skybox
         -   Entity:
                 Id: a7480529-6c59-4db4-9de3-2da91e3176af
                 Name: Camera
                 Components:
                     9f3fab54dca1d6dcdaece270f26a92a9: !TransformComponent
                         Id: f64a56b2-6cfc-4ea0-a5db-8bd7ffa0515b
-                        Position: {X: -21.42288, Y: 6.703941, Z: -7.87628}
+                        Position: {X: 0.0, Y: 16.0, Z: 0.0}
                         Rotation: {X: 0.0, Y: 0.8140366, Z: 0.0, W: -0.5808135}
                         Scale: {X: 1.0, Y: 1.0, Z: 1.0}
                         Children: {}
@@ -61,13 +71,26 @@ Hierarchy:
                         MouseRotationSpeed: {X: 90.0, Y: 60.0}
                         TouchRotationSpeed: {X: 60.0, Y: 40.0}
         -   Entity:
+                Id: c911427d-5abb-4b13-9898-4ad0acc1bc1d
+                Name: Heigh Source Map 1
+                Components:
+                    841e93af82a4cb3338bcdc460f92af4f: !TransformComponent
+                        Id: dde6a5f7-851e-4634-a218-c10b67735267
+                        Position: {X: 0.0, Y: 0.0, Z: 0.0}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    6af7a82fd943d764ab977e84e1135e04: !TerrainHeightSourceEntityComponent
+                        Id: d8994546-bce0-4ecd-af23-b5c029c8d2df
+                        HeightMap: 458028f8-4a79-415f-8ed3-cd24dea037f0:Terrain/heightmap
+        -   Entity:
                 Id: df4a8bd0-ab5b-44d1-af8e-1100e895cb88
                 Name: Sunlight
                 Components:
                     7dcff3107d2c072676edd153cb8b64e8: !TransformComponent
                         Id: 526e8fb1-a586-44d3-b692-f55ece7d3812
                         Position: {X: 179.561, Y: 61.0369263, Z: 0.0}
-                        Rotation: {X: 0.0, Y: 1.0, Z: 0.0, W: 7.54979E-08}
+                        Rotation: {X: 0.0, Y: 0.866025448, Z: 0.0, W: 0.49999997}
                         Scale: {X: 1.0, Y: 1.0, Z: 1.0}
                         Children: {}
                     46ffa9c73930a42cbe094d870888f95f: !LightComponent
@@ -76,7 +99,9 @@ Hierarchy:
                             Color: !ColorRgbProvider
                                 Value: {R: 1.0, G: 1.0, B: 1.0}
                             Shadow:
+                                Enabled: true
                                 Size: Large
+                                CascadeCount: TwoCascades
                                 DepthRange: {}
                                 PartitionMode: !LightDirectionalShadowMap.PartitionLogarithmic {}
                                 ComputeTransmittance: false
@@ -86,6 +111,18 @@ Hierarchy:
                         Id: b1110f63-28e6-400a-bb25-eb65502b4b05
                         Model: 6ad9991c-8471-4c33-9de1-fba46966305b:Sphere
                         Materials: {}
+                    49b129d74e844c5c2aa376d7d96f227a: !StaticColliderComponent
+                        Id: dedb8670-f16a-44c7-bb1d-ab2baac3b05b
+                        CanSleep: false
+                        Restitution: 0.0
+                        Friction: 0.5
+                        RollingFriction: 0.0
+                        CcdMotionThreshold: 0.0
+                        CcdSweptSphereRadius: 0.0
+                        IsTrigger: false
+                        ColliderShapes:
+                            2525327e409c2bc2104256df7f4742b3: !ColliderShapeAssetDesc
+                                Shape: 63455f62-c835-4fe5-98be-081c8bc4a6a6:Sun Collider
         -   Entity:
                 Id: f4b791e5-a75d-499d-8267-7e3966920968
                 Name: TerrainSystem
@@ -96,29 +133,7 @@ Hierarchy:
                         Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
                         Scale: {X: 1.0, Y: 1.0, Z: 1.0}
                         Children:
-                            a61a07fd2ea7414141bff6e06132894c: ref!! 5ac78db9-b9af-47a3-bbbf-6d12ac903497
+                            fe9835765e7bc607917ea452fa44ef87: ref!! dde6a5f7-851e-4634-a218-c10b67735267
+                            4f2e404fce7daf7e5e6d07d5fa76e069: ref!! 1940b1c6-4565-4423-bd16-ecc89896d77e
                     7be057ec449d18e2aa6bfadf2b5bb78a: !TerrainSystemEntityComponent
                         Id: 80778ba6-a712-456c-bbb0-a14522aa57ba
-        -   Entity:
-                Id: fcdcae3b-79f1-4c8d-a881-a850441826c4
-                Name: Terrain Tile
-                Components:
-                    1bf9e7e9030d78323012b39249045fa0: !TransformComponent
-                        Id: 5ac78db9-b9af-47a3-bbbf-6d12ac903497
-                        Position: {X: 11.5626707, Y: 0.0, Z: 0.0}
-                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
-                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
-                        Children: {}
-                    ad86a6332e2572d8fcd79bd86deb5f96: !TerrainEntityComponent
-                        Id: 086a3167-c787-4535-a0e7-c3751b6f39b0
-                        Sun: ref!! cd0f04ad-189f-403a-8dce-4ff68c341c39
-                        BlendMap: f1722294-9c11-497b-ac2c-2d4bb26d60f1:Terrain/blendmap
-                        HeightMap: 458028f8-4a79-415f-8ed3-cd24dea037f0:Terrain/heightmap
-                        SandTexture: da7714b4-4c4f-4762-8c5e-8afa31034ab6:Terrain/sand
-                        DirtTexture: d19dd46a-6d90-4eaa-912d-dbb51f01e79a:Terrain/Grass
-                        GrassTexture: a09d1a26-319d-49d7-8228-bc80ad9319cb:Terrain/dirt
-                        RockTexture: 1eb0b908-c618-4f08-a5b0-9f59879c43d9:Terrain/dark rock
-                    575fbdd7fdee310c7b427d65e27b520e: !ModelComponent
-                        Id: 73143511-0ad8-4bd7-bc47-0e4f60bb4413
-                        Model: 6ad9991c-8471-4c33-9de1-fba46966305b:Sphere
-                        Materials: {}

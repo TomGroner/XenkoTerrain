@@ -12,6 +12,6 @@ stage override void VSMain()
   stage override void PSMain()
   {
     base.PSMain();
-    streams.ColorTarget = ComputeTerrainBaseColor();// * ComputeDiffuseLighting();// + ComputeSpecularLighting(); // Cant figure out what I am doing wrong w/Specular :'(
+    streams.ColorTarget = Compute();
   }
 };

@@ -3,6 +3,7 @@ using Xenko.Graphics;
 using Xenko.Rendering;
 using Xenko.Rendering.Materials;
 using Xenko.Rendering.Materials.ComputeColors;
+using XenkoTerrain.TerrainSystem;
 
 namespace XenkoTerrain.Graphics
 {
@@ -15,9 +16,9 @@ namespace XenkoTerrain.Graphics
 
     public GraphicsDevice GraphicsDevice { get; }
 
-    public Material BuildTerrainMaterial(bool includeTransparency = false)
+    public Material BuildTerrainMaterial(TerrainTileRenderObject renderObject)
     {
-      return BuildMaterial("TerrainShader", includeTransparency);
+      return BuildMaterial("TerrainTileShader", renderObject.AllowTerrainTransparency);
     }
 
     protected Material BuildMaterial(string shaderName, bool includeTransparency)

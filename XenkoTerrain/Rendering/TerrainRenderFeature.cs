@@ -21,7 +21,7 @@ namespace XenkoTerrain.Rendering
     }
 
     protected override void InitializeCore()
-    {      
+    {           
       effect = new DynamicEffectInstance("TerrainRenderFeatureEffect");
       effect.Initialize(Context.Services);
     }

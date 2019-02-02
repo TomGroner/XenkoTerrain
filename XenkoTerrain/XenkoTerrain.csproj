@@ -1,6 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Xenko.Engine" Version="3.1.0.1-beta01-0406" PrivateAssets="contentfiles;analyzers" />
@@ -23,6 +27,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>TerrainShader.xksl</DependentUpon>
     </Compile>
+    <Compile Update="Effects\TerrainTileShader.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TerrainTileShader.xksl</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Update="Effects\TerrainRenderFeatureEffect.xksl">
@@ -32,6 +41,13 @@
     <None Update="Effects\TerrainShader.xksl">
       <Generator>XenkoShaderKeyGenerator</Generator>
       <LastGenOutput>TerrainShader.cs</LastGenOutput>
+    </None>
+    <None Update="Effects\TerrainTileShader.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+      <LastGenOutput>TerrainTileShader.cs</LastGenOutput>
+    </None>
+    <None Update="libbulletc.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 </Project>

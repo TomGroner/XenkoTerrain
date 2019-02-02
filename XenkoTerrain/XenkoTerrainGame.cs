@@ -1,7 +1,9 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
 using Xenko.Engine;
+using Xenko.Games;
 using Xenko.Graphics;
+using Xenko.Physics;
 using XenkoTerrain.Graphics;
 
 namespace XenkoTerrain
@@ -25,5 +27,12 @@ namespace XenkoTerrain
     //    HeightMapDataReady = true;
     //  }
     //}
+
+    protected override void Draw(GameTime gameTime)
+    {
+      var physics = SceneSystem.SceneInstance.GetProcessor<PhysicsProcessor>()?.Simulation;
+
+      base.Draw(gameTime);
+    }
   }
 }

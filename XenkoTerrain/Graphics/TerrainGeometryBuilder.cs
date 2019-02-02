@@ -1,9 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using Xenko.Core;
 using Xenko.Core.Mathematics;
 using Xenko.Engine;
 using Xenko.Extensions;
 using Xenko.Graphics;
 using Xenko.Graphics.GeometricPrimitives;
+using Xenko.Physics;
+using Xenko.Physics.Shapes;
 using Xenko.Rendering;
 
 namespace XenkoTerrain.Graphics
@@ -44,13 +50,6 @@ namespace XenkoTerrain.Graphics
     public GeometricPrimitive BuildTerrain()
     {
       var data = GenerateTerrainGeometry(_pixels.Width, _pixels.Height, Size, false);
-
-
-      if (GraphicsDevice == null)
-      {
-        var tom = "likes crystals butt";
-      }
-
       return new GeometricPrimitive(GraphicsDevice, data);
     }    
 
@@ -147,7 +146,7 @@ namespace XenkoTerrain.Graphics
 
     private float GetHeight(int x, int y)
     {
-      if (!_pixels.HaveData(x,y))
+      if (!_pixels.HaveData(x, y))
       {
         return 0;
       }

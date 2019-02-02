@@ -115,9 +115,15 @@ RenderFeatures:
                 TransparentRenderStage: ref!! 7e342ae7-cfcf-4624-9f39-779e307627fa
                 EffectName: null
         PipelineProcessors: {}
-    1e8a0d8e67b0240e3b578add48b8272d*: !XenkoTerrain.Rendering.TerrainRenderFeature,XenkoTerrain
+    f1ddc05abd710db1587102b05cfac8fb*: !XenkoTerrain.TerrainSystem.TerrainHeightSourceRenderFeature,XenkoTerrain
         RenderStageSelectors:
-            fd6c6fbd0487731fa47243788a9af9fd: !Xenko.Rendering.SimpleGroupToRenderStageSelector,Xenko.Engine
+            21ae09b0060c6ce7050b5c9b7f4c1b89: !Xenko.Rendering.SimpleGroupToRenderStageSelector,Xenko.Engine
+                RenderGroup: Group0
+                RenderStage: ref!! 08809275-ad5f-4599-a314-3bbce6a13014
+                EffectName: null
+    010b24b5e8966e03a882e8b25132ec89*: !XenkoTerrain.TerrainSystem.TerrainTileRenderFeature,XenkoTerrain
+        RenderStageSelectors:
+            cf8bd780b576325a07740067b983c633: !Xenko.Rendering.SimpleGroupToRenderStageSelector,Xenko.Engine
                 RenderGroup: Group0
                 RenderStage: ref!! 08809275-ad5f-4599-a314-3bbce6a13014
                 EffectName: null

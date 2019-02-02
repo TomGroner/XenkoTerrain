@@ -25,7 +25,7 @@ namespace XenkoTerrain.Components
       foreach (var data in ComponentDatas)
       {
         var component = data.Key;
-        var renderObject = data.Value;             
+        var renderObject = data.Value;
 
         if (component.Enabled)
         {
@@ -34,7 +34,7 @@ namespace XenkoTerrain.Components
       }
 
       base.Update(time);
-    } 
+    }
 
     public override void Draw(RenderContext context)
     {
@@ -50,7 +50,8 @@ namespace XenkoTerrain.Components
 
           if (renderObject.IsInitialized && !component.IsGeometryProcessed)
           {
-            renderObject.BuildGeometryForComponent(component);          }
+            renderObject.BuildGeometryForComponent(component);
+          }
         }
         else
         {

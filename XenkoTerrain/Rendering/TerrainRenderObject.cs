@@ -1,17 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Xenko.Core;
 using Xenko.Core.Mathematics;
+using Xenko.Core.Serialization.Contents;
 using Xenko.Engine;
 using Xenko.Games;
 using Xenko.Graphics;
 using Xenko.Graphics.GeometricPrimitives;
+using Xenko.Physics;
 using Xenko.Rendering;
 using XenkoTerrain.Components;
 using XenkoTerrain.Graphics;
 
 namespace XenkoTerrain.Rendering
 {
+  [ContentSerializer(typeof(DataContentSerializer<HeightfieldColliderShapeDesc>))]
+  [DataContract("HeightfieldColliderShapeDesc")]
+  [Display(50, "Heighfield")]
+  public class HeightfieldColliderShapeDesc : IInlineColliderShapeDesc
+  {
+    public bool Match(object obj)
+    {
+      return true;
+    }
+  }
+
+
   public class TerrainRenderObject : RenderObject
   {
     public TerrainRenderObject(RenderGroup rendergroup)
@@ -104,18 +119,18 @@ namespace XenkoTerrain.Rendering
 
         foreach (var terrainEntityComponent in componentsToUpdate.Where(c => !c.IsGeometryProcessed))
         {
-          var geometryModel = geometryBuilder.BuildTerrainModel();
-
           if (terrainEntityComponent.Entity.Get<ModelComponent>() is ModelComponent existingTerrainModel)
           {
-            terrainEntityComponent.Entity.Remove(existingTerrainModel);
+            terrainEntityComponent.Entity.Remove(existingTerrainModel);            
           }
 
+          var geometryModel = geometryBuilder.BuildTerrainModel();
           var materialBuilder = new TerrainMaterialBuilder(context.GraphicsDevice);
-          var material = materialBuilder.BuildTerrainMaterial(false);
-          geometryModel.Materials.Add(0, material);
-
+          //var material = materialBuilder.BuildTerrainMaterial(false);
+          //geometryModel.Materials.Add(0, material);                        
           terrainEntityComponent.Entity.Add(geometryModel);
+       
+
           terrainEntityComponent.IsGeometryProcessed = true;
           stoppedForGameMode = true;
         }
@@ -157,7 +172,10 @@ namespace XenkoTerrain.Rendering
 
     private void DrawComponent(RenderDrawContext context)
     {
-      DoTheDraw(context, component.Entity.Get<ModelComponent>().Materials[0].Passes[0].Parameters);
+      if (component.Entity.Get<ModelComponent>().Materials.Count > 0)
+      {
+        DoTheDraw(context, component.Entity.Get<ModelComponent>().Materials[0].Passes[0].Parameters);
+      }      
     }
 
 

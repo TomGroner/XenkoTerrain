@@ -16,7 +16,7 @@ Attributes:
         EmissiveMap: !ComputeColor
             Value: {R: 0.90025, G: 0.7228726, B: 0.354473442, A: 1.0}
         Intensity: !ComputeFloat
-            Value: 200.0
+            Value: 25.0
     Overrides:
         UVScale: {X: 1.0, Y: 1.0}
 Layers: {}

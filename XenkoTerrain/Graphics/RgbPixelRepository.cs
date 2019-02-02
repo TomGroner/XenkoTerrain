@@ -1,12 +1,13 @@
-﻿using Xenko.Core.Mathematics;
+﻿using System;
+using Xenko.Core.Mathematics;
 using Xenko.Graphics;
 using XenkoTerrain.Extensions;
 
 namespace XenkoTerrain.Graphics
 {
-  public class RgbPixelRepository
+  public class RgbPixelRepository : IDisposable
   {
-    private readonly float[] pixels;
+    private float[] pixels;
     
     public RgbPixelRepository(PixelBuffer pixelBuffer)
     {
@@ -49,6 +50,11 @@ namespace XenkoTerrain.Graphics
     public void SavePixel(int x, int y, float pixel)
     {
       pixels[GetPixelIndex(x, y)] = pixel;
+    }
+
+    public void Dispose()
+    {
+      pixels = null;
     }
   }
 }
