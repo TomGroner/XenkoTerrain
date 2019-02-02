@@ -16,19 +16,13 @@ using Buffer = Xenko.Graphics.Buffer;
 
 namespace Xenko.Rendering
 {
-    public static partial class TerrainShaderKeys
+    public static partial class TerrainTileShaderKeys
     {
-        public static readonly ValueParameterKey<Vector3> LightColor = ParameterKeys.NewValue<Vector3>();
-        public static readonly ValueParameterKey<Vector3> LightPosition = ParameterKeys.NewValue<Vector3>();
-        public static readonly ValueParameterKey<float> LightIntensity = ParameterKeys.NewValue<float>();
-        public static readonly ValueParameterKey<float> TextureScale = ParameterKeys.NewValue<float>();
-        public static readonly ValueParameterKey<float> HeightScale = ParameterKeys.NewValue<float>();
-        public static readonly ValueParameterKey<float> SpecularReflectivity = ParameterKeys.NewValue<float>();
-        public static readonly ValueParameterKey<float> SpecularDamping = ParameterKeys.NewValue<float>();
         public static readonly ObjectParameterKey<Texture> BlendMap = ParameterKeys.NewObject<Texture>();
         public static readonly ObjectParameterKey<Texture> SandTexture = ParameterKeys.NewObject<Texture>();
         public static readonly ObjectParameterKey<Texture> DirtTexture = ParameterKeys.NewObject<Texture>();
         public static readonly ObjectParameterKey<Texture> GrassTexture = ParameterKeys.NewObject<Texture>();
         public static readonly ObjectParameterKey<Texture> RockTexture = ParameterKeys.NewObject<Texture>();
+        public static readonly ValueParameterKey<float> TextureScale = ParameterKeys.NewValue<float>();
     }
 }

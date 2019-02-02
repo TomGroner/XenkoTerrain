@@ -31,7 +31,7 @@ Defaults:
                     MaxSlope: {Radians: 0.7853982}
                     Radius: 0.5
     - !Xenko.Physics.PhysicsSettings,Xenko.Physics
-        Flags: None
+        Flags: UseHardwareWhenPossible, ContinuosCollisionDetection
         MaxSubSteps: 1
         FixedTimeStep: 0.0166666675
     - !Xenko.Graphics.RenderingSettings,Xenko.Graphics
