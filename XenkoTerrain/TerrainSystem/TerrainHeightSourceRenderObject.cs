@@ -2,10 +2,6 @@
 using Xenko.Rendering;
 using XenkoTerrain.Graphics;
 
-// Other idea for things to break out
-// 1. A component just to hold the terrain texture2
-// 1b. Or instead, A component that has a full material to use instead of building it?
-
 namespace XenkoTerrain.TerrainSystem
 {
   public class TerrainHeightSourceRenderObject : RenderObject

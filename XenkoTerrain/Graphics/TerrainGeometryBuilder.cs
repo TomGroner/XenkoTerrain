@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using Xenko.Core;
+﻿using System.Collections.Generic;
 using Xenko.Core.Mathematics;
 using Xenko.Engine;
 using Xenko.Extensions;
 using Xenko.Graphics;
 using Xenko.Graphics.GeometricPrimitives;
-using Xenko.Physics;
-using Xenko.Physics.Shapes;
 using Xenko.Rendering;
 
 namespace XenkoTerrain.Graphics
@@ -74,7 +68,7 @@ namespace XenkoTerrain.Graphics
       {
         for (var x = 0; x < (tessellationX + 1); x++)
         {
-          var height = x == 0 || y == 0 ? 0.1f : GetHeight(x, y);
+          var height = x == 0 || y == 0 ? 0.0f : GetHeight(x, y);
           var position = new Vector3(-size + deltaX * x, height, -size + deltaY * y);
           var normal = GetNormal(x, y);
           var texCoord = new Vector2(uv.X * x / tessellationX, uv.Y * y / tessellationY);

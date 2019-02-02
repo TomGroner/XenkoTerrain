@@ -28,9 +28,6 @@ namespace XenkoTerrain.TerrainSystem
     [DataMember(13)]
     public bool AllowTerrainTransparency { get; set; }
 
-    [DataMember(28)]
-    public LightComponent Sun { get; set; }
-
     [DataMember(29)]
     public Texture BlendMap { get; set; }
 

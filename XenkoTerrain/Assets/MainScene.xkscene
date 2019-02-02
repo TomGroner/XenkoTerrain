@@ -25,7 +25,7 @@ Hierarchy:
                         Id: 888f29e8-40a7-4755-b557-aaeac6278175
                         HeightSource: ref!! d8994546-bce0-4ecd-af23-b5c029c8d2df
                         Size: 32.0
-                        MaxHeight: 5.0
+                        MaxHeight: 4.0
                         AllowTerrainTransparency: false
                         Sun: ref!! cd0f04ad-189f-403a-8dce-4ff68c341c39
                         BlendMap: f1722294-9c11-497b-ac2c-2d4bb26d60f1:Terrain/blendmap
@@ -111,18 +111,6 @@ Hierarchy:
                         Id: b1110f63-28e6-400a-bb25-eb65502b4b05
                         Model: 6ad9991c-8471-4c33-9de1-fba46966305b:Sphere
                         Materials: {}
-                    49b129d74e844c5c2aa376d7d96f227a: !StaticColliderComponent
-                        Id: dedb8670-f16a-44c7-bb1d-ab2baac3b05b
-                        CanSleep: false
-                        Restitution: 0.0
-                        Friction: 0.5
-                        RollingFriction: 0.0
-                        CcdMotionThreshold: 0.0
-                        CcdSweptSphereRadius: 0.0
-                        IsTrigger: false
-                        ColliderShapes:
-                            2525327e409c2bc2104256df7f4742b3: !ColliderShapeAssetDesc
-                                Shape: 63455f62-c835-4fe5-98be-081c8bc4a6a6:Sun Collider
         -   Entity:
                 Id: f4b791e5-a75d-499d-8267-7e3966920968
                 Name: TerrainSystem
@@ -135,5 +123,3 @@ Hierarchy:
                         Children:
                             fe9835765e7bc607917ea452fa44ef87: ref!! dde6a5f7-851e-4634-a218-c10b67735267
                             4f2e404fce7daf7e5e6d07d5fa76e069: ref!! 1940b1c6-4565-4423-bd16-ecc89896d77e
-                    7be057ec449d18e2aa6bfadf2b5bb78a: !TerrainSystemEntityComponent
-                        Id: 80778ba6-a712-456c-bbb0-a14522aa57ba

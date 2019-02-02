@@ -39,6 +39,12 @@ namespace XenkoTerrain.TerrainSystem
           }
           else if (renderObject.HeightData != null && component.HeightData != renderObject.HeightData)
           {
+            // TODO: Feels wrong to put somethng from the render object back to the component, but as-written
+            // the sole-purpose of the render object is to gain access to the uploaded height map texture to
+            // then get the image data from. I would prefer to just get the image directly, but Xenko doesn't 
+            // let an image be assigned to a component (that I can tell) and I cannot come up with a dynamic 
+            // way to select an arbitrary without using a texture and letting it get uploaded to the graphics 
+            // card. So, need to review other ways to get the height map dynamically
             component.HeightData = renderObject.HeightData;
           }
         }
