@@ -10,21 +10,19 @@ namespace XenkoTerrain.TerrainSystem
     {
       var collisionData = geometryData.Simplify(4);
       var collider = new StaticColliderComponent();
-      var boxColliderSize = size / collisionData.Rows;         
-
-      // have issue with using the size of the tile vs size of the map, usually get 0.5-1.5 units off it seems. think over in concept later
+      var boxColliderWidthHeight = size / collisionData.Rows;
+      var halfBoxColliderWidthHeight = boxColliderWidthHeight / 2;
+      var halfSize = size / 2 - halfBoxColliderWidthHeight;      
 
       for (var y = 0; y < collisionData.Rows; y++)
       {
         for (var x = 0; x < collisionData.Columns; x++)
         {
           var height = Math.Max(collisionData.GetTerrainHeight(x, y, maxHeight), 0.1f);
-
-          collider.ColliderShapes.Add(new BoxColliderShapeDesc()
-          {
-            Size = new Vector3(boxColliderSize, height, boxColliderSize),
-            LocalOffset = new Vector3(size / 2 - x * boxColliderSize, 0, size / 2 - y * boxColliderSize)
-          });
+          var halfHeight = height / 2;
+          var boxColliderSize = new Vector3(boxColliderWidthHeight, height, boxColliderWidthHeight);
+          var offset = new Vector3(-halfSize + x * boxColliderWidthHeight, halfHeight, -halfSize + y * boxColliderWidthHeight);
+          collider.ColliderShapes.Add(new BoxColliderShapeDesc() { Size = boxColliderSize, LocalOffset = offset });          
         }
       }
 
