@@ -2,36 +2,29 @@
 using Xenko.Graphics;
 using Xenko.Graphics.GeometricPrimitives;
 
-namespace XenkoTerrain.Graphics
+namespace XenkoTerrain.TerrainSystem
 {
-  // TODO: Extract interface, separate into water and terrain geometry builders
   public class TerrainGeometryBuilder
   {
-    private RgbPixelRepository _pixels;
-    public const float MaxPixelColor = 256 * 256 * 256;   
+    private float?[] heightCache;
+    private TerrainHeightDataRepository heightData;
 
-    public TerrainGeometryBuilder(GraphicsDevice graphicsDevice, float size, RgbPixelRepository pixels, float maxHeight)
+    public TerrainGeometryBuilder(TerrainHeightDataRepository data)
     {
-      _pixels = pixels;
-      GraphicsDevice = graphicsDevice;
-      Size = size;
-      MaxHeight = maxHeight;
+      heightData = data;
+      heightCache = new float?[data.Rows * data.Columns];
     }
 
-    public GraphicsDevice GraphicsDevice { get; }
-
-    public float Size { get; }
-
-    public float MaxHeight { get; }
-
-    public GeometricPrimitive BuildTerrain()
+    public virtual GeometricPrimitive BuildTerrainGeometricPrimitive(GraphicsDevice graphicsDevice, float size, float maxHeight)
     {
-      var data = GenerateTerrainGeometry(_pixels.Width, _pixels.Height, Size, false);
-      return new GeometricPrimitive(GraphicsDevice, data);
-    }    
+      var data = BuildTerrainData(size, maxHeight, false);      
+      return new GeometricPrimitive(graphicsDevice, data);
+    }
 
-    protected virtual GeometricMeshData<VertexPositionNormalTexture> GenerateTerrainGeometry(int tessellationX, int tessellationY, float size, bool generateBackFace)
+    public virtual GeometricMeshData<VertexPositionNormalTexture> BuildTerrainData(float size, float maxHeight, bool generateBackFace)
     {
+      var tessellationX = heightData.Columns;
+      var tessellationY = heightData.Rows;
       var lineWidth = (tessellationX + 1);
       var lineHeight = (tessellationY + 1);
       var vertices = new VertexPositionNormalTexture[lineWidth * lineHeight * (generateBackFace ? 2 : 1)];
@@ -51,9 +44,9 @@ namespace XenkoTerrain.Graphics
       {
         for (var x = 0; x < (tessellationX + 1); x++)
         {
-          var height = x == 0 || y == 0 ? 0.0f : GetHeight(x, y);
+          var height = x == 0 || y == 0 ? 0.0f : GetHeight(x, y, maxHeight); // TODO: replace 0.0f default with a minheight
           var position = new Vector3(-size + deltaX * x, height, -size + deltaY * y);
-          var normal = GetNormal(x, y);
+          var normal = GetNormal(x, y, maxHeight);
           var texCoord = new Vector2(uv.X * x / tessellationX, uv.Y * y / tessellationY);
           vertices[vertexCount++] = new VertexPositionNormalTexture(position, normal, texCoord);
         }
@@ -109,26 +102,18 @@ namespace XenkoTerrain.Graphics
       return new GeometricMeshData<VertexPositionNormalTexture>(vertices, indices, false) { Name = "Terrain" };
     }
 
-    private Vector3 GetNormal(int x, int y)
+    private Vector3 GetNormal(int x, int y, float maxHeight)
     {
       // TODO: Pre-calculate all of these, or cache as they are calculated, and re-use.
-      var heightL = GetHeight(x - 1, y);
-      var heightR = GetHeight(x + 1, y);
-      var heightD = GetHeight(x, y - 1);
-      var heightU = GetHeight(x, y + 1);
+      var heightL = GetHeight(x - 1, y, maxHeight);
+      var heightR = GetHeight(x + 1, y, maxHeight);
+      var heightD = GetHeight(x, y - 1, maxHeight);
+      var heightU = GetHeight(x, y + 1, maxHeight);
       var normal = new Vector3(heightL - heightR, 2f, heightD - heightU);
       normal.Normalize();
       return normal;
     }
 
-    private float GetHeight(int x, int y)
-    {
-      if (!_pixels.HaveData(x, y))
-      {
-        return 0;
-      }
-
-      return _pixels.GetPixel(x, y) / MaxPixelColor * MaxHeight + MaxHeight;
-    }
+    private float GetHeight(int x, int y, float maxHeight) => heightData.GetTerrainHeight(x, y, maxHeight);
   }
 }

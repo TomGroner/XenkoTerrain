@@ -17,6 +17,14 @@
     <PackageReference Include="Xenko.Core.Assets.CompilerApp" Version="3.1.0.1-beta01-0406" PrivateAssets="contentfiles;analyzers" IncludeAssets="build" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="BulletSharp">
+      <HintPath>..\Bin\Windows\Debug\BulletSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="VHACDSharp">
+      <HintPath>VHACDSharp.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Update="Effects\TerrainTileShader.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -29,6 +37,12 @@
       <LastGenOutput>TerrainTileShader.cs</LastGenOutput>
     </None>
     <None Update="libbulletc.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="VHACD.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="VHACDSharp.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

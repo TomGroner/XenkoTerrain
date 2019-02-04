@@ -3,7 +3,6 @@ using Xenko.Core;
 using Xenko.Engine;
 using Xenko.Engine.Design;
 using Xenko.Graphics;
-using XenkoTerrain.Graphics;
 
 namespace XenkoTerrain.TerrainSystem
 {
@@ -21,6 +20,6 @@ namespace XenkoTerrain.TerrainSystem
     public Texture HeightMap { get; set; }
 
     [DataMemberIgnore]
-    public RgbPixelRepository HeightData { get; set; }
+    public TerrainHeightDataRepository HeightData { get; set; }
   }
 }

@@ -1,7 +1,0 @@
-!Texture
-Id: 18a51652-9aa9-4e7e-ba74-b4c20113545e
-SerializedVersion: {Xenko: 2.0.0.0}
-Tags: []
-Source: !file ../../Resources/dirty sand.jpg
-Type: !ColorTextureType
-    ColorKeyColor: {R: 255, G: 0, B: 255, A: 255}

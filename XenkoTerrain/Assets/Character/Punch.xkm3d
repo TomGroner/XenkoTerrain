@@ -1,0 +1,15 @@
+!Model
+Id: 4b311104-9795-4250-8c13-a65f58803161
+SerializedVersion: {Xenko: 2.0.0.0}
+Tags: []
+Source: !file ../../Resources/Punch.fbx
+Skeleton: e11ef112-7f11-4e1f-bf2e-a0b3aeccd71a:Character/Punch Skeleton
+PivotPosition: {X: 0.0, Y: 0.0, Z: 0.0}
+Materials:
+    340d586449faf2157b4ac200f91362d8:
+        Name: Material
+        MaterialInstance:
+            Material: null
+Modifiers: {}
+~SourceHashes:
+    30398e277aca6d093cabfc1e85b90566~../../Resources/Punch.fbx: b2903c4252f5f1bd88e171fcc4791e74

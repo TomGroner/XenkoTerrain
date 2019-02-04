@@ -3,27 +3,19 @@ using Xenko.Graphics;
 using Xenko.Rendering;
 using Xenko.Rendering.Materials;
 using Xenko.Rendering.Materials.ComputeColors;
-using XenkoTerrain.TerrainSystem;
 
-namespace XenkoTerrain.Graphics
+namespace XenkoTerrain.TerrainSystem
 {
   public class TerrainMaterialBuilder
   {
-    public TerrainMaterialBuilder(GraphicsDevice graphicsDevice)
+    public Material BuildTerrainMaterial(GraphicsDevice graphicsDevice, TerrainTileRenderObject renderObject)
     {
-      GraphicsDevice = graphicsDevice;
+      return BuildMaterial("TerrainTileShader", graphicsDevice, renderObject.AllowTerrainTransparency);
     }
 
-    public GraphicsDevice GraphicsDevice { get; }
-
-    public Material BuildTerrainMaterial(TerrainTileRenderObject renderObject)
+    protected Material BuildMaterial(string shaderName, GraphicsDevice graphicsDevice, bool includeTransparency)
     {
-      return BuildMaterial("TerrainTileShader", renderObject.AllowTerrainTransparency);
-    }
-
-    protected Material BuildMaterial(string shaderName, bool includeTransparency)
-    {
-      return Material.New(GraphicsDevice, new MaterialDescriptor
+      return Material.New(graphicsDevice, new MaterialDescriptor
       {
         Attributes = new MaterialAttributes()
         {

@@ -1,0 +1,15 @@
+!Model
+Id: 6e217a19-5e00-4f95-972c-884b62e54853
+SerializedVersion: {Xenko: 2.0.0.0}
+Tags: []
+Source: !file ../../Resources/Run.fbx
+Skeleton: 0d16316e-0622-4f8c-98e8-cf1772d9117f:Character/Run Skeleton
+PivotPosition: {X: 0.0, Y: 0.0, Z: 0.0}
+Materials:
+    a38de1bbd911e45d7076336142de177c:
+        Name: Material
+        MaterialInstance:
+            Material: null
+Modifiers: {}
+~SourceHashes:
+    6b858db7592d9272f7e7dcaded4e1af0~../../Resources/Run.fbx: 42d3e01b2a1e02183f01e280d2b58424

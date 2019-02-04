@@ -9,7 +9,9 @@ Hierarchy:
         - ref!! a7480529-6c59-4db4-9de3-2da91e3176af
         - ref!! df4a8bd0-ab5b-44d1-af8e-1100e895cb88
         - ref!! 18e0596c-bda6-497c-8e6d-61cf7d82f27f
-        - ref!! f4b791e5-a75d-499d-8267-7e3966920968
+        - ref!! 7ff31f0b-4485-49d4-8bb5-6c4f517a3c29
+        - ref!! c911427d-5abb-4b13-9898-4ad0acc1bc1d
+        - ref!! 07c8136d-e882-47f6-98c3-2af69db8a56c
     Parts:
         -   Entity:
                 Id: 07c8136d-e882-47f6-98c3-2af69db8a56c
@@ -32,13 +34,38 @@ Hierarchy:
                         DirtTexture: a09d1a26-319d-49d7-8228-bc80ad9319cb:Terrain/dirt
                         GrassTexture: d19dd46a-6d90-4eaa-912d-dbb51f01e79a:Terrain/Grass
                         RockTexture: 1eb0b908-c618-4f08-a5b0-9f59879c43d9:Terrain/dark rock
+                    bcb85ad4fcd3ee44efebab900ca34f29: !StaticColliderComponent
+                        Id: 4817f716-8018-49ad-b937-c03030d3203f
+                        CanSleep: false
+                        Restitution: 0.0
+                        Friction: 0.5
+                        RollingFriction: 0.0
+                        CcdMotionThreshold: 0.0
+                        CcdSweptSphereRadius: 0.0
+                        IsTrigger: false
+                        ColliderShapes:
+                            7be43acb8c94b2e09a14b125c0e23335: !BoxColliderShapeDesc
+                                Is2D: false
+                                Size: {X: 0.32, Y: 1.0, Z: 0.32}
+                                LocalOffset: {X: 16.0, Y: 0.0, Z: 16.0}
+                                LocalRotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                            a3d88613e4ce16eeb5bb04ecc72734b4: !BoxColliderShapeDesc
+                                Is2D: false
+                                Size: {X: 0.32, Y: 1.0, Z: 0.32}
+                                LocalOffset: {X: 15.68, Y: 0.0, Z: 16.0}
+                                LocalRotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                            2117ac482bfc0a1242ca5751be735211: !BoxColliderShapeDesc
+                                Is2D: false
+                                Size: {X: 0.32, Y: 1.0, Z: 0.32}
+                                LocalOffset: {X: 15.36, Y: 0.0, Z: 16.0}
+                                LocalRotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
         -   Entity:
                 Id: 18e0596c-bda6-497c-8e6d-61cf7d82f27f
                 Name: Ambient light
                 Components:
                     4c68fd14de59f8030cb67648c31d3c4f: !TransformComponent
                         Id: ec3db2a7-d136-487a-b3a6-a1f240f4c670
-                        Position: {X: 0.0, Y: 0.0, Z: 0.0}
+                        Position: {X: 0.0, Y: 20.0, Z: 0.0}
                         Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
                         Scale: {X: 1.0, Y: 1.0, Z: 1.0}
                         Children: {}
@@ -47,13 +74,45 @@ Hierarchy:
                         Type: !LightSkybox
                             Skybox: ddf4fbe0-aad4-4987-928b-e568682652c9:Skybox
         -   Entity:
+                Id: 7ff31f0b-4485-49d4-8bb5-6c4f517a3c29
+                Name: Xenko Mannequin
+                Components:
+                    3dbacb05ac83b223c294d3c823c19304: !TransformComponent
+                        Id: 3a84a566-fb58-4692-bc1c-86577210ce65
+                        Position: {X: -1.73815918, Y: 1.92772746, Z: -2.90592146}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    7313c14c7105a04d56cb644ccc3256dd: !ModelComponent
+                        Id: 40ef5d91-6f04-42d6-9c41-24098cd2bfb7
+                        Model: 120580fc-b51e-4e77-ab4d-d4e647ce38fb:Character/XenkoMannequin
+                        Materials: {}
+                    815de60cbda4fd8ab612fba713aee63e: !CharacterComponent
+                        Id: 1aecff60-5f4c-413f-860f-df0fffe7a798
+                        CanSleep: false
+                        Restitution: 0.0
+                        Friction: 0.5
+                        RollingFriction: 0.0
+                        CcdMotionThreshold: 0.0
+                        CcdSweptSphereRadius: 0.0
+                        FallSpeed: 10.0
+                        MaxSlope: {Radians: 0.7853982}
+                        JumpSpeed: 5.0
+                        Gravity: {X: 0.0, Y: -10.0, Z: 0.0}
+                        ColliderShapes:
+                            cb8a115f3243391fe163a16a1b713e6f: !CapsuleColliderShapeDesc
+                                Length: 1.2
+                                Radius: 0.4
+                                LocalOffset: {X: 0.0, Y: 0.95, Z: 0.0}
+                                LocalRotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+        -   Entity:
                 Id: a7480529-6c59-4db4-9de3-2da91e3176af
                 Name: Camera
                 Components:
                     9f3fab54dca1d6dcdaece270f26a92a9: !TransformComponent
                         Id: f64a56b2-6cfc-4ea0-a5db-8bd7ffa0515b
-                        Position: {X: -16.0, Y: 2.0, Z: 0.0}
-                        Rotation: {X: 0.0, Y: -0.766044438, Z: 0.0, W: 0.642787635}
+                        Position: {X: 23.2266788, Y: 4.43874741, Z: 0.0}
+                        Rotation: {X: 0.0, Y: 0.707106769, Z: 0.0, W: 0.707106769}
                         Scale: {X: 1.0, Y: 1.0, Z: 1.0}
                         Children: {}
                     5cf41658034141baa368e8470d321701: !CameraComponent
@@ -110,15 +169,3 @@ Hierarchy:
                         Id: b1110f63-28e6-400a-bb25-eb65502b4b05
                         Model: 6ad9991c-8471-4c33-9de1-fba46966305b:Sphere
                         Materials: {}
-        -   Entity:
-                Id: f4b791e5-a75d-499d-8267-7e3966920968
-                Name: TerrainSystem
-                Components:
-                    307e9ac96c81c3864ce937cd59f57b1d: !TransformComponent
-                        Id: 4f8c074c-8b71-4557-9545-5922c6d9d92c
-                        Position: {X: 0.0, Y: 0.0, Z: 0.0}
-                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
-                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
-                        Children:
-                            fe9835765e7bc607917ea452fa44ef87: ref!! dde6a5f7-851e-4634-a218-c10b67735267
-                            4f2e404fce7daf7e5e6d07d5fa76e069: ref!! 1940b1c6-4565-4423-bd16-ecc89896d77e

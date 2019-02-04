@@ -1,0 +1,90 @@
+!Skeleton
+Id: b7270b05-0774-4b18-9f2e-1dde804c1615
+SerializedVersion: {Xenko: 2.0.0.0}
+Tags: []
+Source: !file ../../Resources/Idle.fbx
+PivotPosition: {X: 0.0, Y: 0.0, Z: 0.0}
+Nodes:
+    a8a77658268e7d95ae8ab660be88c2aa: {Name: RootNode, Depth: 0}
+    5496e925663daadceccac25e41c38ada: {Name: CATRigHub001, Depth: 1}
+    203333002c0a30c34a854f40bf1d74dc: {Name: CATRigLLeg1, Depth: 2}
+    34bdd7a5fadc44f09c68f235fef572f1: {Name: CATRigLLeg2, Depth: 3}
+    842e129981a0384e8a1c91ce23bda9b7: {Name: CATRigLLegAnkle, Depth: 4}
+    1896489560d9f5482063b186b77bad08: {Name: CATRigAnkleleft, Depth: 5}
+    6d2c6b6faedded432bc76512907116e7: {Name: left_additional, Depth: 5}
+    885dee59d6665f72a7e0c35f236e2b57: {Name: left_extra_bone, Depth: 6}
+    2ca3025e6618a6264a5542b2ea24449a: {Name: CATRig1Boneside01, Depth: 4}
+    16a52a9d185f96ca36c6d74efb990ecf: {Name: CATRig1Boneside324, Depth: 4}
+    d51dc61cfd2a4f94bc134b8f32428e9c: {Name: CATRig1Boneupleft, Depth: 3}
+    40a44f9c1b04c3b8a7afdc82e6334eed: {Name: CATRig1Bonelowleft, Depth: 4}
+    d425cc37c32c203f3b398c01f6881482: {Name: backplateleftup, Depth: 2}
+    5c5607d124e1619f0b4ad97161991a85: {Name: backplatelieftdown, Depth: 3}
+    d23ba6633d9d95a10329954b297ee5bd: {Name: CATRigSpine1, Depth: 2}
+    751f1ac47ab33df780f32c9bb1170724: {Name: CATRigSpine2, Depth: 3}
+    a6546331f7dee8193af418f9a1fc3b70: {Name: CATRigSpine3, Depth: 4}
+    961d50862e8144d363b14bd3d1fdbc80: {Name: CATRigHub002, Depth: 5}
+    99e22b8f80549d4b6f8528ba8125d0c5: {Name: CATRigLArmCollarbone, Depth: 6}
+    94f4f2fa363bca75fc8f21a0ca74d393: {Name: CATRigLArm1, Depth: 7}
+    ca3476374daa6d208f53b91ef9051b7a: {Name: CATRigLArm2, Depth: 8}
+    0abecebd1455f2963f0e413e14e2cbcc: {Name: CATRigLArmPalm, Depth: 9}
+    8a742f4671938f7e9dead8243e26c71d: {Name: CATRigLArmDigit11, Depth: 10}
+    3e8cadfa1edbdef8b52187331cb6d8b3: {Name: CATRigLArmDigit12, Depth: 11}
+    6f2e259657690a29a036762b28927c2f: {Name: CATRigLArmDigit13, Depth: 12}
+    6169cd1742d20263f824f854d245d31e: {Name: CATRigLArmDigit21, Depth: 10}
+    455fcb32f179f9f66475bc93c197da7f: {Name: CATRigLArmDigit22, Depth: 11}
+    b37fb70f0a7ffa1c2e36520c971ddaba: {Name: CATRigLArmDigit23, Depth: 12}
+    bad1157321e2923e3facffff5b9384f0: {Name: CATRigLArmDigit31, Depth: 10}
+    88f6f0c1959bce2efa4f5cf7d9b50fba: {Name: CATRigLArmDigit32, Depth: 11}
+    276ee93052a796da600176f75ea748d6: {Name: CATRigLArmDigit33, Depth: 12}
+    e93a19bee175983bd04e83b03ba964f1: {Name: CATRigLArmDigit41, Depth: 10}
+    49d0f721dbe44cacd16a3ef5cb13162c: {Name: CATRigLArmDigit42, Depth: 11}
+    2d45d9dd1ac335f3aae10276e92f47e3: {Name: CATRigLArmDigit43, Depth: 12}
+    29b25fd3b0479bef2daccd9117609d7c: {Name: CATRigLArmDigit51, Depth: 10}
+    c4252d68fbcd2e25e9a4abeb3d98d77f: {Name: CATRigLArmDigit52, Depth: 11}
+    71981aef024e1d5704a8356fef40e0e9: {Name: CATRigLArmDigit53, Depth: 12}
+    6543d7b11390b974319686fa466b6476: {Name: CATRigHub002Bone001, Depth: 6}
+    d94e3f8844d4cbd8efb301a7ddf51021: {Name: CATRigHub002Bone002, Depth: 6}
+    4a620960348768b4e407016154274227: {Name: CATRigHub002Bone003, Depth: 6}
+    7877b015b59f2fb0a4eae11b024956f7: {Name: CATRigSpin4435f, Depth: 6}
+    66e38f84b110c25e60bb213d569a2c51: {Name: CATRigSpine3294, Depth: 7}
+    9c062c6f59d23394ed9c9269a20e02ba: {Name: CATRigSpineneck043, Depth: 8}
+    c2941b27c828321d2a6264700eedb324: {Name: CATRigRibcage0rtee, Depth: 9}
+    4a23075a1a02854d0da2869b7a62dd10: {Name: CATRigHub002Bone004, Depth: 6}
+    9a376f4e4ba6bb8568f38c8f7f7c0034: {Name: CATRigRArmCollarbone, Depth: 6}
+    bc3ff1ed104b10ef8cd85269422b209d: {Name: CATRigRArm1, Depth: 7}
+    211f7bf3f382ced555c382c17f9f60a1: {Name: CATRigRArm2, Depth: 8}
+    4c84bb3f0119a354d83eab9063f26e6a: {Name: CATRigRArmPalm, Depth: 9}
+    9658df0199454d4a4a8eb8d05102c00d: {Name: CATRigRArmDigit11, Depth: 10}
+    fbd8c4b8f20c7fd7a275743f3f25cb26: {Name: CATRigRArmDigit12, Depth: 11}
+    ecaa3b1b037a207a1e55f563d60e337e: {Name: CATRigRArmDigit13, Depth: 12}
+    e587bd97105440277e761cf55675743d: {Name: CATRigRArmDigit21, Depth: 10}
+    56553f8d2710833b5fb03aec026ee4e7: {Name: CATRigRArmDigit22, Depth: 11}
+    9e75b7e9c7c8669a231f9c38bcf436b0: {Name: CATRigRArmDigit23, Depth: 12}
+    2d318d4ae4f38539f9c783f43a7bd04d: {Name: CATRigRArmDigit31, Depth: 10}
+    7797c1513ae4b4b2c34ae89b337e89eb: {Name: CATRigRArmDigit32, Depth: 11}
+    8cc5e70233146aea1a50ace86ed32445: {Name: CATRigRArmDigit33, Depth: 12}
+    553bd928cbb50ebfd327a583fc379503: {Name: CATRigRArmDigit41, Depth: 10}
+    f6ca0a3bd9faf54e7a7c9d1d93f23881: {Name: CATRigRArmDigit42, Depth: 11}
+    ddeecf1049eb89dc375539cf9ea1f217: {Name: CATRigRArmDigit43, Depth: 12}
+    64dfc4bfdf6a5a30864b152eb74bf57c: {Name: CATRigRArmDigit51, Depth: 10}
+    c0732803ac1f1de526a37184406ec871: {Name: CATRigRArmDigit52, Depth: 11}
+    7cc6839450c0ed95c1f9c331ae14c4d7: {Name: CATRigRArmDigit53, Depth: 12}
+    6be191ee1c7dd0029f817171a98a02aa: {Name: gun_bone, Depth: 6}
+    87cceae4ba5f44861a211799c39df356: {Name: gun_barrel, Depth: 7}
+    431b7771df287a0d132c20aff04c1ead: {Name: gun_bone_magazine_offset, Depth: 7}
+    085721399b6e7edd4b0e632e2f01ae68: {Name: gun_bone_magazine, Depth: 8}
+    c80f017e104386b12411ba6264104c4c: {Name: CATRigHub001Bone002, Depth: 2}
+    f98e6fc60d04344ee5a1809ccb2bb4a0: {Name: backplaterightup, Depth: 2}
+    c6e0ddeb55ac8ed4e8183164892fed05: {Name: backplaterightdown, Depth: 3}
+    277339678625e9f70ed31ec310129c15: {Name: CATRigRLeg1, Depth: 2}
+    73ac5537de9014880db2234ed391a700: {Name: CATRigRLeg2, Depth: 3}
+    c92a4dc16f088a1b5aba9a194ba8e324: {Name: CATRigRLegAnkle, Depth: 4}
+    a2bf2c55b9c1d9ce8e9ccd3c04896979: {Name: CATRigAnkleright, Depth: 5}
+    a4fb91b0483b50d1bd3b37b5ad7000d2: {Name: right_additional, Depth: 5}
+    02538badccccbe9439d2844edbaf6b2e: {Name: right_extra_bone, Depth: 6}
+    94b3b80e51ebb569958532b2cbcff847: {Name: CATRig1Boeer643, Depth: 4}
+    fcdb8a2672a7d117c89db875d8674e9d: {Name: CATRig1Bone43840, Depth: 4}
+    f8fefd80dd1c48ce1d68cc7d6961c58d: {Name: CATRig1Bonesiderightup, Depth: 3}
+    e6c6fe56e818f0b38d8c1eb5d3e2044d: {Name: CATRig1Bonerightlow, Depth: 4}
+~SourceHashes:
+    8d033eb9b8c972860f121acd0e6fe3cf~../../Resources/Idle.fbx: 425da9e0d3fa578a8427ead97d6200b6

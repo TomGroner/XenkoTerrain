@@ -1,0 +1,15 @@
+!Model
+Id: 06eb7d39-4594-4f0c-ac36-b305ecd0ddb4
+SerializedVersion: {Xenko: 2.0.0.0}
+Tags: []
+Source: !file ../../Resources/Guard.fbx
+Skeleton: a497d340-1aba-4d04-8447-1e0ee89c80f8:Character/Guard Skeleton
+PivotPosition: {X: 0.0, Y: 0.0, Z: 0.0}
+Materials:
+    c271cf2f60997c818d4547785d43d077:
+        Name: Material
+        MaterialInstance:
+            Material: null
+Modifiers: {}
+~SourceHashes:
+    ebea4ddd5403d39ded7343cc4dfcf125~../../Resources/Guard.fbx: 109ec485cb05d4a63737810c27e1f1a5

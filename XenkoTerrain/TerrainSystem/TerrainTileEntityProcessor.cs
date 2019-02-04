@@ -3,13 +3,13 @@ using Xenko.Core.Annotations;
 using Xenko.Engine;
 using Xenko.Extensions;
 using Xenko.Games;
+using Xenko.Physics;
 using Xenko.Rendering;
-using XenkoTerrain.Graphics;
 
 namespace XenkoTerrain.TerrainSystem
 {
   public class TerrainTileEntityProcessor : EntityProcessor<TerrainTileEntityComponent, TerrainTileRenderObject>, IEntityComponentRenderProcessor
-  {
+  {    
     public VisibilityGroup VisibilityGroup { get; set; }
 
     protected override bool IsAssociatedDataValid([NotNull] Entity entity, [NotNull] TerrainTileEntityComponent component, [NotNull] TerrainTileRenderObject associatedData)
@@ -43,86 +43,51 @@ namespace XenkoTerrain.TerrainSystem
 
         if (component.Enabled)
         {
-          if (renderObject.Enabled != component.Enabled)
-          {
-            renderObject.Enabled = component.Enabled;
-          }
+          renderObject.Update(component);          
 
-          if(renderObject.AllowTerrainTransparency != component.AllowTerrainTransparency)
+          if (renderObject.TerrainGeometry != null )
           {
-            renderObject.AllowTerrainTransparency = component.AllowTerrainTransparency;
-          }
-
-          if (renderObject.BlendMap != component.BlendMap)
-          {
-            renderObject.BlendMap = component.BlendMap;
-          }
-
-          if (renderObject.SandTexture != component.SandTexture)
-          {
-            renderObject.SandTexture = component.SandTexture;
-          }
-
-          if (renderObject.DirtTexture != component.DirtTexture)
-          {
-            renderObject.DirtTexture = component.DirtTexture;
-          }
-
-          if (renderObject.GrassTexture != component.GrassTexture)
-          {
-            renderObject.GrassTexture = component.GrassTexture;
-          }
-
-          if (renderObject.RockTexture != component.RockTexture)
-          {
-            renderObject.RockTexture = component.RockTexture;
-          }
-
-          if (renderObject.RenderGroup != component.RenderGroup)
-          {
-            renderObject.RenderGroup = component.RenderGroup;
-          }
-
-          if (renderObject.Size != component.Size)
-          {
-            component.IsGeometryProcessed = false;
-            renderObject.TerrainGeometry = null;
-            renderObject.Size = component.Size;
-          }
-
-          if (renderObject.MaxHeight != component.MaxHeight)
-          {
-            component.IsGeometryProcessed = false;
-            renderObject.TerrainGeometry = null;
-            renderObject.MaxHeight = component.MaxHeight;
-          }
-
-          if (component?.HeightSource?.HeightData is RgbPixelRepository heightData && renderObject.HeightData != heightData)
-          {
-            component.IsGeometryProcessed = false;
-            renderObject.TerrainGeometry = null;
-            renderObject.HeightData = heightData;
-          }
-
-          if (renderObject.TerrainGeometry != null && !component.IsGeometryProcessed)
-          {
-            if (component.Entity.Get<ModelComponent>() is ModelComponent existingTerrainModelComponent)
+            if (!component.IsGeometryProcessed)
             {
-              component.Entity.Remove(existingTerrainModelComponent);
+              BuildTerrainMesh(component.Entity, component, renderObject);
+              component.IsGeometryProcessed = true;
             }
 
-            var terrainMesh = new Mesh(renderObject.TerrainGeometry.ToMeshDraw(), new ParameterCollection());
-            var terrainModel = new Model() { Meshes = new List<Mesh>(new[] { terrainMesh }) };
-            var terrainModelComponent = new ModelComponent(terrainModel);
-
-            terrainModelComponent.Materials.Add(0, renderObject.TerrainMaterial);
-            component.Entity.Add(terrainModelComponent);
-            component.IsGeometryProcessed = true;
+            if (!component.IsColliderProcessed)
+            {
+              BuildTerrainCollider(component.Entity, component, renderObject);
+              component.IsColliderProcessed = true;
+            }
           }
         }
       }
 
       base.Update(time);
+    }
+
+    protected virtual void BuildTerrainMesh(Entity entity, TerrainTileEntityComponent component, TerrainTileRenderObject renderObject)
+    {
+      if (component.Entity.Get<ModelComponent>() is ModelComponent existingTerrainModelComponent)
+      {
+        component.Entity.Remove(existingTerrainModelComponent);
+      }
+
+      var terrainMesh = new Mesh(renderObject.TerrainGeometry.ToMeshDraw(), new ParameterCollection());
+      var terrainModel = new Model() { Meshes = new List<Mesh>(new[] { terrainMesh }) };
+      var terrainModelComponent = new ModelComponent(terrainModel);
+
+      terrainModelComponent.Materials.Add(0, renderObject.TerrainMaterial);
+      entity.Add(terrainModelComponent);      
+    }
+
+    protected virtual void BuildTerrainCollider(Entity entity, TerrainTileEntityComponent component, TerrainTileRenderObject renderObject)
+    {
+      if (component.Entity.Get<StaticColliderComponent>() is StaticColliderComponent existingCollider)
+      {
+        component.Entity.Remove(existingCollider);
+      }
+
+      entity.Add(new TerrainTileColliderBuilder().BuildCollider(component.HeightSource.HeightData, component.Size, component.MaxHeight));
     }
 
     public override void Draw(RenderContext context)
@@ -136,13 +101,7 @@ namespace XenkoTerrain.TerrainSystem
         {
           if (component.Entity.Get<ModelComponent>() is ModelComponent terrainModel && terrainModel.Materials.Count > 0)
           {
-            var parameters = terrainModel.Materials[0].Passes[0].Parameters;
-            parameters.Set(TerrainTileShaderKeys.BlendMap, renderObject.BlendMap);
-            parameters.Set(TerrainTileShaderKeys.SandTexture, renderObject.SandTexture);
-            parameters.Set(TerrainTileShaderKeys.DirtTexture, renderObject.DirtTexture);
-            parameters.Set(TerrainTileShaderKeys.GrassTexture, renderObject.GrassTexture);
-            parameters.Set(TerrainTileShaderKeys.RockTexture, renderObject.RockTexture);
-            parameters.Set(TerrainTileShaderKeys.TextureScale, renderObject.Size);
+            renderObject.Draw(terrainModel.Materials[0].Passes[0].Parameters);
           }
 
           VisibilityGroup.RenderObjects.Add(renderObject);

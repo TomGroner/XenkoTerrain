@@ -1,6 +1,5 @@
 ﻿using System;
 using Xenko.Rendering;
-using XenkoTerrain.Graphics;
 
 namespace XenkoTerrain.TerrainSystem
 {
@@ -18,10 +17,10 @@ namespace XenkoTerrain.TerrainSystem
         {
           if (terrainTile.Enabled && terrainTile.TerrainGeometry == null && terrainTile.HeightData != null)
           {
-            var geometryBuilder = new TerrainGeometryBuilder(context.GraphicsDevice, terrainTile.Size, terrainTile.HeightData, terrainTile.MaxHeight);
-            var materialBuilder = new TerrainMaterialBuilder(context.GraphicsDevice);
-            terrainTile.TerrainGeometry = geometryBuilder.BuildTerrain();
-            terrainTile.TerrainMaterial = materialBuilder.BuildTerrainMaterial(terrainTile);
+            var geometryBuilder = new TerrainGeometryBuilder(terrainTile.HeightData);
+            var materialBuilder = new TerrainMaterialBuilder();
+            terrainTile.TerrainGeometry = geometryBuilder.BuildTerrainGeometricPrimitive(context.GraphicsDevice, terrainTile.Size, terrainTile.MaxHeight);
+            terrainTile.TerrainMaterial = materialBuilder.BuildTerrainMaterial(context.GraphicsDevice, terrainTile);
           }
         }
       }

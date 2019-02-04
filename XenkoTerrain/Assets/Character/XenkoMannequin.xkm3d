@@ -1,0 +1,31 @@
+!Model
+Id: 120580fc-b51e-4e77-ab4d-d4e647ce38fb
+SerializedVersion: {Xenko: 2.0.0.0}
+Tags: []
+Source: !file ../../Resources/XenkoMannequin.fbx
+Skeleton: 2194631d-132b-4fb1-a582-a302dc617ca7:Character/XenkoMannequin Skeleton
+PivotPosition: {X: 0.0, Y: 0.0, Z: 0.0}
+Materials:
+    f6ae7dc6c3db5056bc9a920c82d06952:
+        Name: glossMT
+        MaterialInstance:
+            Material: 1b322c92-9a75-4b10-bd65-8104175c5f00:Character/BodyWhite
+    df4523a460b8b77796c646c80256a837:
+        Name: glowMT
+        MaterialInstance:
+            Material: 0f499298-b91f-4273-9bf6-002dede230de:Character/Emissive
+    a77a7802cb3b8203c25224f258c847dc:
+        Name: semiGlossMT
+        MaterialInstance:
+            Material: 9d50f321-04f3-48ab-b49c-c414ef358343:Character/BodyGray
+    d7e1ac7161f313ad847568fe93958c77:
+        Name: upperMatteMT
+        MaterialInstance:
+            Material: b4152531-11a9-4174-8ec9-c1d0a3561714:Character/MattBlackUpper
+    db3ff9b9872f1777dc128b7bfba10f08:
+        Name: lowerMatteMT
+        MaterialInstance:
+            Material: 41b54c7a-d61c-4c02-9d5d-f3a2e6e688ab:Character/MattBlackLower
+Modifiers: {}
+~SourceHashes:
+    870edc8503d61295d29a171bd0e948fb~../../Resources/XenkoMannequin.fbx: 8b081ac60492f21d7f983481f4bd627a

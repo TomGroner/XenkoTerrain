@@ -1,7 +1,0 @@
-!Texture
-Id: 4ac47f45-3286-429d-b0e1-bf4e297fc4d6
-SerializedVersion: {Xenko: 2.0.0.0}
-Tags: []
-Source: !file ../../Resources/heightmap2.png
-IsCompressed: false
-Type: !GrayscaleTextureType {}

@@ -15,6 +15,9 @@ namespace XenkoTerrain.TerrainSystem
     [DataMemberIgnore]
     public bool IsGeometryProcessed { get; set; }
 
+    [DataMemberIgnore]
+    public bool IsColliderProcessed { get; set; }
+
     [DataMember(10)]
     [Display("Height Source")]
     public TerrainHeightSourceEntityComponent HeightSource { get; set; }    

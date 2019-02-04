@@ -1,12 +1,12 @@
 !ColliderShapeAsset
-Id: 63455f62-c835-4fe5-98be-081c8bc4a6a6
+Id: 7cb178d7-4fdc-4ab1-8c99-16af892d2d79
 SerializedVersion: {Xenko: 2.0.0.0}
 Tags: []
 ColliderShapes:
-    306f0c965e65407372305c94a943339c: !ConvexHullColliderShapeDesc
+    9d7e9f334a9ba261125d9a7f3d70e709: !ConvexHullColliderShapeDesc
         ConvexHulls: null
         ConvexHullsIndices: null
-        Model: 6ad9991c-8471-4c33-9de1-fba46966305b:Sphere
+        Model: 888b8034-016f-42a8-9086-d6574ca6bdbb:Terrain Model Placeholder
         LocalOffset: {X: 0.0, Y: 0.0, Z: 0.0}
         LocalRotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
         SimpleWrap: true
