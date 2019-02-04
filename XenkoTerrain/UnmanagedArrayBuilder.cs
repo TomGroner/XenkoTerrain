@@ -1,15 +1,16 @@
-﻿using System;
-using Xenko.Core;
+﻿using Xenko.Core;
 
 namespace XenkoTerrain
 {
   public static class UnmanagedArrayBuilder
   {
-    public unsafe static UnmanagedArray<float> New(float[] data)
+    public unsafe static UnmanagedArray<float> New(float[] arrayData)
     {
-      fixed (float* p = data)
+      fixed (float* p = arrayData)
       {
-        return new UnmanagedArray<float>(data.Length, (IntPtr)p);
+        var unmanagedData = new UnmanagedArray<float>(arrayData.Length);
+        unmanagedData.Write(arrayData);
+        return unmanagedData;
       }
     }
   }

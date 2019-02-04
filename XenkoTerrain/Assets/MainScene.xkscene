@@ -78,7 +78,7 @@ Hierarchy:
                 Components:
                     3dbacb05ac83b223c294d3c823c19304: !TransformComponent
                         Id: 3a84a566-fb58-4692-bc1c-86577210ce65
-                        Position: {X: 0.0, Y: 0.0, Z: -2.0}
+                        Position: {X: 0.0, Y: 0.0, Z: -4.0}
                         Rotation: {X: 0.0, Y: -1.0, Z: 0.0, W: -4.371139E-08}
                         Scale: {X: 1.0, Y: 1.0, Z: 1.0}
                         Children: {}
@@ -92,11 +92,11 @@ Hierarchy:
                 Components:
                     c065789ea31609f5ea8d692f771bae4a: !TransformComponent
                         Id: 633c6992-6042-4d9f-87b5-e1924bb349b0
-                        Position: {X: 1.747, Y: 4.24757576, Z: -6.949347}
+                        Position: {X: 1.747, Y: 8.085421, Z: -6.949347}
                         Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
                         Scale: {X: 1.0, Y: 1.0, Z: 1.0}
                         Children:
-                            7223e4b17423b529866a3abb4616859d: ref!! f64a56b2-6cfc-4ea0-a5db-8bd7ffa0515b
+                            589e89dab345a37a042f2941f4331d74: ref!! f64a56b2-6cfc-4ea0-a5db-8bd7ffa0515b
                             558de5be9603af916c77dbcc114cfd00: ref!! 3a84a566-fb58-4692-bc1c-86577210ce65
                     1320649da27e108e4f4987e391cde475: !CharacterComponent
                         Id: 050a4876-0ef0-4725-bdb2-a57494a68bed
@@ -131,6 +131,16 @@ Hierarchy:
                             e82891340fc5f6a7759ac44c713fedea: A
                             be58b4902d56378d4ac10aae01eae3f2: Left
                             18339a5a73c2e2a541b550366fd54677: A
+                            e4a14359e4dae63778a5de61a0186d7c: Left
+                            263eaa39a259ad91c91ed14bfed145cf: A
+                            2ec189f2f46f2d188937237589b7e440: Left
+                            66b60ad956e9ee1e5c4325f704e92b0b: A
+                            6e89f58d02baa6b7f7e802f896305686: Left
+                            74c730a98415c6b98170280b44760da6: A
+                            71cf4790c78c79c6eba7b6abec412f05: Left
+                            73cee843a994ae869299ae6adb4afcb2: A
+                            08bbf690de25ef533b5c5307a5110bfc: Left
+                            044ef1d38392f523347441cf7130f799: A
                         KeysRight:
                             4c5feb77f0b1c5145361b36714fa561b: Right
                             51c3d7945cfc3602236ff0c8600f4203: D
@@ -138,6 +148,16 @@ Hierarchy:
                             f6d39c22dd89791e31404f191975af4e: D
                             45f4d198200f0b2477e7d614c0dd3a03: Right
                             eedfe3523ca3fec91d97020c3f1f32e3: D
+                            7ac5955520820fbd1831c1b630016176: Right
+                            8cfa001f88d01dc33e5bdffc349760bd: D
+                            0f1ae7ad679a5b25f1908bc68faa9bbe: Right
+                            8c9fc6b4b6913cc64add52efb4ca7d16: D
+                            a8c1cc0312e5f57409d029c69c8ebfc9: Right
+                            70aa1f6f6696b164f134d96baed8980d: D
+                            18c306c2851bd8207dcf95afa4867599: Right
+                            4a9f320860a55b186d17e45494213929: D
+                            58c2f88f30643ec383659f77a337f850: Right
+                            bb0f8b56e4c47cb0883d667de9580edc: D
                         KeysUp:
                             2c0382c57fca4ed9c7131b049e7341b9: Up
                             3d0208a0ff98b54113008716cf55ca05: W
@@ -145,6 +165,16 @@ Hierarchy:
                             f0ee339e66568c58e3734e7f0ce657d4: W
                             2e5c6a7d73199031ddf4be012246bf3a: Up
                             6eff121902f5670f2529c6f4b8e8032b: W
+                            7014bf4ef1ec51975718d4ad989a7102: Up
+                            176c13a4c9cdf8a12b529467e9da6788: W
+                            53e8b7e4a502bb41d41b6f67227c0fcd: Up
+                            16a6b8b93991a49575b0e6e0d98a50c0: W
+                            3b8b5d334364b5cfe04ad910aee5c634: Up
+                            e201771892774ddfc7c87e00bad547ee: W
+                            d5dad54df0c2c8095b169d2c834cb10d: Up
+                            29cdcb99b4e5cb0030080163d7208666: W
+                            ffc30e3fa79b1a0733da69dde4a0c6f7: Up
+                            ec4793359f934cc821172991fe8042c7: W
                         KeysDown:
                             6cd2533993be042df059ffe172c4f076: Down
                             8d1b0ca457b8b91334573ebe595bb242: S
@@ -152,6 +182,16 @@ Hierarchy:
                             2390259a4d79b4353889fcbe1acc706c: S
                             576bca0210d0caec89b391ad9e5a409e: Down
                             1b7e3e9ed7b1a4a863df2e2e747cbb09: S
+                            c5858e68dde44c1b5a2b2e36feb32de6: Down
+                            14a86714dd992dda8ca545286102c142: S
+                            40fc8b2f0fad20b25181a2b8d60264a5: Down
+                            0f7c353e2dc08997bc639258f94cc75c: S
+                            47d180e796721150c5cd9932109bea8f: Down
+                            ac2539ae53ba7cb1a300237611ef6bd0: S
+                            aff387e712f04b16aef56ab2bcefecc1: Down
+                            cfa14137b06885a5b2a4b89b0b4ec2ba: S
+                            a2685dcbd55d192397fd2b9b0eb0314a: Down
+                            1508b9cf5f8be3b2d5496a3638e82f57: S
         -   Entity:
                 Id: a7480529-6c59-4db4-9de3-2da91e3176af
                 Name: Camera
@@ -167,8 +207,8 @@ Hierarchy:
                         Name: null
                         Projection: Perspective
                         Slot: abe2face-5ab9-4612-9ecb-628a9f2021d5
-                    fb799585c2c10e8649af182e6e95c268: !XenkoTerrain.Player.FpsCamera,XenkoTerrain
-                        Id: 514aeb33-1bda-4dbd-a7fe-0a9b2bda3dc6
+                    5068374f901144c94a9914cd03573339: !XenkoTerrain.Player.FpsCamera,XenkoTerrain
+                        Id: 06286acb-b6b9-4f97-8971-373b17773a92
                         RotationSpeed: 2.355
                         RotationAdaptationSpeed: 5.0
         -   Entity:
