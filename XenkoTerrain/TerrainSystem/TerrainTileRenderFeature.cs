@@ -17,8 +17,8 @@ namespace XenkoTerrain.TerrainSystem
         {
           if (terrainTile.Enabled && terrainTile.TerrainGeometry == null && terrainTile.HeightData != null)
           {
-            var geometryBuilder = new TerrainGeometryBuilder(terrainTile.HeightData);
-            var materialBuilder = new TerrainMaterialBuilder();
+            var geometryBuilder = new TerrainGeometryBuilder(terrainTile.HeightData); // TODO: save to component
+            var materialBuilder = new TerrainMaterialBuilder(); // TODO: save to component
             terrainTile.TerrainGeometry = geometryBuilder.BuildTerrainGeometricPrimitive(context.GraphicsDevice, terrainTile.Size, terrainTile.MaxHeight);
             terrainTile.TerrainMaterial = materialBuilder.BuildTerrainMaterial(context.GraphicsDevice, terrainTile);
           }

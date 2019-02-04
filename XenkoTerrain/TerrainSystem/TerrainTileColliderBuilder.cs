@@ -6,6 +6,7 @@ namespace XenkoTerrain.TerrainSystem
 {
   public class TerrainTileColliderBuilder
   {
+    // TODO: use height field, or make it work with both?
     public StaticColliderComponent BuildCollider(TerrainHeightDataRepository geometryData, float size, float maxHeight)
     {
       var collisionData = geometryData.Simplify(4);

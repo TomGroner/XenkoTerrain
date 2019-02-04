@@ -82,6 +82,9 @@ namespace XenkoTerrain.TerrainSystem
       var simplifiedData = new float[simplifiedColumnCount * simplifiedColumnRows];
       var n = 0;
 
+      // TODO: when two points are super different the resulting collider is too big to be used as a "step". 
+      // consider best way to pick a larger increase that can still be a "step".
+
       for (int y = 0; y < Rows; y += factor)
       {
         for (int x = 0; x < Columns; x += factor)

@@ -21,5 +21,7 @@ namespace XenkoTerrain.TerrainSystem
 
     [DataMemberIgnore]
     public TerrainHeightDataRepository HeightData { get; set; }
+    // TODO: Have this component have the geometry builder and collider builder and make them once, instead of
+    // having other pieces use this component's height data to keep re-making them
   }
 }

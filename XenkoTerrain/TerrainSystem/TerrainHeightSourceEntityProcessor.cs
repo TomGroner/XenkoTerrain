@@ -45,6 +45,8 @@ namespace XenkoTerrain.TerrainSystem
             // let an image be assigned to a component (that I can tell) and I cannot come up with a dynamic 
             // way to select an arbitrary without using a texture and letting it get uploaded to the graphics 
             // card. So, need to review other ways to get the height map dynamically
+
+            // TODO: create geometry build and collider builder on component as well for re-use
             component.HeightData = renderObject.HeightData;
           }
         }

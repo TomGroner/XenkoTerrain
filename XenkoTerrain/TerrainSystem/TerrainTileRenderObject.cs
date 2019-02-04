@@ -43,6 +43,7 @@ namespace XenkoTerrain.TerrainSystem
       if (Size != component.Size)
       {
         component.IsGeometryProcessed = false;
+        component.IsColliderProcessed = false;
         TerrainGeometry = null;
         Size = component.Size;
       }
@@ -50,6 +51,7 @@ namespace XenkoTerrain.TerrainSystem
       if (MaxHeight != component.MaxHeight)
       {
         component.IsGeometryProcessed = false;
+        component.IsColliderProcessed = false;
         TerrainGeometry = null;
         MaxHeight = component.MaxHeight;
       }
@@ -57,6 +59,7 @@ namespace XenkoTerrain.TerrainSystem
       if (component?.HeightSource?.HeightData is TerrainHeightDataRepository heightData && HeightData != heightData)
       {
         component.IsGeometryProcessed = false;
+        component.IsColliderProcessed = false;
         TerrainGeometry = null;
         HeightData = heightData;
       }

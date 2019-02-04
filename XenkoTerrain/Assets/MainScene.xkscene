@@ -25,8 +25,8 @@ Hierarchy:
                     03f83e5f61c1f310ead06f99da71f0c7: !TerrainTileEntityComponent
                         Id: 888f29e8-40a7-4755-b557-aaeac6278175
                         HeightSource: ref!! d8994546-bce0-4ecd-af23-b5c029c8d2df
-                        Size: 64.0
-                        MaxHeight: 8.0
+                        Size: 128.0
+                        MaxHeight: 16.0
                         AllowTerrainTransparency: false
                         BlendMap: f1722294-9c11-497b-ac2c-2d4bb26d60f1:Terrain/blendmap
                         SandTexture: da7714b4-4c4f-4762-8c5e-8afa31034ab6:Terrain/sand
@@ -129,21 +129,29 @@ Hierarchy:
                             ea2fc8b14ce4bd869fda6e5ed5b9d96a: A
                             8cdb95c8d060b2029f4a3d90768443b5: Left
                             e82891340fc5f6a7759ac44c713fedea: A
+                            be58b4902d56378d4ac10aae01eae3f2: Left
+                            18339a5a73c2e2a541b550366fd54677: A
                         KeysRight:
                             4c5feb77f0b1c5145361b36714fa561b: Right
                             51c3d7945cfc3602236ff0c8600f4203: D
                             6eb928669c8e9922dd63ae8ef022969e: Right
                             f6d39c22dd89791e31404f191975af4e: D
+                            45f4d198200f0b2477e7d614c0dd3a03: Right
+                            eedfe3523ca3fec91d97020c3f1f32e3: D
                         KeysUp:
                             2c0382c57fca4ed9c7131b049e7341b9: Up
                             3d0208a0ff98b54113008716cf55ca05: W
                             fb15a5a5ca67d9649194a9f0cd07dcad: Up
                             f0ee339e66568c58e3734e7f0ce657d4: W
+                            2e5c6a7d73199031ddf4be012246bf3a: Up
+                            6eff121902f5670f2529c6f4b8e8032b: W
                         KeysDown:
                             6cd2533993be042df059ffe172c4f076: Down
                             8d1b0ca457b8b91334573ebe595bb242: S
                             17833eead5ca3bf99a38c04cd3977351: Down
                             2390259a4d79b4353889fcbe1acc706c: S
+                            576bca0210d0caec89b391ad9e5a409e: Down
+                            1b7e3e9ed7b1a4a863df2e2e747cbb09: S
         -   Entity:
                 Id: a7480529-6c59-4db4-9de3-2da91e3176af
                 Name: Camera

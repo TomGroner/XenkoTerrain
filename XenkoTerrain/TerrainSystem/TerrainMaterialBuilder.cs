@@ -10,6 +10,7 @@ namespace XenkoTerrain.TerrainSystem
   {
     public Material BuildTerrainMaterial(GraphicsDevice graphicsDevice, TerrainTileRenderObject renderObject)
     {
+      // TODO: magic string on shader name
       return BuildMaterial("TerrainTileShader", graphicsDevice, renderObject.AllowTerrainTransparency);
     }
 
