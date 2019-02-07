@@ -1,0 +1,19 @@
+!Animation
+Id: 0dbf5de7-6166-4d34-ade3-d56d3fdcd13c
+SerializedVersion: {Xenko: 2.0.0.0}
+Tags: []
+Source: !file ../../Resources/Walk.fbx
+ClipDuration:
+    Enabled: false
+    StartAnimationTime: 0:00:00:00.0000000
+    EndAnimationTime: 0:00:30:00.0000000
+PivotPosition: {X: 0.0, Y: 0.0, Z: 0.0}
+RepeatMode: LoopInfinite
+Type: !StandardAnimationAssetType {}
+Skeleton: 2194631d-132b-4fb1-a582-a302dc617ca7:Character/XenkoMannequin Skeleton
+RootMotion: false
+PreviewModel: 120580fc-b51e-4e77-ab4d-d4e647ce38fb:Character/XenkoMannequin
+AnimationTimeMinimum: 0:00:00:00.0000000
+AnimationTimeMaximum: 0:00:00:01.0170000
+~SourceHashes:
+    d398dfcb4d5987d4beea25fa5339e3b2~../../Resources/Walk.fbx: 493f0507021c5337c97df93d778acdf4

@@ -7,9 +7,7 @@ using Xenko.Physics;
 using Xenko.Rendering;
 
 namespace XenkoTerrain.TerrainSystem
-{
-  // TODO: the entiy processors have some repetitions. make a generic entity processor that just loads the visiblity group and then make it have an overload per component/render object
-  // since all of these processors do the same boiler plate and then do something different to the data. 
+{  
   public class TerrainTileEntityProcessor : EntityProcessor<TerrainTileEntityComponent, TerrainTileRenderObject>, IEntityComponentRenderProcessor
   {    
     public VisibilityGroup VisibilityGroup { get; set; }
@@ -90,6 +88,7 @@ namespace XenkoTerrain.TerrainSystem
       }
 
       entity.Add(new TerrainTileColliderBuilder().BuildCollider(component.HeightSource.HeightData, component.Size, component.MaxHeight));
+      //entity.Add(new TerrainTileHeightfieldColliderBuilder().BuildCollider(component.HeightSource.HeightData, component.Size, component.MaxHeight));
     }
 
     public override void Draw(RenderContext context)

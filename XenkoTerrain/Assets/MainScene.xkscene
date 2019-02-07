@@ -73,31 +73,55 @@ Hierarchy:
                         Type: !LightSkybox
                             Skybox: ddf4fbe0-aad4-4987-928b-e568682652c9:Skybox
         -   Entity:
+                Id: 2f03fe4d-8130-4468-867b-4622462050e6
+                Name: Camera Container
+                Components:
+                    d655c1d81eabfe4c583009aa5513edb9: !TransformComponent
+                        Id: 992961ec-c57c-4ecc-9378-9c72bfc1cf08
+                        Position: {X: 0.0, Y: 0.0, Z: 0.0}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children:
+                            c740d88ab8f4571a2deff067b66ed7f7: ref!! 9d5350ae-ae57-4953-81f8-0da271fb3097
+        -   Entity:
                 Id: 7ff31f0b-4485-49d4-8bb5-6c4f517a3c29
                 Name: Xenko Mannequin
                 Components:
                     3dbacb05ac83b223c294d3c823c19304: !TransformComponent
                         Id: 3a84a566-fb58-4692-bc1c-86577210ce65
-                        Position: {X: 0.0, Y: 0.0, Z: -4.0}
-                        Rotation: {X: 0.0, Y: -1.0, Z: 0.0, W: -4.371139E-08}
+                        Position: {X: 0.0, Y: 0.0, Z: 0.0}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
                         Scale: {X: 1.0, Y: 1.0, Z: 1.0}
                         Children: {}
                     7313c14c7105a04d56cb644ccc3256dd: !ModelComponent
                         Id: 40ef5d91-6f04-42d6-9c41-24098cd2bfb7
                         Model: 120580fc-b51e-4e77-ab4d-d4e647ce38fb:Character/XenkoMannequin
                         Materials: {}
+                    c6472257296c63f7466bc88e4cbfa77c: !AnimationComponent
+                        Id: 845da87c-f33a-4ec7-964d-28b6c41896cb
+                        Animations:
+                            3c0dedc2cbf1e717f7d3929dab239352~Idle: d89725ff-955c-44b5-92dd-f7739300a05f:Character/Idle
+                            245ed0259325a1905d68c668cc1c6abd~Walk: 0dbf5de7-6166-4d34-ade3-d56d3fdcd13c:Character/Walk
+                            dc6cd9cb120a086f6fb987c4b0b4761f~Run: 01d5f216-0620-4544-bd3e-91609ed98e4f:Character/Run
+                            e8c3668a5339b65978bb9a2e0ac0ded3~Jump Start: 46fa1e41-c7bc-4584-9f2e-d0ded082c245:Character/Jump_Start
+                            f695128e6993fd98a55f3c2dacfa0264~Jump Loop: 08a9b5a5-482a-47f8-90c8-8dff48a8ce60:Character/Jump_Loop
+                            aa635901033acd261b9abe9ad1ac2e68~Jump End: bb0964e7-bfb5-47cd-b3cb-4ffe006e4c85:Character/Jump_End
+                    e029636246ed28bd6db20b1b4af97aae: !XenkoTerrain.Player.PlayerAnimations,XenkoTerrain
+                        Id: 71759c3e-dcec-4356-b320-15c559a47eec
+                        AnimationComponent: ref!! 845da87c-f33a-4ec7-964d-28b6c41896cb
+                        CharacterController: ref!! 766e69ac-6420-4606-a764-73b686250c75
         -   Entity:
                 Id: a4512488-107e-4f63-9602-caa7f06325e3
                 Name: Player
                 Components:
                     c065789ea31609f5ea8d692f771bae4a: !TransformComponent
                         Id: 633c6992-6042-4d9f-87b5-e1924bb349b0
-                        Position: {X: 1.747, Y: 8.085421, Z: -6.949347}
+                        Position: {X: 1.747, Y: 8.085421, Z: 16.8210716}
                         Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
                         Scale: {X: 1.0, Y: 1.0, Z: 1.0}
                         Children:
-                            589e89dab345a37a042f2941f4331d74: ref!! f64a56b2-6cfc-4ea0-a5db-8bd7ffa0515b
                             558de5be9603af916c77dbcc114cfd00: ref!! 3a84a566-fb58-4692-bc1c-86577210ce65
+                            270c79193f5c4f9f6c40278470d8c6a1: ref!! 992961ec-c57c-4ecc-9378-9c72bfc1cf08
                     1320649da27e108e4f4987e391cde475: !CharacterComponent
                         Id: 050a4876-0ef0-4725-bdb2-a57494a68bed
                         CanSleep: false
@@ -106,99 +130,35 @@ Hierarchy:
                         RollingFriction: 0.0
                         CcdMotionThreshold: 0.0
                         CcdSweptSphereRadius: 0.0
-                        FallSpeed: 10.0
-                        MaxSlope: {Radians: 0.7853982}
-                        JumpSpeed: 5.0
-                        Gravity: {X: 0.0, Y: -10.0, Z: 0.0}
+                        StepHeight: 0.5
+                        FallSpeed: 20.0
+                        MaxSlope: {Radians: 1.57079637}
+                        JumpSpeed: 10.0
+                        Gravity: {X: 0.0, Y: -20.0, Z: 0.0}
                         ColliderShapes:
                             ceabb993a1f371f33167f31221568f66: !CapsuleColliderShapeDesc
                                 Length: 1.2
                                 Radius: 0.4
                                 LocalOffset: {X: 0.0, Y: 0.95, Z: 0.0}
                                 LocalRotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
-                    71b3a0c9104fab036339e9b2b846e454: !XenkoTerrain.Player.PlayerController,XenkoTerrain
-                        Id: d8f07233-3361-45af-9c10-b4157663e4ce
-                        MaxRunSpeed: 5.0
-                    f6ccff666314da16bca50474d3f304ae: !XenkoTerrain.Player.PlayerInput,XenkoTerrain
-                        Id: b99c3de2-19d4-41ed-8142-ba4a9a59d11b
-                        DeadZone: 0.25
-                        Camera: ref!! fafdd402-61b3-4f59-8979-95f118dea83c
-                        MouseSensitivity: 100.0
-                        KeysLeft:
-                            514f5110916c1a7527dd034d45a7cd71: Left
-                            ea2fc8b14ce4bd869fda6e5ed5b9d96a: A
-                            8cdb95c8d060b2029f4a3d90768443b5: Left
-                            e82891340fc5f6a7759ac44c713fedea: A
-                            be58b4902d56378d4ac10aae01eae3f2: Left
-                            18339a5a73c2e2a541b550366fd54677: A
-                            e4a14359e4dae63778a5de61a0186d7c: Left
-                            263eaa39a259ad91c91ed14bfed145cf: A
-                            2ec189f2f46f2d188937237589b7e440: Left
-                            66b60ad956e9ee1e5c4325f704e92b0b: A
-                            6e89f58d02baa6b7f7e802f896305686: Left
-                            74c730a98415c6b98170280b44760da6: A
-                            71cf4790c78c79c6eba7b6abec412f05: Left
-                            73cee843a994ae869299ae6adb4afcb2: A
-                            08bbf690de25ef533b5c5307a5110bfc: Left
-                            044ef1d38392f523347441cf7130f799: A
-                        KeysRight:
-                            4c5feb77f0b1c5145361b36714fa561b: Right
-                            51c3d7945cfc3602236ff0c8600f4203: D
-                            6eb928669c8e9922dd63ae8ef022969e: Right
-                            f6d39c22dd89791e31404f191975af4e: D
-                            45f4d198200f0b2477e7d614c0dd3a03: Right
-                            eedfe3523ca3fec91d97020c3f1f32e3: D
-                            7ac5955520820fbd1831c1b630016176: Right
-                            8cfa001f88d01dc33e5bdffc349760bd: D
-                            0f1ae7ad679a5b25f1908bc68faa9bbe: Right
-                            8c9fc6b4b6913cc64add52efb4ca7d16: D
-                            a8c1cc0312e5f57409d029c69c8ebfc9: Right
-                            70aa1f6f6696b164f134d96baed8980d: D
-                            18c306c2851bd8207dcf95afa4867599: Right
-                            4a9f320860a55b186d17e45494213929: D
-                            58c2f88f30643ec383659f77a337f850: Right
-                            bb0f8b56e4c47cb0883d667de9580edc: D
-                        KeysUp:
-                            2c0382c57fca4ed9c7131b049e7341b9: Up
-                            3d0208a0ff98b54113008716cf55ca05: W
-                            fb15a5a5ca67d9649194a9f0cd07dcad: Up
-                            f0ee339e66568c58e3734e7f0ce657d4: W
-                            2e5c6a7d73199031ddf4be012246bf3a: Up
-                            6eff121902f5670f2529c6f4b8e8032b: W
-                            7014bf4ef1ec51975718d4ad989a7102: Up
-                            176c13a4c9cdf8a12b529467e9da6788: W
-                            53e8b7e4a502bb41d41b6f67227c0fcd: Up
-                            16a6b8b93991a49575b0e6e0d98a50c0: W
-                            3b8b5d334364b5cfe04ad910aee5c634: Up
-                            e201771892774ddfc7c87e00bad547ee: W
-                            d5dad54df0c2c8095b169d2c834cb10d: Up
-                            29cdcb99b4e5cb0030080163d7208666: W
-                            ffc30e3fa79b1a0733da69dde4a0c6f7: Up
-                            ec4793359f934cc821172991fe8042c7: W
-                        KeysDown:
-                            6cd2533993be042df059ffe172c4f076: Down
-                            8d1b0ca457b8b91334573ebe595bb242: S
-                            17833eead5ca3bf99a38c04cd3977351: Down
-                            2390259a4d79b4353889fcbe1acc706c: S
-                            576bca0210d0caec89b391ad9e5a409e: Down
-                            1b7e3e9ed7b1a4a863df2e2e747cbb09: S
-                            c5858e68dde44c1b5a2b2e36feb32de6: Down
-                            14a86714dd992dda8ca545286102c142: S
-                            40fc8b2f0fad20b25181a2b8d60264a5: Down
-                            0f7c353e2dc08997bc639258f94cc75c: S
-                            47d180e796721150c5cd9932109bea8f: Down
-                            ac2539ae53ba7cb1a300237611ef6bd0: S
-                            aff387e712f04b16aef56ab2bcefecc1: Down
-                            cfa14137b06885a5b2a4b89b0b4ec2ba: S
-                            a2685dcbd55d192397fd2b9b0eb0314a: Down
-                            1508b9cf5f8be3b2d5496a3638e82f57: S
+                    c819bfbcbd2c96e6c7cc4e6f6ab2fec9: !XenkoTerrain.Player.PlayerController,XenkoTerrain
+                        Id: 766e69ac-6420-4606-a764-73b686250c75
+                        CharacterRotateDegreesPerSecond: 180.0
+                        CharacterRotateLerpAlpha: 0.15
+                        RunSpeed: {X: 350.0, Y: 350.0, Z: 350.0}
+                        WalkSpeed: {X: 100.0, Y: 100.0, Z: 100.0}
+                        InvertX: false
+                        InvertY: false
+                        MinVerticalAngle: -20.0
+                        MaxVerticalAngle: 90.0
+                        VerticalSpeed: 65.0
         -   Entity:
                 Id: a7480529-6c59-4db4-9de3-2da91e3176af
                 Name: Camera
                 Components:
                     9f3fab54dca1d6dcdaece270f26a92a9: !TransformComponent
                         Id: f64a56b2-6cfc-4ea0-a5db-8bd7ffa0515b
-                        Position: {X: 0.0, Y: 1.5, Z: 0.0}
+                        Position: {X: 0.0, Y: 1.4, Z: 4.0}
                         Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
                         Scale: {X: 1.0, Y: 1.0, Z: 1.0}
                         Children: {}
@@ -207,10 +167,6 @@ Hierarchy:
                         Name: null
                         Projection: Perspective
                         Slot: abe2face-5ab9-4612-9ecb-628a9f2021d5
-                    5068374f901144c94a9914cd03573339: !XenkoTerrain.Player.FpsCamera,XenkoTerrain
-                        Id: 06286acb-b6b9-4f97-8971-373b17773a92
-                        RotationSpeed: 2.355
-                        RotationAdaptationSpeed: 5.0
         -   Entity:
                 Id: c911427d-5abb-4b13-9898-4ad0acc1bc1d
                 Name: Heigh Source Map 1
@@ -224,6 +180,17 @@ Hierarchy:
                     6af7a82fd943d764ab977e84e1135e04: !TerrainHeightSourceEntityComponent
                         Id: d8994546-bce0-4ecd-af23-b5c029c8d2df
                         HeightMap: 458028f8-4a79-415f-8ed3-cd24dea037f0:Terrain/heightmap
+        -   Entity:
+                Id: ca6b79cb-2109-4480-9ec9-69da9a07bc84
+                Name: Camera Target
+                Components:
+                    f53a65949d5d3c4f194619af1a70d4cf: !TransformComponent
+                        Id: 9d5350ae-ae57-4953-81f8-0da271fb3097
+                        Position: {X: 0.0, Y: 0.0, Z: 0.0}
+                        Rotation: {X: 0.0, Y: -1.0, Z: 0.0, W: -4.371139E-08}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children:
+                            4baf3c54f4bb8c84ed6c6e60d7b213b8: ref!! f64a56b2-6cfc-4ea0-a5db-8bd7ffa0515b
         -   Entity:
                 Id: df4a8bd0-ab5b-44d1-af8e-1100e895cb88
                 Name: Sunlight
