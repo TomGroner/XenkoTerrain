@@ -6,6 +6,10 @@ using Xenko.Graphics;
 
 namespace XenkoTerrain.TerrainSystem
 {
+  // Could this be useful?
+  // [ObjectFactory(typeof(CameraComponent.Factory))]
+
+
   [DataContract(nameof(TerrainHeightSourceEntityComponent))]
   [Display("Terrain Height Source", Expand = ExpandRule.Once)]
   [DefaultEntityComponentRenderer(typeof(TerrainHeightSourceEntityProcessor))]

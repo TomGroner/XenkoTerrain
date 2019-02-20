@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using Xenko.Core;
+using Xenko.Core.Annotations;
 using Xenko.Engine;
 using Xenko.Engine.Design;
 using Xenko.Graphics;
@@ -12,42 +13,66 @@ namespace XenkoTerrain.TerrainSystem
   [ComponentOrder(100)]
   public class TerrainTileEntityComponent : ActivableEntityComponent
   {
-    [DataMemberIgnore]
-    public bool IsGeometryProcessed { get; set; }
+    private const int RenderingCategory = 100;
+    private const int TerrainCategory   = 200;
+    private const int TexturesCategory  = 300;
 
-    [DataMemberIgnore]
-    public bool IsColliderProcessed { get; set; }
+    internal bool IsGeometryProcessed;
+    internal bool IsColliderProcessed;
 
-    [DataMember(10)]
-    [Display("Height Source")]
-    public TerrainHeightSourceEntityComponent HeightSource { get; set; }    
+    // *** RENDER PROPERTIES
+    [Display(category: "Rendering Properties")]
+    [DataMember(RenderingCategory + 1)]
+    [DataMemberRange(0.0, 20, 1.0, 10.0, 0)]
+    [DefaultValue(1.0f)]
+    public float AdditionalTessellation { get; set; } 
 
-    [DataMember(11)]
-    public float Size { get; set; }
-
-    [DataMember(12)]
-    public float MaxHeight { get; set; }
-
-    [DataMember(13)]
-    public bool AllowTerrainTransparency { get; set; }
-
-    [DataMember(29)]
-    public Texture BlendMap { get; set; }
-
-    [DataMember(32)]
-    public Texture SandTexture { get; set; }
-
-    [DataMember(33)]
-    public Texture DirtTexture { get; set; }
-
-    [DataMember(34)]
-    public Texture GrassTexture { get; set; }
-
-    [DataMember(35)]
-    public Texture RockTexture { get; set; } 
-
-    [DataMember(100)]
+    [Display(category: "Rendering Properties")]
+    [DataMember(RenderingCategory + 3)]
     [DefaultValue(RenderGroup.Group0)]
     public RenderGroup RenderGroup { get; set; }
-  }
+
+    // *** TERRAIN PROPERTIES
+    [Display(category: "Terrain Properties")]
+    [DataMember(TerrainCategory + 1)]
+    public TerrainHeightSourceEntityComponent HeightSource { get; set; }
+
+    [Display(category: "Terrain Properties")]
+    [DataMember(TerrainCategory + 2)]
+    public float Size { get; set; }
+
+    [Display(category: "Terrain Properties")]
+    [DataMember(TerrainCategory + 3)]
+    [DataMemberRange(1.0, 100, 1.0, 10.0, 0)]
+    [DefaultValue(3.0f)]
+    public float MaxHeight { get; set; }
+
+    [Display(category: "Terrain Properties")]
+    [DataMember(TerrainCategory + 4)]
+    [DefaultValue(false)]
+    public bool AllowTerrainTransparency { get; set; }
+
+    // ** TEXTURE PROPERTIES
+    [Display(category: "Terrain Textures")]
+    [DataMember(TexturesCategory + 1)]
+    public Texture BlendMap { get; set; }
+
+    [Display(category: "Terrain Textures")]
+    [DataMember(TexturesCategory + 2)]
+    public Texture SandTexture { get; set; }
+
+    [Display(category: "Terrain Textures")]
+    [DataMember(TexturesCategory + 3)]
+    public Texture DirtTexture { get; set; }
+
+    [Display(category: "Terrain Textures")]
+    [DataMember(TexturesCategory + 4)]
+    public Texture GrassTexture { get; set; }
+
+    [Display(category: "Terrain Textures")]
+    [DataMember(TexturesCategory + 5)]
+    public Texture RockTexture { get; set; }
+
+  }// Make one of these for textures? make a nice UI?
+   // public IndexingDictionary<Material> Materials { get; } = new IndexingDictionary<Material>();
 }

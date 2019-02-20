@@ -17,6 +17,25 @@ namespace XenkoTerrain.TerrainSystem
       return component.RenderGroup == associatedData.RenderGroup;
     }
 
+    //// IDEA BELOW HERE - Mimic Xenko. Review audio processors + other systems
+    //private class TerrainSystem : GameSystem { }
+
+    //private TerrainSystem terrainSystem;
+
+    //// idea in idea
+    //// can you make a component of a base xenko object and change the yaml to a custom version of it and be sneaky? 
+    //// or really, while the editor cannot let you drag and drop your own, would it still work if you modified the files 
+    //// yourself?
+    //// and:   public class MeshPipelineProcessor : PipelineProcessor
+    //// what is a pipeline processor and would it make my life easier to make one?
+    //// did I just need to do this the entire time...?scene.Entities.Remove(tile);
+
+    //protected override void OnSystemAdd()
+    //{
+    //  terrainSystem = Services.GetService<TerrainSystem>();
+    //}
+    //// END OF IDEA
+
     protected override TerrainTileRenderObject GenerateComponentData([NotNull] Entity entity, [NotNull] TerrainTileEntityComponent component)
     {
       return new TerrainTileRenderObject()
@@ -43,9 +62,9 @@ namespace XenkoTerrain.TerrainSystem
 
         if (component.Enabled)
         {
-          renderObject.Update(component);          
+          renderObject.Update(component);
 
-          if (renderObject.TerrainGeometry != null )
+          if (renderObject.TerrainGeometry != null)
           {
             if (!component.IsGeometryProcessed)
             {

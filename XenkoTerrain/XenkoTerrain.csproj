@@ -7,16 +7,21 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Xenko.Engine" Version="3.1.0.1-beta01-0406" PrivateAssets="contentfiles;analyzers" />
-    <PackageReference Include="Xenko.Video" Version="3.1.0.1-beta01-0406" PrivateAssets="contentfiles;analyzers" />
-    <PackageReference Include="Xenko.Physics" Version="3.1.0.1-beta01-0406" PrivateAssets="contentfiles;analyzers" />
-    <PackageReference Include="Xenko.Navigation" Version="3.1.0.1-beta01-0406" PrivateAssets="contentfiles;analyzers" />
-    <PackageReference Include="Xenko.Particles" Version="3.1.0.1-beta01-0406" PrivateAssets="contentfiles;analyzers" />
-    <PackageReference Include="Xenko.UI" Version="3.1.0.1-beta01-0406" PrivateAssets="contentfiles;analyzers" />
-    <PackageReference Include="Xenko.Core" Version="3.1.0.1-beta01-0406" PrivateAssets="contentfiles;analyzers" />
-    <PackageReference Include="Xenko.Core.Assets.CompilerApp" Version="3.1.0.1-beta01-0406" PrivateAssets="contentfiles;analyzers" IncludeAssets="build" />
+    <PackageReference Include="Xenko.Engine" Version="3.1.0.1-beta01-0441" PrivateAssets="contentfiles;analyzers" />
+    <PackageReference Include="Xenko.Video" Version="3.1.0.1-beta01-0441" PrivateAssets="contentfiles;analyzers" />
+    <PackageReference Include="Xenko.Physics" Version="3.1.0.1-beta01-0441" PrivateAssets="contentfiles;analyzers" />
+    <PackageReference Include="Xenko.Navigation" Version="3.1.0.1-beta01-0441" PrivateAssets="contentfiles;analyzers" />
+    <PackageReference Include="Xenko.Particles" Version="3.1.0.1-beta01-0441" PrivateAssets="contentfiles;analyzers" />
+    <PackageReference Include="Xenko.UI" Version="3.1.0.1-beta01-0441" PrivateAssets="contentfiles;analyzers" />
+    <PackageReference Include="Xenko.Core" Version="3.1.0.1-beta01-0441" PrivateAssets="contentfiles;analyzers" />
+    <PackageReference Include="Xenko.Core.Assets.CompilerApp" Version="3.1.0.1-beta01-0441" PrivateAssets="contentfiles;analyzers" IncludeAssets="build" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Effects\TerrainTileRenderFeatureEffect.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TerrainTileRenderFeatureEffect.xksl</DependentUpon>
+    </Compile>
     <Compile Update="Effects\TerrainTileShader.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -24,6 +29,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Update="Effects\TerrainTileRenderFeatureEffect.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+      <LastGenOutput>TerrainTileRenderFeatureEffect.cs</LastGenOutput>
+    </None>
     <None Update="Effects\TerrainTileShader.xksl">
       <Generator>XenkoShaderKeyGenerator</Generator>
       <LastGenOutput>TerrainTileShader.cs</LastGenOutput>

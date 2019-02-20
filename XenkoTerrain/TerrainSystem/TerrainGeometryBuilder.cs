@@ -1,4 +1,5 @@
-﻿using Xenko.Core.Mathematics;
+﻿using System;
+using Xenko.Core.Mathematics;
 using Xenko.Graphics;
 using Xenko.Graphics.GeometricPrimitives;
 
@@ -21,13 +22,13 @@ namespace XenkoTerrain.TerrainSystem
       return new GeometricPrimitive(graphicsDevice, data);
     }
 
-    public virtual GeometricMeshData<VertexPositionNormalTexture> BuildTerrainData(float size, float maxHeight, bool generateBackFace)
+    public virtual TerrainGeometryData BuildTerrainData(float size, float maxHeight, bool generateBackFace)
     {
       var tessellationX = heightData.Columns;
       var tessellationY = heightData.Rows;
-      var lineWidth = (tessellationX + 1);
-      var lineHeight = (tessellationY + 1);
-      var vertices = new VertexPositionNormalTexture[lineWidth * lineHeight * (generateBackFace ? 2 : 1)];
+      var columnCount = (tessellationX + 1);
+      var rowCount = (tessellationY + 1);
+      var vertices = new VertexPositionNormalTexture[columnCount * rowCount * (generateBackFace ? 2 : 1)];
       var indices = new int[tessellationX * tessellationY * 6 * (generateBackFace ? 2 : 1)];
       var deltaX = size / tessellationX;
       var deltaY = size / tessellationY;
@@ -58,19 +59,19 @@ namespace XenkoTerrain.TerrainSystem
         for (var x = 0; x < tessellationX; x++)
         {
           // Six indices (two triangles) per face.
-          var vbase = lineWidth * y + x;
+          var vbase = columnCount * y + x;
           indices[indexCount++] = (vbase + 1);
-          indices[indexCount++] = (vbase + 1 + lineWidth);
-          indices[indexCount++] = (vbase + lineWidth);
+          indices[indexCount++] = (vbase + 1 + columnCount);
+          indices[indexCount++] = (vbase + columnCount);
           indices[indexCount++] = (vbase + 1);
-          indices[indexCount++] = (vbase + lineWidth);
+          indices[indexCount++] = (vbase + columnCount);
           indices[indexCount++] = (vbase);
         }
       }
 
       if (generateBackFace)
       {
-        var numVertices = lineWidth * lineHeight;
+        var numVertices = columnCount * rowCount;
 
         for (var y = 0; y < (tessellationY + 1); y++)
         {
@@ -88,18 +89,22 @@ namespace XenkoTerrain.TerrainSystem
         {
           for (var x = 0; x < tessellationX; x++)
           {
-            var vbase = lineWidth * (y + tessellationY + 1) + x;
+            var vbase = columnCount * (y + tessellationY + 1) + x;
             indices[indexCount++] = (vbase + 1);
-            indices[indexCount++] = (vbase + lineWidth);
-            indices[indexCount++] = (vbase + 1 + lineWidth);
+            indices[indexCount++] = (vbase + columnCount);
+            indices[indexCount++] = (vbase + 1 + columnCount);
             indices[indexCount++] = (vbase + 1);
             indices[indexCount++] = (vbase);
-            indices[indexCount++] = (vbase + lineWidth);
+            indices[indexCount++] = (vbase + columnCount);
           }
         }
       }
 
-      return new GeometricMeshData<VertexPositionNormalTexture>(vertices, indices, false) { Name = "Terrain" };
+      var data = new TerrainGeometryData(size * 2, tessellationX, tessellationY, vertices, indices, false) { Name = "Terrain" };
+      var savePath = $@"T:\Storage\Projects\TomGroner\XenkoTerrain\XenkoTerrain\Resources\TerrainExport\Terrain20190220072029.obj";
+      //new TerrainGeometryExporer().SaveObj(savePath, data);
+
+      return data;
     }
 
     private Vector3 GetNormal(int x, int y, float maxHeight)

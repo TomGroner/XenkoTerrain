@@ -1,5 +1,5 @@
 ﻿namespace XenkoTerrain.Player
-{
+{  
   public enum JumpingState
   {
     None,

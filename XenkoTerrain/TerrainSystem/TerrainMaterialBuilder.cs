@@ -11,10 +11,10 @@ namespace XenkoTerrain.TerrainSystem
     public Material BuildTerrainMaterial(GraphicsDevice graphicsDevice, TerrainTileRenderObject renderObject)
     {
       // TODO: magic string on shader name
-      return BuildMaterial("TerrainTileShader", graphicsDevice, renderObject.AllowTerrainTransparency);
+      return BuildMaterial("TerrainTileShader", graphicsDevice, renderObject.AllowTerrainTransparency, (int)renderObject.AdditionalTessellation);
     }
 
-    protected Material BuildMaterial(string shaderName, GraphicsDevice graphicsDevice, bool includeTransparency)
+    protected Material BuildMaterial(string shaderName, GraphicsDevice graphicsDevice, bool includeTransparency, int tessellation)
     {
       return Material.New(graphicsDevice, new MaterialDescriptor
       {
@@ -22,7 +22,12 @@ namespace XenkoTerrain.TerrainSystem
         {
           DiffuseModel = new MaterialDiffuseLambertModelFeature(),
           Diffuse = BuildDiffuseMap(shaderName),
-          Transparency = includeTransparency ? GetTransparencyFeature() : null
+          Transparency = includeTransparency ? GetTransparencyFeature() : null,
+          //Tessellation = new MaterialTessellationPNFeature()
+          //{
+          //  Enabled = true,
+          //  TriangleSize = tessellation
+          //}
         }
       });
     }
