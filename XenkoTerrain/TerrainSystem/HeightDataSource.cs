@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Xenko.Core.Mathematics;
 using Xenko.Graphics;
 
@@ -8,65 +9,80 @@ namespace XenkoTerrain.TerrainSystem
   {
     public const float DefaultMaxPixelColor = 256 * 256 * 256;
 
-    private float[] pixels;
-
-    public HeightDataSource(PixelBuffer pixelBuffer)
-    {
-      Columns = pixelBuffer.Width;
-      Rows = pixelBuffer.Height;
-      pixels = new float[pixelBuffer.Width * pixelBuffer.Height];
-      Initialize(pixelBuffer);
-    }
+    private float[] heights;
 
     public HeightDataSource(int columns, int rows, float[] data)
     {
       Columns = columns;
       Rows = rows;
-      pixels = data;
+      heights = data;
     }
+
+    public HeightDataSource(PixelBuffer pixelBuffer)
+    {
+      Columns = pixelBuffer.Width;
+      Rows = pixelBuffer.Height;
+      heights = new float[pixelBuffer.Width * pixelBuffer.Height];
+
+      foreach (var coord in GetCoordinates())
+      {
+        heights[coord.index] = pixelBuffer.GetPixel<Color>(coord.x, coord.y).ToRgb();
+      }
+    }
+
+    public HeightDataSource(int columns, int rows, VertexPositionNormalTexture[] vertices)
+    {
+      Columns = columns;
+      Rows = rows;
+      heights = new float[columns * rows];
+
+      foreach (var coord in GetCoordinates())
+      {
+        heights[coord.index] = vertices[coord.index].Position.Y;
+      }
+    }
+
+    public float MaxPixelColor { get; set; } = DefaultMaxPixelColor;
 
     public int Columns { get; set; }
 
     public int Rows { get; set; }
 
-    public float MaxPixelColor { get; set; } = DefaultMaxPixelColor;
-
-    private int GetPixelIndex(int x, int y)
+    public float GetHeight(int x, int y)
     {
-      return y * Rows + x;
+      return heights[GetHeightIndex(x, y)];
     }
 
-    public bool HaveData(int x, int y)
+    public Vector3 GetNormal(int x, int y, float maxHeight)
+    {
+      var heightL = GetTerrainHeight(x - 1, y, maxHeight);
+      var heightR = GetTerrainHeight(x + 1, y, maxHeight);
+      var heightD = GetTerrainHeight(x, y - 1, maxHeight);
+      var heightU = GetTerrainHeight(x, y + 1, maxHeight);
+
+      var normal = new Vector3(heightL - heightR, 2.0f, heightD - heightU);
+      normal.Normalize();
+      return normal / 3;
+    }
+
+    public bool IsValidCoordinate(int x, int y)
     {
       return x >= 0 && x < Columns && y >= 0 && y < Rows;
     }
 
-    public float[] GetAllHeightData()
+    public int GetHeightIndex(int x, int y)
     {
-      return pixels;
+      return y * Rows + x;
     }
 
     public float GetTerrainHeight(int x, int y, float maxHeight)
     {
-      return !HaveData(x, y) ? 0.0f : GetHeightData(x, y) / MaxPixelColor * maxHeight + maxHeight;
-    }
-
-    public float GetHeightData(int x, int y)
-    {
-      return pixels[GetPixelIndex(x, y)];
-    }
-
-    private void Initialize(PixelBuffer pixelBuffer)
-    {
-      for (var y = 0; y < Rows; y++)
+      if (!IsValidCoordinate(x, y))
       {
-        for (var x = 0; x < Columns; x++)
-        {
-          SavePixel(x, y, pixelBuffer.GetPixel<Color>(x, y).ToRgb());
-        }
+        return 0.0f;
       }
 
-      void SavePixel(int x, int y, float pixel) => pixels[GetPixelIndex(x, y)] = pixel;
+      return heights[GetHeightIndex(x, y)] / MaxPixelColor * maxHeight + maxHeight;
     }
 
     public float[] GetAllTerrainHeights(float maxHeight)
@@ -85,39 +101,20 @@ namespace XenkoTerrain.TerrainSystem
       return heights;
     }
 
-    public HeightDataSource Simplify(int factor)
+    private IEnumerable<(int x, int y, int index)> GetCoordinates()
     {
-      var simplifiedColumnCount = Columns / factor;
-      var simplifiedColumnRows = Rows / factor;
-      var simplifiedData = new float[simplifiedColumnCount * simplifiedColumnRows];
-      var n = 0;
-
-      for (var y = 0; y < Rows; y += factor)
+      for (var y = 0; y < Rows; y++)
       {
-        for (var x = 0; x < Columns; x += factor)
+        for (var x = 0; x < Columns; x++)
         {
-          var gatheredHeight = 0.0f;
-          var gatheredPointCount = 0;
-
-          for (var gatherAtY = y; gatherAtY < y + factor; gatherAtY++)
-          {
-            for (var gatherAtX = x; gatherAtX < x + factor; gatherAtX++)
-            {
-              gatheredHeight += GetHeightData(x, y);
-              gatheredPointCount++;
-            }
-          }
-
-          simplifiedData[n++] = gatheredHeight / gatheredPointCount;
+          yield return (x, y, GetHeightIndex(x, y));
         }
       }
-
-      return new HeightDataSource(simplifiedColumnCount, simplifiedColumnRows, simplifiedData);
     }
 
     public void Dispose()
     {
-      pixels = null;
+      heights = null;
     }
   }
 }

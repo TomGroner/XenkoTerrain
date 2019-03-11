@@ -5,15 +5,14 @@ using Xenko.Graphics.GeometricPrimitives;
 
 namespace XenkoTerrain.TerrainSystem
 {
+
   public class GeometryBuilder
   {
-    private float?[] heightCache;
     private HeightDataSource heightData;
 
     public GeometryBuilder(HeightDataSource data)
     {
       heightData = data;
-      heightCache = new float?[data.Rows * data.Columns];
     }
 
     public virtual GeometricPrimitive BuildTerrainGeometricPrimitive(GraphicsDevice graphicsDevice, float size, float maxHeight, Vector2 uv)
@@ -43,9 +42,9 @@ namespace XenkoTerrain.TerrainSystem
       {
         for (var x = 0; x < (tessellationX + 1); x++)
         {
-          var height = x == 0 || y == 0 ? 0.0f : GetHeight(x, y, maxHeight);
+          var height = heightData.GetTerrainHeight(x, y, maxHeight);
           var position = new Vector3(-size + deltaX * x, height, -size + deltaY * y);
-          var normal = GetNormal(x, y, maxHeight);
+          var normal = heightData.GetNormal(x, y, maxHeight);
           var texCoord = new Vector2(uv.X * x / tessellationX, uv.Y * y / tessellationY);
           vertices[vertexCount++] = new VertexPositionNormalTexture(position, normal, texCoord);
         }
@@ -67,21 +66,11 @@ namespace XenkoTerrain.TerrainSystem
         }
       }
 
-      return new GeometryData(size * 2, rowCount, columnCount, vertices, indices, false) { Name = "Terrain" };
+      return new GeometryData(size * 2, rowCount, columnCount, vertices, indices, false)
+      {
+        Name = "Terrain",
+        HeightSource = heightData
+      };
     }
-
-    private Vector3 GetNormal(int x, int y, float maxHeight)
-    {
-      var heightL = GetHeight(x - 1, y, maxHeight);
-      var heightR = GetHeight(x + 1, y, maxHeight);
-      var heightD = GetHeight(x, y - 1, maxHeight);
-      var heightU = GetHeight(x, y + 1, maxHeight);
-
-      var normal = new Vector3(heightL - heightR, 2.0f, heightD - heightU);
-      normal.Normalize();
-      return normal / 3;
-    }
-
-    private float GetHeight(int x, int y, float maxHeight) => heightData.GetTerrainHeight(x, y, maxHeight);
   }
 }

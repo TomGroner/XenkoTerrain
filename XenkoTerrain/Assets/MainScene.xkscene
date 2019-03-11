@@ -8,9 +8,8 @@ Hierarchy:
     RootParts:
         - ref!! df4a8bd0-ab5b-44d1-af8e-1100e895cb88
         - ref!! 18e0596c-bda6-497c-8e6d-61cf7d82f27f
-        - ref!! 88c2dc2d-d568-40e2-8f17-8726c106ca2e
-        - ref!! 383b3cba-c32e-4f46-a4e8-dd8f7a461869
         - ref!! 13303850-fc30-43ce-a291-132816a867eb
+        - ref!! e2c234a2-90a7-4136-b141-6415e63bdeae
     Parts:
         -   Entity:
                 Id: 13303850-fc30-43ce-a291-132816a867eb
@@ -18,7 +17,7 @@ Hierarchy:
                 Components:
                     f581def6aee54936d7556f57cffb305f: !TransformComponent
                         Id: 2630e95a-eea9-48de-9dd3-0d8cf4a67725
-                        Position: {X: -8.0, Y: 10.0, Z: -4.0}
+                        Position: {X: -8.0, Y: 10.0, Z: 58.0}
                         Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
                         Scale: {X: 1.0, Y: 1.0, Z: 1.0}
                         Children: {}
@@ -27,31 +26,14 @@ Hierarchy:
                         Name: null
                         Projection: Perspective
                         Slot: abe2face-5ab9-4612-9ecb-628a9f2021d5
-                    21526b0f68343515b8ef60200fdc7a6c: !XenkoTerrain.FpsCamera,XenkoTerrain
-                        Id: 8c484acf-cfa2-4b99-84b4-29b07c24ba97
-                        RotationOnly: false
-                        MoveSpeed: 10.0
-                        RotationSpeed: 2.355
-                        MouseMoveSpeedFactor: 100.0
-                        RotationAdaptationSpeed: 5.0
-                    6bacbcb83e9791574b337766e0a287f4: !CharacterComponent
-                        Id: a93be8d3-9220-4657-a21f-b20910a5eb64
-                        CanSleep: false
-                        Restitution: 0.0
-                        Friction: 0.5
-                        RollingFriction: 0.0
-                        CcdMotionThreshold: 0.0
-                        CcdSweptSphereRadius: 0.0
-                        FallSpeed: 10.0
-                        MaxSlope: {Radians: 0.7853982}
-                        JumpSpeed: 5.0
-                        Gravity: {X: 0.0, Y: -10.0, Z: 0.0}
-                        ColliderShapes:
-                            6b045cf12795d561faec91da8d608286: !CapsuleColliderShapeDesc
-                                Length: 1.2
-                                Radius: 0.4
-                                LocalOffset: {X: 0.0, Y: 0.95, Z: 0.0}
-                                LocalRotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                    b718d72379af13ada70ca1ad5034f51d: !XenkoTerrain.BasicCameraController,XenkoTerrain
+                        Id: 1bd3a91c-a5f7-478e-be2f-b033d7d01135
+                        KeyboardMovementSpeed: {X: 5.0, Y: 5.0, Z: 5.0}
+                        TouchMovementSpeed: {X: 40.0, Y: 40.0, Z: 20.0}
+                        SpeedFactor: 5.0
+                        KeyboardRotationSpeed: {X: 3.0, Y: 3.0}
+                        MouseRotationSpeed: {X: 90.0, Y: 60.0}
+                        TouchRotationSpeed: {X: 60.0, Y: 40.0}
         -   Entity:
                 Id: 18e0596c-bda6-497c-8e6d-61cf7d82f27f
                 Name: Ambient light
@@ -67,66 +49,6 @@ Hierarchy:
                         Type: !LightSkybox
                             Skybox: ddf4fbe0-aad4-4987-928b-e568682652c9:Skybox
                         Intensity: 0.25
-        -   Entity:
-                Id: 383b3cba-c32e-4f46-a4e8-dd8f7a461869
-                Name: Exported Terrain
-                Components:
-                    216e163f58413013d1733c508627e4d9: !TransformComponent
-                        Id: 18f180b1-f86f-4f8a-bc5c-b882ddffa282
-                        Position: {X: -128.0, Y: 0.0, Z: -128.0}
-                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
-                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
-                        Children: {}
-                    b44a8327d74e42068d6e4987a9390407: !ModelComponent
-                        Id: 5480ff89-44c3-47d2-b8cc-2aecc0865fdc
-                        Model: 03f1d89b-397f-4f9d-aeb6-d6f77603a985:Terrain/terrain
-                        Materials: {}
-                    e812e7446b44331c79c82bc52e34b2fc: !StaticColliderComponent
-                        Id: 4701ce4c-a0de-4180-9c4f-a204a33fd867
-                        CanSleep: false
-                        Restitution: 0.0
-                        Friction: 0.5
-                        RollingFriction: 0.0
-                        CcdMotionThreshold: 0.0
-                        CcdSweptSphereRadius: 0.0
-                        IsTrigger: false
-                        ColliderShapes:
-                            d511613293588d40d963be3b961d8758: !ColliderShapeAssetDesc
-                                Shape: ce7a7bf9-e017-4616-9b4e-ea8cc5e88863:Terrain/Terrain Collider
-        -   Entity:
-                Id: 88c2dc2d-d568-40e2-8f17-8726c106ca2e
-                Name: Procedural Terrain
-                Components:
-                    2dd49c117dcb8d44c7b86525985d38d7: !TransformComponent
-                        Id: 1f2e5fd5-1167-48fa-a6bd-56202bf0c5af
-                        Position: {X: -128.0, Y: 0.0, Z: 128.0}
-                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
-                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
-                        Children: {}
-                    4f62eba544c1f029eb86104339857a03: !TerrainTileComponent
-                        Id: 9e099f6f-9de3-4d0e-a53e-5fe077af2655
-                        RenderGroup: Group0
-                        HeightMap: 458028f8-4a79-415f-8ed3-cd24dea037f0:Terrain/heightmap
-                        Size: 256.0
-                        MaxHeight: 32.0
-                        ScaleUv: {X: 32.0, Y: 32.0}
-                        Material: 74bd97ef-f8c6-48d4-9346-b2de9b101e15:Terrain/Grassy Dirt No Normal
-                    6c0de898e405c599e218f44d40968c35: !StaticColliderComponent
-                        Id: d964a35f-993e-4ab9-8835-2e095aa6d1db
-                        CanSleep: false
-                        Restitution: 0.0
-                        Friction: 0.5
-                        RollingFriction: 0.0
-                        CcdMotionThreshold: 0.0
-                        CcdSweptSphereRadius: 0.0
-                        IsTrigger: false
-                        ColliderShapes:
-                            4017a8df8e98bc81bf62f7dc838e5b91: !ColliderShapeAssetDesc
-                                Shape: ce7a7bf9-e017-4616-9b4e-ea8cc5e88863:Terrain/Terrain Collider
-            Base:
-                BasePartAsset: 88e29421-225c-4cec-ac76-24ee2e65d756:Procedural Terrain
-                BasePartId: ccd219d9-6e5f-4a8f-b136-05625b0cec31
-                InstanceId: 937c82a1-cc4d-436f-94a4-e195b5d53e41
         -   Entity:
                 Id: df4a8bd0-ab5b-44d1-af8e-1100e895cb88
                 Name: Sunlight
@@ -157,3 +79,27 @@ Hierarchy:
                         Model: null
                         IsShadowCaster: false
                         Materials: {}
+        -   Entity:
+                Id: e2c234a2-90a7-4136-b141-6415e63bdeae
+                Name: Terrain
+                Components:
+                    1f83e5efd1c55af9d403dfa882894bf3: !TransformComponent
+                        Id: 123f5161-eefd-40bf-a5fa-d58dc028be86
+                        Position: {X: 0.0, Y: 0.0, Z: 0.0}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    d6ab0988b496bf64ecd0913276b0a691: !TerrainTileComponent
+                        Id: 1fe4ff7e-474d-447f-bd9a-10fdb2540de9
+                        Size: 128.0
+                        RenderGroup: Group0
+                        MaxHeight: 16.0
+                        UvScale: {X: 32.0, Y: 32.0}
+                        HeightMap: 458028f8-4a79-415f-8ed3-cd24dea037f0:Terrain/heightmap
+                        Material: d1e384d9-68e4-44d6-be6e-5e805d475280:Terrain/Grassy Dirt
+                        Enabled: true
+                    0ecc143f22b6466c5506a1c87d18eb9f: !XenkoTerrain.TerrainSystem.TerrainTileModifierComponent,XenkoTerrain
+                        Id: 62d7d2aa-4cf3-464a-886c-5a636b40bfb6
+                        CurrentCamera: ref!! 1c0a6b3a-71c7-4443-bc49-0c28483021d8
+                        TerrainTile: ref!! 1fe4ff7e-474d-447f-bd9a-10fdb2540de9
+                        Radius: 4.0

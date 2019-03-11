@@ -13,14 +13,9 @@ namespace XenkoTerrain.TerrainSystem
 
       foreach (var renderObject in RenderObjects)
       {
-        if (renderObject is TerrainTileRenderObject tile)
+        if (renderObject is TerrainTileRenderObject tile && tile.HeightMap?.Width > 0)
         {
-          tile.Prepare(context);
-
-          if (tile.Material != null && tile.Material.Passes.Count > 0)
-          {
-            Context.StreamingManager?.StreamResources(tile.Material.Passes[0].Parameters);
-          }
+          tile.Build(context);
         }
       }
     }

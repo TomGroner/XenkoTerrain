@@ -18,12 +18,13 @@ Hierarchy:
                         Children: {}
                     4f62eba544c1f029eb86104339857a03: !TerrainTileComponent
                         Id: e5bb13a3-479e-44a9-b0c0-db22d353ccd0
-                        RenderGroup: Group0
-                        HeightMap: 458028f8-4a79-415f-8ed3-cd24dea037f0:Terrain/heightmap
                         Size: 256.0
+                        RenderGroup: Group0
                         MaxHeight: 32.0
-                        ScaleUv: {X: 32.0, Y: 32.0}
-                        Material: 74bd97ef-f8c6-48d4-9346-b2de9b101e15:Terrain/Grassy Dirt No Normal
+                        UvScale: {X: 1.0, Y: 1.0}
+                        HeightMap: 458028f8-4a79-415f-8ed3-cd24dea037f0:Terrain/heightmap
+                        Material: null
+                        Enabled: false
                     6c0de898e405c599e218f44d40968c35: !StaticColliderComponent
                         Id: bf5f7f10-7e4f-4686-bdfc-17627b8fee9b
                         CanSleep: false
@@ -35,4 +36,4 @@ Hierarchy:
                         IsTrigger: false
                         ColliderShapes:
                             4017a8df8e98bc81bf62f7dc838e5b91: !ColliderShapeAssetDesc
-                                Shape: ce7a7bf9-e017-4616-9b4e-ea8cc5e88863:Terrain/Terrain Collider
+                                Shape: null

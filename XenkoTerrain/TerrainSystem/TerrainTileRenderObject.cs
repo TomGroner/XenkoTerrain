@@ -1,76 +1,74 @@
 ﻿using Xenko.Core.Mathematics;
-using Xenko.Engine;
 using Xenko.Graphics;
-using Xenko.Graphics.GeometricPrimitives;
 using Xenko.Rendering;
 
 namespace XenkoTerrain.TerrainSystem
 {
   public class TerrainTileRenderObject : RenderObject
   {
+    public TerrainTileRenderObject(TerrainTileComponent component)
+    {
+      Update(component);
+    }
+
     public float Size;
     public float MaxHeight;
+    public Mesh Mesh;
+    public GeometryData Data;
     public Texture HeightMap;
-    public Matrix World;
-    public GeometricPrimitive Geometry;
-    public HeightDataSource HeightData;
+    public Vector2 UvScale;
+    public BoundingBox MeshBoundingBox;
+    public BoundingSphere MeshBoundingSphere;
+    public MeshDraw MeshDraw;
     public Material Material;
-    public Vector2 ScaleUv;
 
     public void Update(TerrainTileComponent component)
     {
-      RenderGroup = component.RenderGroup;
-      World = component.Entity.Transform.WorldMatrix;
+      var shouldClear = Size != component.Size ||
+                        MaxHeight != component.MaxHeight ||
+                        HeightMap != component.HeightMap ||
+                        UvScale != component.UvScale;
+
       Enabled = component.Enabled;
+      Size = component.Size;
+      HeightMap = component.HeightMap;
+      MaxHeight = component.MaxHeight;
+      UvScale = component.UvScale;
+      Material = component.Material;
 
-      if (Material != component.Material)
+      if (shouldClear)
       {
-        Material = component.Material;
-      }
-
-      if (ScaleUv != component.ScaleUv)
-      {
-        ScaleUv = component.ScaleUv;
-        Clear();
-      }
-
-      if (HeightMap != component.HeightMap)
-      {
-        HeightMap = component.HeightMap;
-        Clear();
-      }
-
-      if (Size != component.Size)
-      {
-        Size = component.Size;
-        Clear();
-      }
-
-      if (MaxHeight != component.MaxHeight)
-      {
-        MaxHeight = component.MaxHeight;
-        Clear();
-      }
-
-      void Clear()
-      {
-        Geometry = null;
-        component.IsGeometryProcessed = false;   
+        Mesh = null;
+        Data = null;
+        component.Clear();
       }
     }
 
-    public void Prepare(RenderDrawContext context)
+    public void Build(RenderDrawContext context)
     {
-      if (Enabled && HeightDataNeedsRebuilt() && TryGetHeightMapImageData(context.CommandList, out var heightData))
+      if (Mesh == null && TryGetHeightMapImageData(context.CommandList, out var data))
       {
-        HeightData = heightData;
-        Geometry = new GeometryBuilder(heightData).BuildTerrainGeometricPrimitive(context.GraphicsDevice, Size, MaxHeight, ScaleUv);
-      }
-    }
+        Data = new GeometryBuilder(data).BuildTerrainData(Size, MaxHeight, UvScale);
+        MeshBoundingBox = Utils.FromPoints(Data.Vertices);
+        MeshBoundingSphere = BoundingSphere.FromBox(MeshBoundingBox);
+        BoundingBox = new BoundingBoxExt(MeshBoundingBox);
 
-    private bool HeightDataNeedsRebuilt()
-    {
-      return HeightMap != null && HeightData == null;
+        var vertexBuffer = Buffer.Vertex.New(context.GraphicsDevice, Data.Vertices, GraphicsResourceUsage.Dynamic);
+        var indexBuffer = Buffer.Index.New(context.GraphicsDevice, Data.Indices);
+        var vertexBufferBinding = new VertexBufferBinding(vertexBuffer, VertexPositionNormalTexture.Layout, vertexBuffer.ElementCount);
+        var indexBufferBinding = new IndexBufferBinding(indexBuffer, true, indexBuffer.ElementCount);
+
+        MeshDraw = new MeshDraw
+        {
+          StartLocation = 0,
+          PrimitiveType = PrimitiveType.TriangleList,
+          VertexBuffers = new[] { vertexBufferBinding },
+          IndexBuffer = indexBufferBinding,
+          DrawCount = indexBuffer.ElementCount
+        };
+
+        Mesh = new Mesh(MeshDraw, new ParameterCollection());
+      }
     }
 
     protected bool TryGetHeightMapImageData(CommandList commandList, out HeightDataSource data)

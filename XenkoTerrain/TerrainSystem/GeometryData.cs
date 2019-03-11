@@ -19,5 +19,7 @@ namespace XenkoTerrain.TerrainSystem
     public float TessellationX { get; set; }
 
     public float TessellationY { get; set; }
+
+    public HeightDataSource HeightSource { get; set; }
   }
 }

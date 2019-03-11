@@ -11,50 +11,11 @@ namespace XenkoTerrain.TerrainSystem
   {
     public VisibilityGroup VisibilityGroup { get; set; }
 
-    protected override bool IsAssociatedDataValid([NotNull] Entity entity, [NotNull] TerrainTileComponent component, [NotNull] TerrainTileRenderObject associatedData)
-    {
-      return component.RenderGroup == associatedData.RenderGroup;
-    }
-
-    protected override TerrainTileRenderObject GenerateComponentData([NotNull] Entity entity, [NotNull] TerrainTileComponent component)
-    {
-      return new TerrainTileRenderObject()
-      {
-        Size = component.Size,
-        Enabled = component.Enabled,
-        RenderGroup = component.RenderGroup,
-        HeightMap = component.HeightMap,
-        World = entity.Transform.WorldMatrix
-      };
-    }
-
     public override void Update(GameTime time)
     {
       foreach (var data in ComponentDatas)
       {
-        var component = data.Key;
-        var renderObject = data.Value;
-
-        if (component.Enabled)
-        {
-          renderObject.Update(component);
-
-          if (renderObject.Geometry != null && !component.IsGeometryProcessed)
-          {
-            if (component.Entity.Get<ModelComponent>() is ModelComponent existing)
-            {
-              component.Entity.Remove(existing);
-            }            
-
-            var meshDraw = renderObject.Geometry.ToMeshDraw();           
-            var terrainMesh = new Mesh(meshDraw, component.Material.Passes[0].Parameters);
-            var terrainModel = new Model() { Meshes = new List<Mesh>(new[] { terrainMesh }), };
-            var terrainModelComponent = new ModelComponent(terrainModel);           
-            component.Entity.Add(terrainModelComponent);
-            terrainModelComponent.Materials.Add(0, renderObject.Material);
-            component.IsGeometryProcessed = true;
-          }
-        }
+        UpdatePair(time, data.Key, data.Value);
       }
 
       base.Update(time);
@@ -70,17 +31,47 @@ namespace XenkoTerrain.TerrainSystem
         if (component.Enabled)
         {
           VisibilityGroup.RenderObjects.Add(renderObject);
-
-          if (component.Entity.Get<ModelComponent>() is ModelComponent existing)
-          {
-            //component.Material.Passes[0].Parameters.Set(MaterialSur)
-          }
-
         }
         else
         {
           VisibilityGroup.RenderObjects.Remove(renderObject);
         }
+      }
+    }
+
+    protected override bool IsAssociatedDataValid([NotNull] Entity entity, [NotNull] TerrainTileComponent component, [NotNull] TerrainTileRenderObject associatedData)
+    {
+      return component.RenderGroup == associatedData.RenderGroup;
+    }
+
+    protected override TerrainTileRenderObject GenerateComponentData([NotNull] Entity entity, [NotNull] TerrainTileComponent component)
+    {
+      return new TerrainTileRenderObject(component)
+      {
+        Size = component.Size,
+        Enabled = component.Enabled,
+        RenderGroup = component.RenderGroup
+      };
+    }
+
+    private void UpdatePair(GameTime time, TerrainTileComponent component, TerrainTileRenderObject renderObject)
+    {
+      renderObject.Update(component);
+
+      if (component.Enabled)
+      {
+        if (renderObject.Mesh != null && !component.IsSet)
+        {
+          component.Build(renderObject);
+        }
+        else if (component.IsHidden && component.IsSet)
+        {
+          component.Show();
+        }
+      }
+      else
+      {
+        component.Hide();
       }
     }
   }

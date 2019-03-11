@@ -29,9 +29,9 @@ namespace XenkoTerrain.TerrainSystem
         sr.WriteLine("# Size: " + data.Size);
         sr.WriteLine("usemtl Terrain");
 
-        for (var row = 0; row < data.TessellationY-1; row++)
+        for (var row = 0; row < data.TessellationY - 1; row++)
         {
-          for (var col = 0; col < data.TessellationX-1; col++)
+          for (var col = 0; col < data.TessellationX - 1; col++)
           {
             var topLeft = col + row * (int)data.TessellationX;
             var topRight = topLeft + 1;
@@ -60,7 +60,7 @@ namespace XenkoTerrain.TerrainSystem
 
             sr.WriteLine($"f {++vertIdx}/{++uvIdx}/{++normIdx} {++vertIdx}/{++uvIdx}/{++normIdx} {++vertIdx}/{++uvIdx}/{++normIdx} {++vertIdx}/{++uvIdx}/{++normIdx}");
           }
-        }   
+        }
       }
     }
   }

@@ -13,16 +13,6 @@ Attributes:
         Intensity: !ComputeFloat
             Value: 0.25
         Stage: Vertex
-    Surface: !MaterialNormalMapFeature
-        Enabled: false
-        NormalMap: !ComputeTextureColor
-            Texture: dd4846cd-22c3-48d9-bbf1-100ea3fc2479:Terrain/Textures/DirtyGrassSeamless_NRM
-            FallbackValue:
-                Value: {R: 1.0, G: 1.0, B: 1.0, A: 1.0}
-            Scale: {X: 1.0, Y: 1.0}
-            Offset: {X: 0.0, Y: 0.0}
-            Swizzle: null
-        IsXYNormal: true
     Diffuse: !MaterialDiffuseMapFeature
         DiffuseMap: !ComputeTextureColor
             Texture: f1c212f1-260b-4f8f-a6d8-5cae524339e1:Terrain/Textures/DirtyGrassSeamless_COLOR
