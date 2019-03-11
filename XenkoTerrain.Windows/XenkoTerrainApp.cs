@@ -1,9 +1,11 @@
+using System;
 using XenkoTerrain.Services;
 
 namespace XenkoTerrain.Windows
 {
   internal class XenkoTerrainApp
   {
+    [STAThread]
     private static void Main(string[] args)
     {
       using (var game = new XenkoTerrainGame())
@@ -13,6 +15,7 @@ namespace XenkoTerrain.Windows
           game.Services.AddService(new CustomGraphicsSettings(game, width, height));
         }
 
+        game.Services.AddService(new SaveTerrainService());
         game.Run();
       }
     }

@@ -71,6 +71,20 @@ namespace XenkoTerrain.TerrainSystem
       }
     }
 
+    public static bool TryLoadFromTexture(CommandList commandList, Texture texture, out HeightDataSource data)
+    {
+      if (texture?.Width > 0)
+      {
+        data = new HeightDataSource(texture.GetDataAsImage(commandList).PixelBuffer[0]);
+        return true;
+      }
+      else
+      {
+        data = default;
+        return false;
+      }
+    }
+
     protected bool TryGetHeightMapImageData(CommandList commandList, out HeightDataSource data)
     {
       if (HeightMap?.Width > 0)

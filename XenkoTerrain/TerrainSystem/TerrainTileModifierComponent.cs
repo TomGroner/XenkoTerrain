@@ -3,15 +3,15 @@ using Xenko.Engine;
 using Xenko.Graphics;
 using Xenko.Input;
 using Xenko.Physics;
+using XenkoTerrain.Services;
 
+// Special thank you to profan for his sample on updating geometry on the fly: https://github.com/profan/XenkoByteSized
+// His code was the basis for this class, with modifications (different geometry structure for example) but otherwise
+// his technique entirely :)
 namespace XenkoTerrain.TerrainSystem
 {
   public class TerrainTileModifierComponent : SyncScript
   {
-    // Special thank you to profan for his sample on updating geometry on the fly: https://github.com/profan/XenkoByteSized
-    // His code was the basis for this class, with modifications (different geometry structure for example) but otherwise
-    // his technique entirely :)
-
     const float UNITS_PER_SECOND = 2.0f;
 
     public enum ModificationCommand
@@ -20,7 +20,8 @@ namespace XenkoTerrain.TerrainSystem
       Raise,
       Lower,
       Smoothen,
-      Flatten
+      Flatten,
+      SaveToFile
     }
 
     public CameraComponent CurrentCamera { get; set; }
@@ -94,6 +95,7 @@ namespace XenkoTerrain.TerrainSystem
 
       switch (mode)
       {
+        case ModificationCommand.SaveToFile: Save(); return;
         case ModificationCommand.Raise: Raise(pickPosition, delta, data.Vertices); break;
         case ModificationCommand.Lower: Lower(pickPosition, delta, data.Vertices); break;
         case ModificationCommand.Smoothen: Smoothen(pickPosition, delta, data.Vertices); break;
@@ -105,8 +107,16 @@ namespace XenkoTerrain.TerrainSystem
       TerrainTile.CurrentMeshDraw.VertexBuffers[0].Buffer.SetData(Game.GraphicsContext.CommandList, data.Vertices);
     }
 
+    private async void Save()
+    {
+      if (Game.Services.TryGetService<SaveTerrainService>(out var saveService))
+      {
+        await saveService.SaveAsync(TerrainTile.CurrentGeometryData);
+      }
+    }
+
     private void AdjustHeight(Vector2 pos, float delta, VertexPositionNormalTexture[] vertices)
-    {      
+    {
       for (int i = 0; i < vertices.Length; ++i)
       {
         ref var position = ref vertices[i].Position;
@@ -189,7 +199,11 @@ namespace XenkoTerrain.TerrainSystem
     {
       mode = ModificationCommand.None;
 
-      if (Input.IsMouseButtonDown(MouseButton.Left) && Input.IsKeyDown(Keys.LeftCtrl))
+      if (Input.IsKeyDown(Keys.LeftCtrl) && Input.IsKeyDown(Keys.S))
+      {
+        mode = ModificationCommand.SaveToFile;
+      }
+      else if (Input.IsMouseButtonDown(MouseButton.Left) && Input.IsKeyDown(Keys.LeftCtrl))
       {
         mode = ModificationCommand.Flatten;
       }
