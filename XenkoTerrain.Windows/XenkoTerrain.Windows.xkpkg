@@ -14,5 +14,4 @@ OutputGroupDirectories: {}
 ExplicitFolders: []
 Bundles: []
 TemplateFolders: []
-RootAssets:
-    - 888b8034-016f-42a8-9086-d6574ca6bdbb:Terrain Model Placeholder
+RootAssets: []

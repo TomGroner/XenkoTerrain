@@ -1,4 +1,5 @@
 ﻿using Xenko.Core.Mathematics;
+using Xenko.Engine;
 using Xenko.Graphics;
 using Xenko.Graphics.GeometricPrimitives;
 using Xenko.Rendering;
@@ -9,70 +10,80 @@ namespace XenkoTerrain.TerrainSystem
   {
     public float Size;
     public float MaxHeight;
-    public float AdditionalTessellation;
-    public Texture BlendMap;
-    public Texture SandTexture;
-    public Texture DirtTexture;
-    public Texture GrassTexture;
-    public Texture RockTexture;
-    public bool AllowTerrainTransparency;
+    public Texture HeightMap;
     public Matrix World;
+    public GeometricPrimitive Geometry;
+    public HeightDataSource HeightData;
+    public Material Material;
+    public Vector2 ScaleUv;
 
-    public Material TerrainMaterial;
-    public GeometricPrimitive TerrainGeometry;
-    public TerrainHeightDataRepository HeightData;
-
-    public void Draw(ParameterCollection parameters) // TODO: wireframe and other modes
+    public void Update(TerrainTileComponent component)
     {
-      parameters.Set(TerrainTileShaderKeys.BlendMap, BlendMap);
-      parameters.Set(TerrainTileShaderKeys.SandTexture, SandTexture);
-      parameters.Set(TerrainTileShaderKeys.DirtTexture, DirtTexture);
-      parameters.Set(TerrainTileShaderKeys.GrassTexture, GrassTexture);
-      parameters.Set(TerrainTileShaderKeys.RockTexture, RockTexture);
-      parameters.Set(TerrainTileShaderKeys.TextureScale, Size);
-    }
+      RenderGroup = component.RenderGroup;
+      World = component.Entity.Transform.WorldMatrix;
+      Enabled = component.Enabled;
 
-    public void Update(TerrainTileEntityComponent component)
-    {
-      if (                 Enabled != component.Enabled)                  { Enabled                  = component.Enabled; }
-      if (AllowTerrainTransparency != component.AllowTerrainTransparency) { AllowTerrainTransparency = component.AllowTerrainTransparency; }
-      if (BlendMap                 != component.BlendMap)                 { BlendMap                 = component.BlendMap; }
-      if (SandTexture              != component.SandTexture)              { SandTexture              = component.SandTexture; }
-      if (DirtTexture              != component.DirtTexture)              { DirtTexture              = component.DirtTexture; }
-      if (GrassTexture             != component.GrassTexture)             { GrassTexture             = component.GrassTexture; }
-      if (RockTexture              != component.RockTexture)              { RockTexture              = component.RockTexture; }
-      if (RenderGroup              != component.RenderGroup)              { RenderGroup              = component.RenderGroup; }
-
-      if (AdditionalTessellation != component.AdditionalTessellation)
+      if (Material != component.Material)
       {
-        AdditionalTessellation = component.AdditionalTessellation;
-        TerrainGeometry = null;
+        Material = component.Material;
       }
 
-      World = component.Entity.Transform.WorldMatrix;
+      if (ScaleUv != component.ScaleUv)
+      {
+        ScaleUv = component.ScaleUv;
+        Clear();
+      }
+
+      if (HeightMap != component.HeightMap)
+      {
+        HeightMap = component.HeightMap;
+        Clear();
+      }
 
       if (Size != component.Size)
       {
-        component.IsGeometryProcessed = false;
-        component.IsColliderProcessed = false;
-        TerrainGeometry = null;
         Size = component.Size;
+        Clear();
       }
 
       if (MaxHeight != component.MaxHeight)
       {
-        component.IsGeometryProcessed = false;
-        component.IsColliderProcessed = false;
-        TerrainGeometry = null;
         MaxHeight = component.MaxHeight;
+        Clear();
       }
 
-      if (component?.HeightSource?.HeightData is TerrainHeightDataRepository heightData && HeightData != heightData)
+      void Clear()
       {
-        component.IsGeometryProcessed = false;
-        component.IsColliderProcessed = false;
-        TerrainGeometry = null;
+        Geometry = null;
+        component.IsGeometryProcessed = false;   
+      }
+    }
+
+    public void Prepare(RenderDrawContext context)
+    {
+      if (Enabled && HeightDataNeedsRebuilt() && TryGetHeightMapImageData(context.CommandList, out var heightData))
+      {
         HeightData = heightData;
+        Geometry = new GeometryBuilder(heightData).BuildTerrainGeometricPrimitive(context.GraphicsDevice, Size, MaxHeight, ScaleUv);
+      }
+    }
+
+    private bool HeightDataNeedsRebuilt()
+    {
+      return HeightMap != null && HeightData == null;
+    }
+
+    protected bool TryGetHeightMapImageData(CommandList commandList, out HeightDataSource data)
+    {
+      if (HeightMap?.Width > 0)
+      {
+        data = new HeightDataSource(HeightMap.GetDataAsImage(commandList).PixelBuffer[0]);
+        return true;
+      }
+      else
+      {
+        data = default;
+        return false;
       }
     }
   }

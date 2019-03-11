@@ -1,0 +1,7 @@
+!Texture
+Id: bed23296-3453-4ef5-8dff-901313d9212a
+SerializedVersion: {Xenko: 2.0.0.0}
+Tags: []
+Source: !file ../../../Resources/Textures/DirtyGrassSeamless_SPEC.jpg
+Type: !ColorTextureType
+    ColorKeyColor: {R: 255, G: 0, B: 255, A: 255}

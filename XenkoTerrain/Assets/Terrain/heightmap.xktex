@@ -3,7 +3,10 @@ Id: 458028f8-4a79-415f-8ed3-cd24dea037f0
 SerializedVersion: {Xenko: 2.0.0.0}
 Tags: []
 Source: !file ../../Resources/heightmap.png
+Width: 256.0
+Height: 256.0
 IsSizeInPercentage: false
 IsCompressed: false
-Type: !GrayscaleTextureType {}
+Type: !ColorTextureType
+    ColorKeyColor: {R: 255, G: 0, B: 255, A: 255}
 GenerateMipmaps: false

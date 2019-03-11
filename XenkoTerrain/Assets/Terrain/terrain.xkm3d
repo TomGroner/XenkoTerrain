@@ -1,0 +1,15 @@
+!Model
+Id: 03f1d89b-397f-4f9d-aeb6-d6f77603a985
+SerializedVersion: {Xenko: 2.0.0.0}
+Tags: []
+Source: !file ../../../../../OneTwentyEight/TerrainBuilder/TerrainBuilder/Resources/Export/terrain.obj
+Skeleton: null
+PivotPosition: {X: 0.0, Y: 0.0, Z: 0.0}
+Materials:
+    dc4f5ebc43e0c57b6ea450210ea51a31:
+        Name: Terrain
+        MaterialInstance:
+            Material: d1e384d9-68e4-44d6-be6e-5e805d475280:Terrain/Grassy Dirt
+Modifiers: {}
+~SourceHashes:
+    97c299a60f12dc28be86ef11b43d8c8a~../../../../../OneTwentyEight/TerrainBuilder/TerrainBuilder/Resources/Export/terrain.obj: 50bf97e57f1311658743ba606d589441

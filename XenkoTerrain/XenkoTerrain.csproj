@@ -17,26 +17,6 @@
     <PackageReference Include="Xenko.Core.Assets.CompilerApp" Version="3.1.0.1-beta01-0441" PrivateAssets="contentfiles;analyzers" IncludeAssets="build" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Effects\TerrainTileRenderFeatureEffect.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>TerrainTileRenderFeatureEffect.xksl</DependentUpon>
-    </Compile>
-    <Compile Update="Effects\TerrainTileShader.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>TerrainTileShader.xksl</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Update="Effects\TerrainTileRenderFeatureEffect.xksl">
-      <Generator>XenkoShaderKeyGenerator</Generator>
-      <LastGenOutput>TerrainTileRenderFeatureEffect.cs</LastGenOutput>
-    </None>
-    <None Update="Effects\TerrainTileShader.xksl">
-      <Generator>XenkoShaderKeyGenerator</Generator>
-      <LastGenOutput>TerrainTileShader.cs</LastGenOutput>
-    </None>
     <None Update="VHACD.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

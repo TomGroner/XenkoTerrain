@@ -1,0 +1,21 @@
+!ColliderShapeAsset
+Id: ce7a7bf9-e017-4616-9b4e-ea8cc5e88863
+SerializedVersion: {Xenko: 3.0.0.0}
+Tags: []
+ColliderShapes:
+    70d4849c2b2dc1b8cb2b93cb07dcf4d7: !ConvexHullColliderShapeDesc
+        ConvexHulls: null
+        ConvexHullsIndices: null
+        Model: 03f1d89b-397f-4f9d-aeb6-d6f77603a985:Terrain/terrain
+        LocalOffset: {X: 0.0, Y: 0.0, Z: 0.0}
+        LocalRotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+        Scaling: {X: 1.0, Y: 1.0, Z: 1.0}
+        Decomposition:
+            Depth: 10
+            PosSampling: 1
+            AngleSampling: 1
+            PosRefine: 10
+            AngleRefine: 10
+            Alpha: 0.01
+            Threshold: 0.01
+            Enabled: true

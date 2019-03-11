@@ -1,7 +1,0 @@
-!Texture
-Id: d19dd46a-6d90-4eaa-912d-dbb51f01e79a
-SerializedVersion: {Xenko: 2.0.0.0}
-Tags: []
-Source: !file ../../Resources/Grass.jpg
-Type: !ColorTextureType
-    ColorKeyColor: {R: 255, G: 0, B: 255, A: 255}

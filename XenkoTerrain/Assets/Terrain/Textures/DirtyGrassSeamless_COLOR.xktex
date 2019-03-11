@@ -1,0 +1,7 @@
+!Texture
+Id: f1c212f1-260b-4f8f-a6d8-5cae524339e1
+SerializedVersion: {Xenko: 2.0.0.0}
+Tags: []
+Source: !file ../../../Resources/Textures/DirtyGrassSeamless_COLOR.jpg
+Type: !ColorTextureType
+    ColorKeyColor: {R: 255, G: 0, B: 255, A: 255}

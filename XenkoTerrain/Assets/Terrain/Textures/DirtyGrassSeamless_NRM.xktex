@@ -1,0 +1,7 @@
+!Texture
+Id: dd4846cd-22c3-48d9-bbf1-100ea3fc2479
+SerializedVersion: {Xenko: 2.0.0.0}
+Tags: []
+Source: !file ../../../Resources/Textures/DirtyGrassSeamless_NRM.jpg
+Type: !ColorTextureType
+    ColorKeyColor: {R: 255, G: 0, B: 255, A: 255}

@@ -1,0 +1,7 @@
+!Texture
+Id: d697c020-59c8-4624-89f0-56d39ad87763
+SerializedVersion: {Xenko: 2.0.0.0}
+Tags: []
+Source: !file ../../../Resources/Textures/DirtyGrassSeamless_OCC.jpg
+Type: !ColorTextureType
+    ColorKeyColor: {R: 255, G: 0, B: 255, A: 255}
