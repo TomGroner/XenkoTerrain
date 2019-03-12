@@ -30,18 +30,6 @@ namespace XenkoTerrain.TerrainSystem
 
         public float Radius { get; set; } = 4.0f;
 
-        public override void Start()
-        {
-            if (TerrainTile != null && !TerrainTile.Entity.Has<StaticColliderComponent>())
-            {
-                var colliderComponent = new StaticColliderComponent();
-                var planeShape = new StaticPlaneColliderShape(new Vector3(0.0f, 1.0f, 0.0f), TerrainTile.MaxHeight / 2);
-                colliderComponent.ColliderShapes.Add(new StaticPlaneColliderShapeDesc() { Normal = new Vector3(0.0f, 1.0f, 0.0f) });
-                colliderComponent.ColliderShape = planeShape;
-                TerrainTile.Entity.Add(colliderComponent);
-            }
-        }
-
         public override void Update()
         {
             if (TerrainTile != null && TerrainTile.IsSet && TryGetModifyCommand(out var command))
