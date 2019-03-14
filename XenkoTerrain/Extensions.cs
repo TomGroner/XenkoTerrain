@@ -7,7 +7,7 @@ using Xenko.Engine;
 
 namespace XenkoTerrain
 {
-  public static class EntityExtensions
+  public static class Extensions
   {
     public static Action<T> ToAction<T, T2>(this Func<T, T2> tryExpression)
     {

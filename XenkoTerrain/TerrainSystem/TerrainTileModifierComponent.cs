@@ -1,4 +1,5 @@
-﻿using Xenko.Core.Mathematics;
+﻿using System;
+using Xenko.Core.Mathematics;
 using Xenko.Engine;
 using Xenko.Graphics;
 using Xenko.Input;
@@ -21,7 +22,9 @@ namespace XenkoTerrain.TerrainSystem
       Lower,
       Smoothen,
       Flatten,
-      SaveToFile
+      SaveToFile,
+      IncreaseRadius,
+      DecreaseRadius
     }
 
     public CameraComponent CurrentCamera { get; set; }
@@ -95,6 +98,8 @@ namespace XenkoTerrain.TerrainSystem
 
       switch (mode)
       {
+        case ModificationCommand.IncreaseRadius: Radius++; return;
+        case ModificationCommand.DecreaseRadius: Radius = Math.Max(Radius - 1, 1); return;
         case ModificationCommand.SaveToFile: Save(); return;
         case ModificationCommand.Raise: Raise(pickPosition, delta, data.Vertices); break;
         case ModificationCommand.Lower: Lower(pickPosition, delta, data.Vertices); break;
@@ -198,6 +203,8 @@ namespace XenkoTerrain.TerrainSystem
     private bool TryGetModifyCommand(out ModificationCommand mode)
     {
       mode = ModificationCommand.None;
+
+      // radius here
 
       if (Input.IsKeyDown(Keys.LeftCtrl) && Input.IsKeyDown(Keys.S))
       {

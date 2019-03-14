@@ -46,7 +46,7 @@ namespace XenkoTerrain.TerrainSystem
 
     public void Build(RenderDrawContext context)
     {
-      if (Mesh == null && TryGetHeightMapImageData(context.CommandList, out var data))
+      if (Mesh == null && TryLoadFromTexture(context.CommandList, HeightMap, out var data))
       {
         Data = new GeometryBuilder(data).BuildTerrainData(Size, MaxHeight, UvScale);
         MeshBoundingBox = Utils.FromPoints(Data.Vertices);
@@ -76,20 +76,6 @@ namespace XenkoTerrain.TerrainSystem
       if (texture?.Width > 0)
       {
         data = new HeightDataSource(texture.GetDataAsImage(commandList).PixelBuffer[0]);
-        return true;
-      }
-      else
-      {
-        data = default;
-        return false;
-      }
-    }
-
-    protected bool TryGetHeightMapImageData(CommandList commandList, out HeightDataSource data)
-    {
-      if (HeightMap?.Width > 0)
-      {
-        data = new HeightDataSource(HeightMap.GetDataAsImage(commandList).PixelBuffer[0]);
         return true;
       }
       else

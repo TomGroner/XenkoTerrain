@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using System.Windows.Forms;
 using XenkoTerrain.TerrainSystem;
+using XenkoTerrain.TerrainSystem.Export.Obj;
 
 namespace XenkoTerrain.Services
 {
@@ -16,7 +17,7 @@ namespace XenkoTerrain.Services
 
       if (saveDialog.ShowDialog() == DialogResult.OK && !string.IsNullOrEmpty(saveDialog.FileName))
       {        
-        await new GeometryExporer().SaveAsync(saveDialog.FileName, data);
+        await new GeometryExporerObj().SaveAsync(saveDialog.FileName, data);
       }
     }
   }
