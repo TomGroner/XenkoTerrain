@@ -74,11 +74,6 @@ Hierarchy:
                                 ComputeTransmittance: false
                                 BiasParameters: {}
                         Intensity: 3.0
-                    1e486a981678a91fdebc1f6d7e0ba7ff: !ModelComponent
-                        Id: b1110f63-28e6-400a-bb25-eb65502b4b05
-                        Model: null
-                        IsShadowCaster: false
-                        Materials: {}
         -   Entity:
                 Id: e2c234a2-90a7-4136-b141-6415e63bdeae
                 Name: Terrain
