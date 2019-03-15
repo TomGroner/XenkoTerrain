@@ -36,10 +36,10 @@ namespace XenkoTerrain.TerrainSystem.Export.Obj
             await fileContent.WriteLineAsync(topLeftVertex.Normal.PrintObj(ObjLineType.Normal));
             await fileContent.WriteLineAsync(bottomLeftVertex.Normal.PrintObj(ObjLineType.Normal));
             await fileContent.WriteLineAsync(botomRightVertex.Normal.PrintObj(ObjLineType.Normal));
-            await fileContent.WriteLineAsync((data.Size * topRightVertex.TextureCoordinate).PrintObj(ObjLineType.TextureCoordinate));
-            await fileContent.WriteLineAsync((data.Size * topLeftVertex.TextureCoordinate).PrintObj(ObjLineType.TextureCoordinate));
-            await fileContent.WriteLineAsync((data.Size * bottomLeftVertex.TextureCoordinate).PrintObj(ObjLineType.TextureCoordinate));
-            await fileContent.WriteLineAsync((data.Size * botomRightVertex.TextureCoordinate).PrintObj(ObjLineType.TextureCoordinate));
+            await fileContent.WriteLineAsync((topRightVertex.TextureCoordinate * data.Size).PrintObj(ObjLineType.TextureCoordinate));
+            await fileContent.WriteLineAsync((topLeftVertex.TextureCoordinate * data.Size).PrintObj(ObjLineType.TextureCoordinate));
+            await fileContent.WriteLineAsync((bottomLeftVertex.TextureCoordinate * data.Size).PrintObj(ObjLineType.TextureCoordinate));
+            await fileContent.WriteLineAsync((botomRightVertex.TextureCoordinate * data.Size).PrintObj(ObjLineType.TextureCoordinate));
             await fileContent.WriteLineAsync($"f -4/-4/-4 -3/-3/-3 -2/-2/-2 -1/-1/-1 ");
           }
         }

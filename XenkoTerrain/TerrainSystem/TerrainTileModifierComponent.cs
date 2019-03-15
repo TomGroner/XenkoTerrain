@@ -11,8 +11,9 @@ using XenkoTerrain.Services;
 // his technique entirely :)
 namespace XenkoTerrain.TerrainSystem
 {
-  public class TerrainTileModifierComponent : SyncScript
+  public partial class TerrainTileModifierComponent : SyncScript
   {
+    private ModificationCommands onScreenCommands;
     const float UNITS_PER_SECOND = 2.0f;
 
     public enum ModificationCommand
@@ -35,6 +36,9 @@ namespace XenkoTerrain.TerrainSystem
 
     public override void Start()
     {
+      DebugText.Visible = true;
+      onScreenCommands = new ModificationCommands(DebugText);
+
       if (TerrainTile != null && !TerrainTile.Entity.Has<StaticColliderComponent>())
       {
         var colliderComponent = new StaticColliderComponent();
@@ -47,6 +51,8 @@ namespace XenkoTerrain.TerrainSystem
 
     public override void Update()
     {
+      onScreenCommands.Write();
+
       if (TerrainTile != null && TerrainTile.IsSet && TryGetModifyCommand(out var command))
       {
         var dt = (float)Game.TargetElapsedTime.TotalSeconds;
