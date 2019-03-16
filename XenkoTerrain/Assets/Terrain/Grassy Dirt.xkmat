@@ -13,6 +13,14 @@ Attributes:
         Intensity: !ComputeFloat
             Value: 0.25
         Stage: Vertex
+    Surface: !MaterialNormalMapFeature
+        Enabled: false
+        NormalMap: !ComputeTextureColor
+            FallbackValue:
+                Value: {R: 1.0, G: 1.0, B: 1.0, A: 1.0}
+            Scale: {X: 1.0, Y: 1.0}
+            Offset: {X: 0.0, Y: 0.0}
+            Swizzle: null
     Diffuse: !MaterialDiffuseMapFeature
         DiffuseMap: !ComputeTextureColor
             Texture: f1c212f1-260b-4f8f-a6d8-5cae524339e1:Terrain/Textures/DirtyGrassSeamless_COLOR

@@ -1,11 +1,9 @@
-﻿using System.Drawing;
-using Xenko.Core.Mathematics;
+﻿using Xenko.Core.Mathematics;
 using Xenko.Graphics;
 using Xenko.Graphics.GeometricPrimitives;
 
 namespace XenkoTerrain.TerrainSystem
 {
-
   public class GeometryBuilder
   {
     private HeightDataSource heightData;

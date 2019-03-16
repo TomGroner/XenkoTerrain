@@ -9,6 +9,11 @@ namespace XenkoTerrain.TerrainSystem
   {
     public static HitResult ScreenPositionToWorldPositionRaycast(Vector2 screenPos, CameraComponent camera, Simulation simulation)
     {
+      if (camera == null || simulation == null)
+      {
+        return default;
+      }
+
       var invViewProj = Matrix.Invert(camera.ViewProjectionMatrix);
 
       // Reconstruct the projection-space position in the (-1, +1) range.

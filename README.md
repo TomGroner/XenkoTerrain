@@ -16,3 +16,7 @@ The following are items I wish to finish to consider this demo "done":
 
 1. Take the time to really refine and abstract a version of this demo that could be a re-usable NuGet package.
 2. Implement a paintbrush feature that can define a custom texture that is dynamically generated to paint the surface.
+
+// Special thank you to profan for his sample on updating geometry on the fly: https://github.com/profan/XenkoByteSized
+// His code was the basis for this class, with modifications (different geometry structure for example) but otherwise
+// his technique entirely :)
