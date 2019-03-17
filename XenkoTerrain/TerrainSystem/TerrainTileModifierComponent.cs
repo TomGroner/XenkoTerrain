@@ -2,26 +2,12 @@
 using Xenko.Core.Mathematics;
 using Xenko.Engine;
 using Xenko.Physics;
+using XenkoTerrain.Services;
 
 namespace XenkoTerrain.TerrainSystem
 {
   public partial class TerrainTileModifierComponent : SyncScript, ITerrainTileModifier
   {
-    public TerrainTileModifierComponent()
-    {
-      Commands = new ModificationCommandCollection()
-      {
-        new SaveTerrainCommand(),
-        new DecreaseBrushRadiusCommand(),
-        new IncreaseBrushRadiusCommand(),
-        new FlattenTerrainCommand(),
-        new SmoothTerrainCommand(),
-        new RaiseTerrainCommand(),
-        new LowerTerrainCommand(),
-        new FixNormalsCommand()
-      };
-    }
-
     public CameraComponent CurrentCamera { get; set; }
 
     public TerrainTileComponent TerrainTile { get; set; }
@@ -29,11 +15,12 @@ namespace XenkoTerrain.TerrainSystem
     [DataMemberIgnore]
     public ModificationCommandCollection Commands { get; set; }
 
-    public float Radius { get; set; } = 4.0f; // should probably be on a "brush command"
+    public float Radius { get; set; } = 4.0f;
 
     public override void Start()
     {
       DebugText.Visible = true;
+      Commands = ModificationCommandSourceFactoryProvider.Factory?.GetCommands();
       Commands.DebugText = DebugText;
 
       if (TerrainTile != null && !TerrainTile.Entity.Has<StaticColliderComponent>())

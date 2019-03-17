@@ -26,7 +26,7 @@ namespace XenkoTerrain.TerrainSystem
       for (int i = 0; i < context.Data.Vertices.Length; ++i)
       {
         ref var v = ref context.Data.Vertices[i].Position;
-        var dist = (v.XZ() - context.Input.MousePosition).Length();
+        var dist = (v.XZ() - context.GetLocalHitPosition()).Length();
         if (dist <= context.Modifier.Radius)
         {
           totalHeights += v.Y;
@@ -38,7 +38,7 @@ namespace XenkoTerrain.TerrainSystem
       for (int i = 0; i < context.Data.Vertices.Length; ++i)
       {
         ref var v = ref context.Data.Vertices[i].Position;
-        var dist = (v.XZ() - context.Input.MousePosition).Length();
+        var dist = (v.XZ() - context.GetLocalHitPosition()).Length();
         if (dist <= context.Modifier.Radius)
         {
           v.Y += (avgHeight - v.Y) * (context.Modifier.Radius - dist) * context.DeltaTime;

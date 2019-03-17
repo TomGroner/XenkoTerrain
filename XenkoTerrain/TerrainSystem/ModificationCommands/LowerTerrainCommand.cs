@@ -22,7 +22,7 @@ namespace XenkoTerrain.TerrainSystem
       for (int i = 0; i < context.Data.Vertices.Length; ++i)
       {
         ref var position = ref context.Data.Vertices[i].Position;
-        var dist = (position.XZ() - context.Input.MousePosition).Length();
+        var dist = (position.XZ() - context.GetLocalHitPosition()).Length();
         var factor = context.Modifier.Radius - dist;
 
         if (factor >= 0.0f)

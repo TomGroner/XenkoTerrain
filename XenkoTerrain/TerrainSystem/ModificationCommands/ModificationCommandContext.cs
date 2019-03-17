@@ -25,7 +25,7 @@ namespace XenkoTerrain.TerrainSystem
 
     public Matrix WorldMatrix { get; set; }
 
-    public Vector2 GetWorldHitPosition()
+    public Vector2 GetLocalHitPosition()
     {
       if (worldHitPosition == null)
       {

@@ -8,6 +8,8 @@ namespace XenkoTerrain.Windows
     [STAThread]
     private static void Main(string[] args)
     {
+      ModificationCommandSourceFactoryProvider.SetFactory(new ModificationCommandFactory());
+
       using (var game = new XenkoTerrainGame())
       {
         if (new WindowResolutionLookup().TryDetermineMaximumResolution(out var width, out var height))

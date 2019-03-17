@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using Xenko.Core.Mathematics;
 using Xenko.Profiling;
 
@@ -40,17 +39,14 @@ namespace XenkoTerrain.TerrainSystem
 
       foreach (var command in commands)
       {
-        if (command.CanExecute(context))
-        {
-          DebugText.TextColor = Color.Yellow;
+        var isHighlighted = command.CanExecute(context);
+
+        if (isHighlighted)
+        {        
           command.Execute(context);
         }
-        else
-        {
-          DebugText.TextColor = Color.White;
-        }
 
-        DebugText?.Print($"{command.Name}: {command.Description}", TopLeft + DrawCommandDelta * n++);
+        DebugText.Print($"{command.Name}: {command.Description}", TopLeft + DrawCommandDelta * n++, isHighlighted ? Color.Yellow : Color.White);
       }
     }
   }

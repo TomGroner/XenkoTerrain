@@ -11,6 +11,8 @@ namespace XenkoTerrain.TerrainSystem
       IsOnScreen = true;
     }
 
+    public int MaxBrushSize { get; set; } = 16;
+
     public override bool CanExecute(ModificationCommandContext context)
     {
       return context.Input.IsKeyReleased(Keys.PageUp);
@@ -20,9 +22,9 @@ namespace XenkoTerrain.TerrainSystem
     {
       context.Modifier.Radius++;
 
-      if (context.Modifier.Radius > 10)
+      if (context.Modifier.Radius > MaxBrushSize)
       {
-        context.Modifier.Radius = 10;
+        context.Modifier.Radius = MaxBrushSize;
       }
     }
   }
