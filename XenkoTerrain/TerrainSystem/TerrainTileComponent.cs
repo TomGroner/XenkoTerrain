@@ -5,6 +5,9 @@ using Xenko.Graphics;
 using Xenko.Rendering;
 using Xenko.Core.Mathematics;
 using System.Collections.Generic;
+using Xenko.Physics.Shapes;
+using Xenko.Physics;
+using System.Linq;
 
 namespace XenkoTerrain.TerrainSystem
 {
@@ -102,6 +105,49 @@ namespace XenkoTerrain.TerrainSystem
       modelComponent.Materials.Add(0, renderObject.Material);
 
       Entity.Add(modelComponent);
+      RegenCollider();      
+    }
+    
+    //Thanks to EternalTamago
+    private HeightfieldColliderShape CreateHeightfield(int width, int length, float min, float max, float[] values, out UnmanagedArray<float> points)
+    {
+     points = new UnmanagedArray<float>(width * length);
+     points.Write(values);
+     return new HeightfieldColliderShape(width, length, points, 1f, min, max, false);
+    }
+
+    public void RegenCollider(GeometryData data = null)
+    {
+     //If no new data is provided, use the existing data
+     if (data == null)
+      data = CurrentGeometryData; //Use the existing data
+     else
+      CurrentGeometryData = data; //Save the new data, there's been an update
+
+     //Whether or not to add the collider to the entity
+     var add = false;
+
+     //Get or create a collider
+     StaticColliderComponent colliderComponent = Entity.Get<StaticColliderComponent>();
+     if (colliderComponent == null)
+     {
+      colliderComponent = new StaticColliderComponent();
+      add = true;
+     }
+     
+     //Create collider
+     var heightfield = CreateHeightfield((int)data.TessellationX, (int)data.TessellationY, -MaxHeight, MaxHeight, data.Vertices.Select(v => v.Position.Y).ToArray(), out var points);
+
+     //Clear any existing colliders
+     colliderComponent.ColliderShapes.Clear();
+
+     //Add the collider
+     colliderComponent.ColliderShapes.Add(new BoxColliderShapeDesc());
+     colliderComponent.ColliderShape = heightfield;
+            
+     //Add to entity if it does not already exist
+     if (add)
+      Entity.Add(colliderComponent);
     }
   }
 }

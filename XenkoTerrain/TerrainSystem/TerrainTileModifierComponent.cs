@@ -110,6 +110,7 @@ namespace XenkoTerrain.TerrainSystem
 
       FixNormals(data.Vertices);
       TerrainTile.CurrentMeshDraw.VertexBuffers[0].Buffer.SetData(Game.GraphicsContext.CommandList, data.Vertices);
+      TerrainTile.RegenCollider(data);
     }
 
     private async void Save()
